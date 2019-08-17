@@ -1,0 +1,54 @@
+
+.mainBlock{
+    display: block;
+    margin-top: 4rem;
+}
+
+.colSt{
+    border: 1px solid lightgray;
+}
+
+.headline{
+    text-align: right;
+    direction: rtl;
+    color: #686868;
+    float: right;
+    margin-bottom: 2rem;
+}
+
+.listBlock{
+    display: block;
+}
+
+.buttonList{    
+    position: relative;
+    width: 100%;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    background-color: #F4F4F4;
+    color: #686868;
+    border: 1px solid lightgray;
+    cursor: pointer;
+    direction: rtl;
+}
+
+.buttonList:hover{    
+    background-color: #EAEAEA; 
+}
+
+.buttonList:active{   
+    background-color: #444444; 
+}
+
+.buttonListChecked{    
+    position: relative;
+    width: 100%;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    background-color: rgb(99, 99, 99);
+    color: #686868;
+    border: 1px solid lightgray;
+    color: #EAEAEA;
+    cursor: pointer;
+    direction: rtl;
+}
