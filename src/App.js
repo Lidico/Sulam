@@ -9,6 +9,7 @@ import navList from './components/students/navList';
 import SignIn from "./components/auth/signIn";
 import MainCard from "./components/students/mainCard";
 import AddNewStud from "./components/forms/addNewStud";
+import personalDetails from "./components/students/personalDetails";
 
 
 class App extends Component {

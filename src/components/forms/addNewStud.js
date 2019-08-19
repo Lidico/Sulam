@@ -16,13 +16,14 @@ class AddNewStud extends Component {
                     <h5 className="rightHeb">פרטים אישיים:</h5><br/>
                     <div>
                         <label>
-                        <span className="headLinePD"> שם פרטי: </span>
+                        <span className="headLinePD" dir="rtl"> שם פרטי: </span>
                             <input
                                 className="inputB"
                                 required
                                 type="text"
                                 name="name"
                                 placeholder="הכנס שם פרטי"
+                                dir="rtl"
                             />
                     </label>
                 </div>
