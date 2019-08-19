@@ -19,7 +19,6 @@ const Tracing = () => {
             <div className="datePic">
                 <DatePicker
                     dateFormat="dd/mm/yyyy"
-                    monthsShown={2}
                     isClearable={true}
                     placeholderText="מלא תאריך"
                 />

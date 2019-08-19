@@ -19,7 +19,7 @@ class App extends Component {
           <NavBar/>
         </div>
         <Switch>
-            <Route path = '/' component={AddNewStud}/>
+            <Route path = '/' component={MainCard}/>
         </Switch>
         </BrowserRouter>
     );

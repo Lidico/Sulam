@@ -11,26 +11,28 @@
     border: 1px solid lightgray;
     margin-left: 1rem;
     width: 60%;
-    height: 100vh;
     border-radius: 0.5rem;
     background-color: #FFFDFD;
     margin-left: 25%;
     margin-top: 3rem;
     padding-top: 2rem;
     padding-right: 3rem;
-    position: relative;
+    position: absolute;
+    margin-bottom: 2rem;
   }
 
   .rightHeb{
       text-align: right;
       direction: rtl;
       float:right;
+      margin-bottom: 2rem;
   }
 
   .formCont{
     float: right;
     position: relative;
     display: block;
+    align-content: right;
   }
 
   .headLinePD{
