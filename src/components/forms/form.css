@@ -62,3 +62,11 @@
     position: relative;
     display: block;
   }
+
+  .courseButtons{
+    width: 60%;
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    margin-bottom: 2rem;
+  }

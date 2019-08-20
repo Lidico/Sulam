@@ -6,6 +6,7 @@
     "apexcharts": "^3.8.4",
     "bootstrap": "^4.3.1",
     "chart.js": "^2.8.0",
+    "firebase": "^6.4.0",
     "highcharts": "^7.1.2",
     "materialize-css": "^1.0.0-rc.2",
     "prop-types": "^15.7.2",
