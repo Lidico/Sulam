@@ -10,6 +10,7 @@ const AcademyDetails = () => {
      <div>
          <Graph/>
          <Proff/>
+         <Proff/>
     </div>
        
     )

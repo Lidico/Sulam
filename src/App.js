@@ -20,7 +20,7 @@ class App extends Component {
           <NavBar/>
         </div>
         <Switch>
-            <Route path = '/' component={AddNewStud}/>
+            <Route path = '/' component={personalDetails}/>
         </Switch>
         </BrowserRouter>
     );
