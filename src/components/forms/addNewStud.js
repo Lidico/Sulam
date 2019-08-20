@@ -74,6 +74,24 @@ class AddNewStud extends Component {
                     </label>
                 </div>
                 <div className="inpBox">
+
+<label>
+<span dir="rtl"  className="headLinePD"> מין: </span><br/>
+<p>
+    <label>
+        <input name="gender" type="radio" checked />
+        <span>זכר</span>
+    </label>
+    </p>
+    <p>
+    <label>
+        <input name="gender" type="radio" />
+        <span>נקבה</span>
+    </label>
+    </p>
+</label>
+</div>
+                <div className="inpBox">
                         <label>
                         <span  dir="rtl" className="headLinePD"> מס' טלפון: </span>
                             <input
@@ -138,17 +156,18 @@ class AddNewStud extends Component {
                             />
                     </label>
                 </div>
-                  <div name="program" dir="rtl" class="input-field col s12">
-                        <select>
+                <div className="inpBox">
+                    <label>
+                    <span  dir="rtl" className="headLinePD"> בחר תוכנית: </span>
+                    <select className="browser-default" name="program" value={this.state.value} onChange={this.handleChange}>
                         <option value="" disabled selected>בחר תוכנית</option>
                         <option value="regila">רגילה</option>
                         <option value="mugberet">מוגברת</option>
-                        </select>
-                        <label>בחר תוכנית</label>
-                    </div>
+                        </select>         
+                    </label>
+                 </div>
+                 <div className="inpBox">
 
-                            
-                <div className="inpBox">
                                     <label>
                                     <span dir="rtl"  className="headLinePD">  גישה למחשב: </span><br/>
                                     <p>
@@ -165,11 +184,11 @@ class AddNewStud extends Component {
                                         </p>
                                 </label>
                             </div>
-                    <h5 className="rightHeb">פרטים אקדמים:</h5><br/><br/>
+                    <h5 className="rightHeb">פרטים לימודיים:</h5><br/><br/>
                     <div className="inpBox">
                     <label>
                     <span  dir="rtl" className="headLinePD"> בחר בית ספר: </span>
-                    <select name="school" value={this.state.value} onChange={this.handleChange}>
+                    <select className="browser-default" name="school" value={this.state.value} onChange={this.handleChange}>
                         <option value="grapefruit">זיו</option>
                         <option value="lime">הגמנסיה העברית</option>
                     </select>
@@ -178,11 +197,11 @@ class AddNewStud extends Component {
                  <div className="inpBox">
                     <label>
                     <span  dir="rtl" className="headLinePD"> בחר כיתה: </span>
-                    <select name="kita"value={this.state.value} onChange={this.handleChange}>
-                        <option value="grapefruit">ט'</option>
-                        <option value="lime">י'</option>
-                        <option value="grape">י"א</option>
-                        <option value="mir">י"ב</option>
+                    <select className="browser-default" dir="rtl" name="kita"value={this.state.value} onChange={this.handleChange}>
+                        <option value="t">ט'</option>
+                        <option value="y">י'</option>
+                        <option value="ya">י"א</option>
+                        <option value="yb">י"ב</option>
                     </select>
                     </label>
                  </div>
@@ -194,7 +213,7 @@ class AddNewStud extends Component {
                                 required
                                 dir="rtl"
                                 type="text"
-                                name="name"
+                                name="teacherName"
                                 placeholder="הכנס שם המחנכ\ת"
                             />
                     </label>
@@ -207,7 +226,7 @@ class AddNewStud extends Component {
                                 required
                                 dir="rtl"
                                 type="text"
-                                name="name"
+                                name="teacherPhone"
                                 placeholder="הכנס מס' טלפון"
                             />
                     </label>
@@ -221,7 +240,7 @@ class AddNewStud extends Component {
                                 required
                                 dir="rtl"
                                 type="text"
-                                name="name"
+                                name="firstContactName"
                                 placeholder="הכנס שם מלא"
                             />
                     </label>
@@ -234,7 +253,7 @@ class AddNewStud extends Component {
                                 required
                                 dir="rtl"
                                 type="text"
-                                name="name"
+                                name="firstContPhoneNume"
                                 placeholder="הכנס מס' טלפון"
                             />
                     </label>
@@ -247,7 +266,7 @@ class AddNewStud extends Component {
                                 required
                                 dir="rtl"
                                 type="text"
-                                name="name"
+                                name="secondContactName"
                                 placeholder="הכנס שם מלא"
                             />
                     </label>
@@ -260,7 +279,7 @@ class AddNewStud extends Component {
                                 required
                                 dir="rtl"
                                 type="text"
-                                name="name"
+                                name="secondContPhoneNume"
                                 placeholder="הכנס מס' טלפון"
                             />
                     </label>
@@ -273,7 +292,7 @@ class AddNewStud extends Component {
                                 required
                                 dir="rtl"
                                 type="text"
-                                name="name"
+                                name="numOfbrothers"
                                 placeholder="הכנס מס' אחים"
                             />
                     </label>
@@ -286,7 +305,7 @@ class AddNewStud extends Component {
                       rows="4"
                       cols="50"
                       required
-                      name="description"
+                      name="familyStatus"
                       placeholder="מלא את הדיווח השבועי"
                     />
                     </label>
@@ -299,7 +318,7 @@ class AddNewStud extends Component {
                       rows="4"
                       cols="50"
                       required
-                      name="description"
+                      name="generalDescription"
                       placeholder="מלא את הדיווח השבועי"
                     />
                     </label>

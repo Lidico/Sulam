@@ -9,6 +9,8 @@ import navList from './components/students/navList';
 import SignIn from "./components/auth/signIn";
 import MainCard from "./components/students/mainCard";
 import AddNewStud from "./components/forms/addNewStud";
+import AddNewSchool from "./components/forms/addNewSchool";
+import AddNewMiktzua from "./components/forms/addNewMiktzua";
 
 
 class App extends Component {
@@ -19,7 +21,7 @@ class App extends Component {
           <NavBar/>
         </div>
         <Switch>
-            <Route path = '/' component={MainCard}/>
+            <Route path = '/' component={AddNewMiktzua}/>
         </Switch>
         </BrowserRouter>
     );
@@ -27,3 +29,4 @@ class App extends Component {
 }
 
 export default App;
+
