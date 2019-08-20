@@ -70,3 +70,15 @@
     position: relative;
     margin-bottom: 2rem;
   }
+
+  .try{
+    width: 35%;
+    height: 2rem;
+    float: left;
+    margin-left: 2rem;
+    margin-top: 2rem;
+    position: relative;
+    display: block;
+    border: 1px solid lightgray;
+    background-color: #FFFDFD;
+  }

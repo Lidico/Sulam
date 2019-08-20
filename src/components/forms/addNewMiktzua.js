@@ -59,6 +59,19 @@ class AddNewMiktzua extends Component {
                     </label>
                 </div>
                 <div className="inpBox">
+                        <label>
+                        <span dir="rtl" className="headLinePD"> בחר יום מפגש: </span>
+                        <select className="browser-default" dir="rtl" name="kita"value={this.state.value} onChange={this.handleChange}>
+                        <option value="sun">א'</option>
+                        <option value="mon">ב'</option>
+                        <option value="tus">ג'</option>
+                        <option value="wed">ד' </option>
+                        <option value="thr">ה' </option>
+                        <option value="fri">ו' </option>
+                    </select>
+                    </label>
+                </div>
+                <div className="inpBox">
                 <label>
                 <span dir="rtl" className="headLinePD"> מורה מלמד בביה"ס: </span>
                             <input
@@ -89,6 +102,8 @@ class AddNewMiktzua extends Component {
                     <button className="grey darken-3 waves-effect waves-light btn-large">הוסף</button><br/><br/>
                 </div>
                 </form>
+                </div>
+                <div className="try">sda
                 </div>
             </div>
 
