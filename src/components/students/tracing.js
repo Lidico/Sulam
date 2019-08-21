@@ -2,6 +2,7 @@ import React from 'react';
 import OneTrace from './oneTrace';
 import { Link } from 'react-router-dom';
 import DatePicker, { registerLocale } from 'react-datepicker';
+
 import "react-datepicker/dist/react-datepicker.css";
 
 
@@ -17,11 +18,11 @@ const Tracing = () => {
         </div>
          <div className="addNewTrace">
             <div className="datePic">
-                <DatePicker
-                    dateFormat="dd/mm/yyyy"
-                    isClearable={true}
+               <DatePicker
+                    dateFormat="dd/MM/yyyy"
                     placeholderText="מלא תאריך"
-                />
+            /> 
+
             </div>
             <label>
                     <textarea

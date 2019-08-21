@@ -21,7 +21,7 @@ class App extends Component {
           <NavBar/>
         </div>
         <Switch>
-            <Route path = '/' exact component={SignIn}/>
+            <Route path = '/' exact component={MainCard}/>
             <Route path = '/AddNewStud' exact component={AddNewStud}/>
             <Route path = '/AddNewMiktzua' exact component={AddNewMiktzua}/>
         </Switch>

@@ -4,6 +4,8 @@ import DatePicker, { registerLocale } from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 import { Link } from 'react-router-dom';
 import firebase from '../../FireBase/FireStore';
+import TimePicker from 'react-time-picker';
+
 
 function MiktzuaList(props){
     return (
@@ -22,10 +24,17 @@ function MiktzuaList(props){
 }
 
 class AddNewMiktzua extends Component {
+    state = {
+        time: '10:00',
+      }
+     
+      onChange = time => this.setState({ time })
+    
+
     constructor(props) {
         super(props);
         this.state = {
-            StudentiD: props.location.state.StudentiD,
+         /* StudentiD: props.location.state.StudentiD,*/
             profName:'',
             sulamTeacher:'',
             schoolTeacherName:'',
@@ -112,6 +121,23 @@ class AddNewMiktzua extends Component {
                     </select>
                     </label>
                 </div>
+                <div className="inpBox">
+                <label>
+                <span dir="rtl" className="headLinePD"> בחר שעת המפגש: </span>
+                    <DatePicker
+                        selected={this.state.startDate}
+                        onChange={this.handleChange}
+                        showTimeSelect
+                        showTimeSelectOnly
+                        timeIntervals={15}
+                        dateFormat="h:mm aa"
+                        timeCaption="Time"
+            
+                    />
+                    </label>
+                </div>
+
+
                 <div className="inpBox">
                 <label>
                 <span dir="rtl" className="headLinePD"> מורה מלמד בביה"ס: </span>
