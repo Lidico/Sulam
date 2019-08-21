@@ -6,6 +6,7 @@
     "apexcharts": "^3.8.4",
     "bootstrap": "^4.3.1",
     "chart.js": "^2.8.0",
+    "firebase": "^6.4.0",
     "highcharts": "^7.1.2",
     "materialize-css": "^1.0.0-rc.2",
     "prop-types": "^15.7.2",
@@ -15,9 +16,10 @@
     "react-chartjs-2": "^2.7.6",
     "react-datepicker": "^2.8.0",
     "react-dom": "^16.9.0",
+    "react-firebase": "^2.2.8",
     "react-jsx-highcharts": "^3.6.1",
     "react-router-dom": "^5.0.1",
-    "react-scripts": "3.0.1"
+    "react-scripts": "^3.0.1"
   },
   "scripts": {
     "start": "react-scripts start",

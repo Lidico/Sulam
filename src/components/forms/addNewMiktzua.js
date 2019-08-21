@@ -3,25 +3,66 @@ import './form.css';
 import DatePicker, { registerLocale } from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 import { Link } from 'react-router-dom';
+import firebase from '../../FireBase/FireStore';
+
+function MiktzuaList(props){
+    return (
+        <div>
+            <h6>רשימת מקצועות</h6>
+
+            {props.list.map(element => {
+                return(
+                    <div>
+                <h6>{element.profName}</h6>
+                </div>
+                );
+            })}
+        </div>
+    )
+}
 
 class AddNewMiktzua extends Component {
     constructor(props) {
         super(props);
-        this.state = {value: 'coconut'};
+        this.state = {
+            StudentiD: props.location.state.StudentiD,
+            profName:'',
+            sulamTeacher:'',
+            schoolTeacherName:'',
+            schoolTeacherPhone:'',
+            MiktzuaList: new Array()
+        };
     
         this.handleChange = this.handleChange.bind(this);
+        this.handleAdd = this.handleAdd.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
       }
     
-      handleChange(event) {
-        this.setState({value: event.target.value});
+      handleChange(e) {
+        this.setState({[e.target.name]: e.target.value});
       }
-    
-      handleSubmit(event) {
+      handleAdd(e) {
+          let temp={
+            profName:this.state.profName,
+            sulamTeacher:this.state.sulamTeacher,
+            schoolTeacherName:this.state.schoolTeacherName,
+            schoolTeacherPhone:this.state.schoolTeacherPhone
+          }
+          let arrTemp = this.state.MiktzuaList;
+          arrTemp.push(temp);
+          this.setState({MiktzuaList:arrTemp});
+
       }
 
-      setGender(event) {
-        console.log(event.target.value);
+      handleSubmit(e) {
+        e.preventDefault();
+        const db = firebase.firestore();
+
+        db.settings({});
+
+        db.collection("listOfStudents").doc(this.state.StudentiD).update({
+            listOfmiktzout:this.state.MiktzuaList   
+        }).then(() => alert("save")); 
       }
 
 
@@ -32,11 +73,11 @@ class AddNewMiktzua extends Component {
             <div align="right" className="formBox">
                 <div align="right" className="formCont">
                     <h4 className="rightHeb">הוספת מקצוע חדש</h4><br/><br/><br/>
-                    <form onSubmit={this.handleSubmit}>
+                    <form onSubmit={this.handleSubmit} id="mikzua">
                     <div className="inpBox">
                         <label>
                         <span dir="rtl" className="headLinePD"> בחר מקצוע: </span>
-                        <select className="browser-default" dir="rtl" name="kita"value={this.state.value} onChange={this.handleChange}>
+                        <select className="browser-default" dir="rtl" name="profName" value={this.state.profName} onChange={this.handleChange}>
                         <option value="english">אנגלית</option>
                         <option value="math">מתמטיקה</option>
                         <option value="history">היסטוריה</option>
@@ -49,7 +90,7 @@ class AddNewMiktzua extends Component {
                 <div className="inpBox">
                         <label>
                         <span dir="rtl" className="headLinePD"> בחר מורה סולם לעתיד: </span>
-                        <select className="browser-default" dir="rtl" name="kita"value={this.state.value} onChange={this.handleChange}>
+                        <select className="browser-default" dir="rtl" name="sulamTeacher" value={this.state.sulamTeacher} onChange={this.handleChange}>
                         <option value="stop">יונתן סטופ</option>
                         <option value="chops">צ'ופס לוי</option>
                         <option value="catri">כתריאל בארי</option>
@@ -79,8 +120,10 @@ class AddNewMiktzua extends Component {
                                 required
                                 dir="rtl"
                                 type="text"
-                                name="fName"
+                                name="schoolTeacherName"
                                 placeholder="הכנס שם מלא"
+                                value={this.state.schoolTeacherName}
+                                onChange={this.handleChange}
                             />
                     </label>
                 </div>
@@ -92,21 +135,22 @@ class AddNewMiktzua extends Component {
                                 required
                                 dir="rtl"
                                 type="text"
-                                name="fName"
+                                name="schoolTeacherPhone"
                                 placeholder="הכנס מס' טלפון"
+                                value={this.state.schoolTeacherPhone}
+                                onChange={this.handleChange}
                             />
                     </label>
                 </div>
-                <div className="courseButtons">
-                    <button className="grey darken-3 waves-effect waves-light btn-large">שלח</button><br/><br/>
-                    <button className="grey darken-3 waves-effect waves-light btn-large">הוסף</button><br/><br/>
-                </div>
                 </form>
+                <div className="courseButtons">
+                    <button type="submit" form="mikzua" className="grey darken-3 waves-effect waves-light btn-large">שלח</button><br/><br/>
+                    <button className="grey darken-3 waves-effect waves-light btn-large" onClick={this.handleAdd}>הוסף</button><br/><br/>
+                </div>
                 </div>
                 <div className="try">sda
                 </div>
             </div>
-
         </div>
 
         )
