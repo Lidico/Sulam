@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import DatePicker, { registerLocale } from 'react-datepicker';
+import firebase from '../../FireBase/FireStore';
 
 
 
@@ -14,7 +15,7 @@ class PersonalDetails extends Component {
                 EmailEdit: false,
                 address: 'בית ראש הממשלה 22 ירושלים',
                 addressEdit: false,
-                birthDate: '22.10.15',
+                birthDate: new Date(),
                 birthDateEdit: false,
                 vetekInSulam: 'שנה',
                 vetekInSulamEdit: false,
@@ -31,21 +32,24 @@ class PersonalDetails extends Component {
             this.handleChange = this.handleChange.bind(this);
             this.handleEdit = this.handleEdit.bind(this);
             this.handleSave = this.handleSave.bind(this);
+            this.handleChangebirthDate = this.handleChangebirthDate.bind(this);
           }
 
     handleChange(e) {
         this.setState({[e.target.name]: e.target.value});
     }
+    handleChangebirthDate(e) {
+        this.setState({birthDate: e});
+      }
     handleEdit(e) {
         this.setState({[e.target.name]: true});
         console.log(this.state.birthDateEdit)
     }
     handleSave(e) {
-        this.setState({[e.target.name]: false});
-
-        
+        this.setState({[e.target.name]: false});  
     }
-    render(){     
+    render(){
+        console.log(firebase.auth().currentUser);     
         return(
             <div className="personalDataBox">
                 <h5>יצירת קשר</h5>
@@ -123,21 +127,21 @@ class PersonalDetails extends Component {
                 <label>
                 <span dir="rtl"  className="headLinePD"> תאריך לידה: </span>
                     <DatePicker
-                        dateFormat="dd/mm/yyyy"
+                        dateFormat="dd/MM/yyyy"
                         showYearDropdown
                         isClearable={true}
                         dir="rtl"
                         placeholderText="מלא תאריך לידה"
                         name="birthDate"
-                        value = {this.state.birthDate}
-                        onChange = {this.onChange}
+                        selected={this.state.birthDate}
+                        onChange={this.handleChangebirthDate}
                     />
                 </label>
                 <button className="buttonEdit" name="birthDateEdit" value={this.state.birthDateEdit} onClick={this.handleSave}>שמור</button><br/>
                 </div>)
                 :
                 (
-                    <div><span className="headLinePD">תאריך לידה:</span><span className="contentPD">{this.state.birthDate}</span>
+                    <div><span className="headLinePD">תאריך לידה:</span><span className="contentPD">fdg</span>
                     <button className="buttonEdit" name="birthDateEdit" value={this.state.birthDateEdit} onClick={this.handleEdit}>עריכה</button><br/></div>
                 )}
                 
@@ -169,7 +173,7 @@ class PersonalDetails extends Component {
                 
                 {this.state.programEdit ?
                 (<div name="program" dir="rtl" class="input-field col s12">
-                <select>
+                <select className="browser-default">
                 <option value="" disabled selected>בחר תוכנית</option>
                 <option value="regila">רגילה</option>
                 <option value="mugberet">מוגברת</option>

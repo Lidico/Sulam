@@ -1,38 +1,82 @@
 import React, { Component } from 'react';
 import './signIn.css';
+import firebase from '../../FireBase/FireStore';
+import { Redirect } from 'react-router';
+import signedIn from '../layOut/signedIn';
+import AddUser from './addUser'
+import SigninForm from './signinForm'
 
 class SignIn extends Component {
     state={
         email: '',
-        password: ''
-
+        password: '',
+        signedIn: false,
+        manager: false
     }
-    handleChange = (e) =>{
+
+    componentDidMount = () => {
+        firebase.auth().onAuthStateChanged(user => {
+            console.log(user);
+            if(!user){
+                this.setState({signedIn: false,manager: false})
+                return;
+            }
+            if(user.email === "piskarov@gmail.com")
+                this.setState({manager:true})
+            else
+                this.setState({signedIn:true})
+        })
+    }
+    handleChange = (e) => {
         this.setState({
             [e.target.id]: e.target.value
         })
     }
-    handleSubmit = (e) =>{
+    handleSubmit = (e) => {
         e.preventDefault();
         console.log(this.state)
     }
+
+    SignIn = () => {
+        console.log(this.state)
+        firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
+        .catch(function(error) {
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            alert(errorCode);
+            alert(errorMessage);
+          });
+    }
+ 
+    createUser = ()=> {
+        firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
+        .catch(function(error) {
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            alert(errorCode);
+            alert(errorMessage);
+          });
+        
+    }
     render(){
+
         return(
             <div className="container right-align containBox">
-                <form onSubmit={this.handleSubmit} className="white">
-                        <h5 className="grey-text text-darken-3">כניסת משתמש</h5>
-                        <div dir="rtl" className="input-field">
-                            <input dir="rtl"  type="email" id="email" onChange={this.handleChange}/>
-                            <label dir="rtl" htmlFor="email">דואר אלקטרוני</label>
-                        </div>
-                        <div dir="rtl" className="input-field">
-                            <input dir="rtl" type="password" id="password" onChange={this.handleChange}/>
-                            <label dir="rtl" htmlFor="password">סיסמה</label>
-                        </div>
-                        <div className="input-field">
-                            <button className="btn grey darken-3 waves-effect waves-light z-depth-0">כניסה</button>
-                        </div>
-                </form>
+            {this.state.signedIn ? (<Redirect to="/"></Redirect>):null}
+
+                {this.state.manager ? 
+                null
+                :
+                (<SigninForm handleChange={this.handleChange} SignIn={this.SignIn}/>)
+                }
+
+                {this.state.manager ? 
+                (
+                <AddUser handleChange={this.handleChange} createUser={this.createUser}/>
+                )
+                :
+                null
+                }
             </div>
         )
     }

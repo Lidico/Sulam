@@ -5,6 +5,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { Link } from 'react-router-dom';
 import firebase from '../../FireBase/FireStore';
 import { Redirect } from 'react-router';
+import CheckAuth from '../auth/checkAuth'
 
 class AddNewStud extends Component {
     constructor(props) {
@@ -87,6 +88,7 @@ class AddNewStud extends Component {
     render(){
         return(
         <div className="formPage">
+            <CheckAuth/>
             <div align="right" className="formBox">
                 <div align="right" className="formCont">
                     <h4 className="rightHeb">הוסף תלמיד חדש</h4><br/><br/><br/>
