@@ -207,10 +207,8 @@ class AddNewStud extends Component {
                         <label>
                         <span dir="rtl"  className="headLinePD"> תאריך לידה: </span>
                             <DatePicker
-                                dateFormat="dd/mm/yyyy"
+                                dateFormat="dd/MM/yyyy"
                                 showYearDropdown
-                                isClearable={true}
-                                dir="rtl"
                                 placeholderText="מלא תאריך לידה"
                                 name="birthDate"
                                 selected={this.state.birthDate}
@@ -222,10 +220,8 @@ class AddNewStud extends Component {
                         <label>
                         <span  dir="rtl" className="headLinePD">  תאריך כניסה לסולם לעתיד: </span>
                             <DatePicker
-                                dateFormat="dd/mm/yyyy"
+                                dateFormat="dd/MM/yyyy"
                                 showYearDropdown
-                                dir="rtl"
-                                isClearable={true}
                                 placeholderText="מלא תאריך כניסה"
                                 name="vetekInSulam"
                                 selected={this.state.vetekInSulam}

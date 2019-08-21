@@ -25,7 +25,7 @@ class MainCard extends Component {
             <div className="dataBox">
                 {/*<PersonalDetails/>*/}
                 {/*<FamilyDetails/>*/}
-                <AcademicDetails/>
+                <Tracing/>
             </div>
         </div>
 
