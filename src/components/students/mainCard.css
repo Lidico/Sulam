@@ -190,3 +190,19 @@ hr.borderLine{
     z-index: 100;
     text-align: right;
 }
+
+ .inpBox{
+    display: inline;
+    position: relative;
+    display: block;
+  }
+
+  .checkBOxes{
+    width: 60%;
+    display: flex;
+    justify-content: space-between;
+    float: right;
+    position: relative;
+    margin-top: 2rem;
+    margin-bottom: 0.5rem;
+  }

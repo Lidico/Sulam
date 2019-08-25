@@ -1,0 +1,76 @@
+.mainBlockCard{
+    margin-top: 2rem;
+    width: 98%;
+    height: 100vh;
+
+}
+
+.nameBlock{
+    border: 1px solid lightgray;
+    height: 20vh;
+    margin-left: 1rem;
+    width: 100%;
+    border-radius: 0.5rem;
+    background-color: #FFFDFD;
+}
+
+.nameAndPhoto{
+    position: relative;
+    float: right;
+    top: 20%;
+    margin-right: 3rem;
+
+}
+
+.profImage{
+    height: 7rem;
+    width: 7rem;
+    border-radius: 50%;
+    float: right;
+}
+
+.nameBox{
+    float: left;
+}
+
+.headerTextPrimary{
+    display: block;
+    font-size: 5vh;
+    font-weight: 400;
+    letter-spacing: 2px;
+    margin-right: 2rem;
+}
+
+.headerTextSub{
+    display: block;
+    font-size: 1.5vh;
+    font-weight: 400;
+    letter-spacing: 2px;
+    direction: rtl;
+}
+
+.buttonNav{    
+    position: relative;
+    width: 100%;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    background-color: #F4F4F4;
+    color: #686868;
+    border: 1px solid lightgray;
+    cursor: pointer;
+    direction: rtl;
+    float: left;
+}
+
+.buttonNav:hover{    
+    background-color: #EAEAEA; 
+}
+
+.detailsBlock{
+    border: 1px solid lightgray;
+    margin-left: 1rem;
+    width: 100%;
+    border-radius: 0.5rem;
+    background-color: #FFFDFD;
+}
+

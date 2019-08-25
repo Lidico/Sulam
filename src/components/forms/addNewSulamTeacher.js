@@ -2,28 +2,50 @@ import React, { Component } from 'react';
 import './form.css';
 import DatePicker, { registerLocale } from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
+import firebase from '../../FireBase/FireStore';
 import { Link } from 'react-router-dom';
 
 class AddNewSulamTeacher extends Component {
     constructor(props) {
         super(props);
-        this.state = {value: 'coconut'};
+        this.state = {
+            fName:'',
+            sName:'',
+            SulamTeacherID:'',
+            phoneNumber:'',
+            Email:'',
+            address:'',
+            generalDescription:'',
+            TeacherMiktzuaList: new Array(),
+            isSubmit: false
+        };
     
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
       }
     
-      handleChange(event) {
-        this.setState({value: event.target.value});
+      handleChange(e) {
+        this.setState({[e.target.name]: e.target.value});
       }
     
-      handleSubmit(event) {
-      }
+      handleSubmit(e) {
+        e.preventDefault();
+        const db = firebase.firestore();
 
-      setGender(event) {
-        console.log(event.target.value);
-      }
+        db.settings({});
 
+        db.collection("listOfTeachers").doc(this.state.SulamTeacherID).set({
+            fName:this.state.fName,
+            sName:this.state.sName,
+            SulamTeacherID:this.state.SulamTeacherID,
+            gender:this.state.gender,
+            phoneNumber:this.state.phoneNumber,
+            Email:this.state.Email,
+            address:this.state.address,
+           
+            generalDescription:this.state.generalDescription,
+        }).then(() => this.setState({isSubmit:true})); 
+      }
 
     render(){
     
@@ -31,62 +53,181 @@ class AddNewSulamTeacher extends Component {
         <div className="formPage">
             <div align="right" className="formBox">
                 <div align="right" className="formCont">
-                    <h4 className="rightHeb">הוספת מקצוע חדש</h4><br/><br/><br/>
+                    <h4 className="rightHeb">הוספת מורה חדש</h4><br/><br/><br/>
                     <form onSubmit={this.handleSubmit}>
                     <div className="inpBox">
                         <label>
-                        <span dir="rtl" className="headLinePD"> בחר מקצוע: </span>
+                        <span dir="rtl" className="headLinePD"> בחר שם תואר: </span>
                         <select className="browser-default" dir="rtl" name="kita"value={this.state.value} onChange={this.handleChange}>
-                        <option value="english">אנגלית</option>
-                        <option value="math">מתמטיקה</option>
-                        <option value="history">היסטוריה</option>
-                        <option value="Literature">ספרות</option>
-                        <option value="bible">תנ"ך</option>
-                        <option value="phisic">פיזיקה</option>
+                        <option value="english">מר\גברת</option>
+                        <option value="math">ד"ר</option>
+                        <option value="history">פרופסור</option>
                     </select>
+                    </label>
+                </div>
+                    <div className="inpBox">
+                        <label>
+                        <span dir="rtl" className="headLinePD"> שם פרטי: </span>
+                            <input
+                                className="inputB"
+                                required
+                                dir="rtl"
+                                type="text"
+                                name="fName"
+                                placeholder="הכנס שם פרטי"
+                                dir="rtl"
+                                value={this.state.fName}
+                                onChange={this.handleChange}
+                            />
                     </label>
                 </div>
                 <div className="inpBox">
                         <label>
-                        <span dir="rtl" className="headLinePD"> בחר מורה סולם לעתיד: </span>
-                        <select className="browser-default" dir="rtl" name="kita"value={this.state.value} onChange={this.handleChange}>
-                        <option value="stop">יונתן סטופ</option>
-                        <option value="chops">צ'ופס לוי</option>
-                        <option value="catri">כתריאל בארי</option>
-                        <option value="bella">בלה צ'ארלס</option>
-                        <option value="arth">ארתור פינשטיין</option>
-                    </select>
-                    </label>
-                </div>
-                <div className="inpBox">
-                <label>
-                <span dir="rtl" className="headLinePD"> מורה מלמד בביה"ס: </span>
+                        <span dir="rtl"  className="headLinePD"> שם משפחה: </span>
                             <input
                                 className="inputB"
                                 required
                                 dir="rtl"
                                 type="text"
-                                name="fName"
-                                placeholder="הכנס שם מלא"
+                                name="sName"
+                                placeholder="הכנס שם משפחה"
+                                value={this.state.sName}
+                                onChange={this.handleChange}
                             />
                     </label>
                 </div>
                 <div className="inpBox">
-                <label>
-                <span dir="rtl" className="headLinePD"> מס' טלפון: </span>
+                        <label>
+                        <span  dir="rtl" className="headLinePD"> מס' ת"ז: </span>
                             <input
                                 className="inputB"
                                 required
                                 dir="rtl"
                                 type="text"
-                                name="fName"
+                                name="StudentiD"
+                                placeholder="הכנס מס' תעודת זהות"
+                                value={this.state.StudentiD}
+                                onChange={this.handleChange}
+                            />
+                    </label>
+                </div>
+                <div className="inpBox">
+                        <label>
+                        <span  dir="rtl" className="headLinePD"> כתובת: </span>
+                            <input
+                                className="inputB"
+                                required
+                                dir="rtl"
+                                type="text"
+                                name="StudentiD"
+                                placeholder="הכנס כתובת"
+                                value={this.state.StudentiD}
+                                onChange={this.handleChange}
+                            />
+                    </label>
+                </div>
+                <div className="inpBox">
+                        <label>
+                        <span  dir="rtl" className="headLinePD"> מס' טלפון: </span>
+                            <input
+                                className="inputB"
+                                required
+                                dir="rtl"
+                                type="text"
+                                name="phoneNumber"
                                 placeholder="הכנס מס' טלפון"
+                                value={this.state.phoneNumber}
+                                onChange={this.handleChange}
                             />
                     </label>
                 </div>
+                <div className="inpBox">
+                        <label>
+                        <span dir="rtl"  className="headLinePD"> דוא"ל: </span>
+                            <input
+                                className="inputB"
+                                required
+                                dir="rtl"
+                                type="text"
+                                name="Email"
+                                placeholder="הכנס דוא''ל"
+                                value={this.state.Email}
+                                onChange={this.handleChange}
+                            />
+                    </label>
+                </div>
+                    <div className="inpBox">
+                        <label>
+                        <span dir="rtl" className="headLinePD"> בחר מקצועות לימוד: </span>
+                        <p>
+                            <label>
+                                <input type="checkbox" />
+                                <span>מתמטיקה</span>
+                            </label>
+                        </p>
+                        <p>
+                            <label>
+                                <input type="checkbox"/>
+                                <span>ספרות</span>
+                            </label>
+                        </p>
+                        <p>
+                            <label>
+                                <input type="checkbox" />
+                                <span>פיזיקה</span>
+                            </label>
+                        </p>
+                        <p>
+                            <label>
+                                <input type="checkbox" />
+                                <span>היסטוריה</span>
+                            </label>
+                        </p>
+                        <p>
+                            <label>
+                                <input type="checkbox" />
+                                <span>אזרחות</span>
+                            </label>
+                        </p>
+                        <p>
+                            <label>
+                                <input type="checkbox" />
+                                <span>אנגלית</span>
+                            </label>
+                        </p>
+                        <p>
+                            <label>
+                                <input type="checkbox" />
+                                <span>תנ"ך</span>
+                            </label>
+                        </p>
+                        <p>
+                            <label>
+                                <input type="checkbox" />
+                                <span>לשון</span>
+                            </label>
+                        </p>
+                    </label>
+                </div>
+
+                <div className="inpBox">
+                        <label>
+                        <span dir="rtl" className="headLinePD">  מידע כללי על המורה: </span>
+                        <textarea
+                        dir="rtl"
+                      rows="4"
+                      cols="50"
+                      required
+                      name="generalDescription"
+                      placeholder="מלא את הדיווח השבועי"
+                      value={this.state.generalDescription}
+                      onChange={this.handleChange}
+                    />
+                    </label>
+                </div>
+                
                 <div className="courseButtons">
                     <button className="grey darken-3 waves-effect waves-light btn-large">שלח</button><br/><br/>
-                    <button className="grey darken-3 waves-effect waves-light btn-large">הוסף</button><br/><br/>
                 </div>
                 </form>
                 </div>

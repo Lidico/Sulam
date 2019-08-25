@@ -10,10 +10,10 @@
   .formBox{
     border: 1px solid lightgray;
     margin-left: 1rem;
-    width: 60%;
+    width: 80%;
     border-radius: 0.5rem;
     background-color: #FFFDFD;
-    margin-left: 25%;
+    margin-left: 10%;
     margin-top: 3rem;
     padding-top: 2rem;
     padding-right: 3rem;
@@ -71,14 +71,60 @@
     margin-bottom: 2rem;
   }
 
-  .try{
+  .newClassesBox{
     width: 35%;
-    height: 2rem;
     float: left;
     margin-left: 2rem;
     margin-top: 2rem;
     position: relative;
     display: block;
+  }
+
+  .newClassBox{
+    width: 100%;
+    margin-left: 2rem;
+    margin-top: 2rem;
+    position: relative;
+    float: left;
+    display: block;
+    border-radius: 0.5rem;
     border: 1px solid lightgray;
     background-color: #FFFDFD;
+    padding-top: 1rem;
+    padding-right: 1rem;
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
   }
+
+  .headLinePD{
+    font-size: 1.5vh;
+    font-weight: 400;
+    letter-spacing: 2px;
+    direction: rtl;
+    color: #686868;
+    margin-left: 2rem;
+}
+
+.contentPD{
+    font-size: 1.5vh;
+    font-weight: 400;
+    letter-spacing: 2px;
+    direction: rtl;
+    color: #686868;
+}
+
+.lineClass{
+  float: right;
+  display: inline-block;
+  direction: rtl;
+}
+
+.deletButt{
+  margin-top: 1rem;
+  padding-top: 1rem;
+  width: 60%;
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  margin-bottom: 2rem;
+}

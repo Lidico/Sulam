@@ -13,10 +13,13 @@ const navList = () => {
                     <button className="buttonNav">מצב משפחתי</button>
                 </Link>
                 <Link to="/">
-                    <button className="buttonNav">מצב אקדמי</button>
+                    <button className="buttonNav">מצב לימודי</button>
                 </Link>
                 <Link to="/">
                     <button className="buttonNav">מעקב שבועי</button>
+                </Link>
+                <Link to="/">
+                    <button className="buttonNav">מעקב פיננסי</button>
                 </Link>
             </div>
          </div>

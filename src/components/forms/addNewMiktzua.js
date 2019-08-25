@@ -5,6 +5,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { Link } from 'react-router-dom';
 import firebase from '../../FireBase/FireStore';
 import TimePicker from 'react-time-picker';
+import NewClass from './newClass';
 
 
 function MiktzuaList(props){
@@ -30,15 +31,18 @@ class AddNewMiktzua extends Component {
      
       onChange = time => this.setState({ time })
     
-
     constructor(props) {
         super(props);
         this.state = {
          /* StudentiD: props.location.state.StudentiD,*/
             profName:'',
             sulamTeacher:'',
+            dayOfMifgash:'',
+            hourOfMifgash:'',
+            
             schoolTeacherName:'',
             schoolTeacherPhone:'',
+            studInTeacherHome:'',
             MiktzuaList: new Array()
         };
     
@@ -125,14 +129,13 @@ class AddNewMiktzua extends Component {
                 <label>
                 <span dir="rtl" className="headLinePD"> בחר שעת המפגש: </span>
                     <DatePicker
-                        selected={this.state.startDate}
-                        onChange={this.handleChange}
+                        selected={this.state.vetekInSulam}
+                        onChange={this.handleChangevetekInSulam}
                         showTimeSelect
                         showTimeSelectOnly
                         timeIntervals={15}
                         dateFormat="h:mm aa"
                         timeCaption="Time"
-            
                     />
                     </label>
                 </div>
@@ -168,13 +171,40 @@ class AddNewMiktzua extends Component {
                             />
                     </label>
                 </div>
+                <div className="inpBox">
+                    <label>
+                    <span dir="rtl"  className="headLinePD"> לומד בבית המורה: </span><br/>
+                    <p>
+                        <label>
+                            <input name="gishaLeMahshev" type="radio" value="לא"/>
+                            <span>לא</span>
+                        </label>
+                        </p>
+                        <p>
+                        <label>
+                            <input name="gishaLeMahshev" type="radio" value="כן"/>
+                            <span>כן</span>
+                        </label>
+                        </p>
+                    </label>
+                    </div>
                 </form>
                 <div className="courseButtons">
                     <button type="submit" form="mikzua" className="grey darken-3 waves-effect waves-light btn-large">שלח</button><br/><br/>
                     <button className="grey darken-3 waves-effect waves-light btn-large" onClick={this.handleAdd}>הוסף</button><br/><br/>
                 </div>
                 </div>
-                <div className="try">sda
+                <div className="newClassesBox">
+                    <NewClass/>
+                    <NewClass/>
+                    <NewClass/>
+                    <NewClass/>
+                    <NewClass/>
+                    <NewClass/>
+                    <NewClass/>
+                    <NewClass/>
+                    <NewClass/>
+                    <NewClass/>
                 </div>
             </div>
         </div>
