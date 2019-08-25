@@ -4,6 +4,7 @@ import DatePicker, { registerLocale } from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 import firebase from '../../FireBase/FireStore';
 import { Link } from 'react-router-dom';
+import { Redirect } from 'react-router';
 
 class AddNewSulamTeacher extends Component {
     constructor(props) {
@@ -26,6 +27,14 @@ class AddNewSulamTeacher extends Component {
     
       handleChange(e) {
         this.setState({[e.target.name]: e.target.value});
+        if(e.target.type == "checkbox"){
+            if(this.state.TeacherMiktzuaList.Contains(e.target.value)){
+                this.state.TeacherMiktzuaList.remove(e.target.value);
+            }
+            else{
+                this.state.TeacherMiktzuaList.push(e.target.value);
+            }
+        }
       }
     
       handleSubmit(e) {
@@ -38,11 +47,9 @@ class AddNewSulamTeacher extends Component {
             fName:this.state.fName,
             sName:this.state.sName,
             SulamTeacherID:this.state.SulamTeacherID,
-            gender:this.state.gender,
             phoneNumber:this.state.phoneNumber,
             Email:this.state.Email,
             address:this.state.address,
-           
             generalDescription:this.state.generalDescription,
         }).then(() => this.setState({isSubmit:true})); 
       }
@@ -104,7 +111,7 @@ class AddNewSulamTeacher extends Component {
                                 required
                                 dir="rtl"
                                 type="text"
-                                name="StudentiD"
+                                name="SulamTeacherID"
                                 placeholder="הכנס מס' תעודת זהות"
                                 value={this.state.StudentiD}
                                 onChange={this.handleChange}
@@ -119,7 +126,7 @@ class AddNewSulamTeacher extends Component {
                                 required
                                 dir="rtl"
                                 type="text"
-                                name="StudentiD"
+                                name="address"
                                 placeholder="הכנס כתובת"
                                 value={this.state.StudentiD}
                                 onChange={this.handleChange}
@@ -161,49 +168,49 @@ class AddNewSulamTeacher extends Component {
                         <span dir="rtl" className="headLinePD"> בחר מקצועות לימוד: </span>
                         <p>
                             <label>
-                                <input type="checkbox" />
+                                <input dir="rtl" type="checkbox" value="מתמטיקה" onChange={this.handleChange} />
                                 <span>מתמטיקה</span>
                             </label>
                         </p>
                         <p>
                             <label>
-                                <input type="checkbox"/>
+                                <input dir="rtl" type="checkbox" value="ספרות" onChange={this.handleChange}/>
                                 <span>ספרות</span>
                             </label>
                         </p>
                         <p>
                             <label>
-                                <input type="checkbox" />
+                                <input dir="rtl" type="checkbox" value="פיזיקה" onChange={this.handleChange} />
                                 <span>פיזיקה</span>
                             </label>
                         </p>
                         <p>
                             <label>
-                                <input type="checkbox" />
+                                <input dir="rtl" type="checkbox" value="היסטוריה" onChange={this.handleChange} />
                                 <span>היסטוריה</span>
                             </label>
                         </p>
                         <p>
                             <label>
-                                <input type="checkbox" />
+                                <input dir="rtl" type="checkbox" value="אזרחות" onChange={this.handleChange} />
                                 <span>אזרחות</span>
                             </label>
                         </p>
                         <p>
                             <label>
-                                <input type="checkbox" />
+                                <input dir="rtl" type="checkbox" value="אנגלית" onChange={this.handleChange} />
                                 <span>אנגלית</span>
                             </label>
                         </p>
                         <p>
                             <label>
-                                <input type="checkbox" />
+                                <input dir="rtl" type="checkbox" value="תנך" onChange={this.handleChange} />
                                 <span>תנ"ך</span>
                             </label>
                         </p>
                         <p>
                             <label>
-                                <input type="checkbox" />
+                                <input dir="rtl" type="checkbox" value="לשון" onChange={this.handleChange} />
                                 <span>לשון</span>
                             </label>
                         </p>
@@ -228,6 +235,8 @@ class AddNewSulamTeacher extends Component {
                 
                 <div className="courseButtons">
                     <button className="grey darken-3 waves-effect waves-light btn-large">שלח</button><br/><br/>
+                    {this.state.isSubmit ? (<Redirect to={{pathname: "/Dashboard", state:{SulamTeacherID:this.state.SulamTeacherID}}} ></Redirect>):null}
+
                 </div>
                 </form>
                 </div>
