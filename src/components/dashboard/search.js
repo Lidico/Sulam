@@ -3,10 +3,17 @@ import React from 'react';
 
 const Search = () => {
     return(
-        <div className="input-field col s6">
-            <input id="icon_telephone" type="tel" className="validate"/>
-            <label for="icon_telephone">חפש</label>
-            <i className="material-icons prefix">search</i>
+        <div className="searchBox">
+            <label>
+                            <textarea   
+                             className="materialize-textarea"    
+                                dir="rtl"
+                                type="text"
+                                name="search"
+                                placeholder="חפש..."
+                            />
+                    </label>
+                    <i className="material-icons prefix">search</i>
       </div>
     )
 }

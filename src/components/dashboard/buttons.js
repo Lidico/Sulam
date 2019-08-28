@@ -5,36 +5,36 @@ import Search from './search';
 
 const Buttons = () => {
     return(
-        <div className="project-list section center-align">
-             <div className="section">
-                <Link to="/">
-                    <button className="waves-effect waves-light btn-large m3">הוספת תלמיד</button>
+        <div className="buttBox">
+             <div className="buttLine">
+                <Link>
+                   <button disabled className="grey darken-3 waves-effect waves-light btn-large" >הוסף תוכנית חדשה</button>
                 </Link>
-                <Link to="/">
-                    <button className="waves-effect waves-light btn-large m3">פרטי התלמיד</button>
+                <Link>
+                   <button disabled className="grey darken-3 waves-effect waves-light btn-large" >הוסף ביה"ס חדש</button>
                 </Link>
-            </div>
-                <div className="section">
-                <Link to="/">
-                    <button className="waves-effect waves-light btn-large m3" disabled>הוספת מורה</button>
+                <Link to="/addNewSulamTeacher">
+                   <button className="grey darken-3 waves-effect waves-light btn-large" >הוסף מורה חדש</button>
                 </Link>
-                <Link to="/">
-                    <button className="waves-effect waves-light btn-large m3">פרטי המורים</button>
+                <Link to="/AddNewStud">
+                   <button className="grey darken-3 waves-effect waves-light btn-large" >הוסף תלמיד חדש</button>
                 </Link>
-            </div>
-            <div className="section">
-                <Link to="/">
-                    <button className="waves-effect waves-light btn-large m3" disabled>הוספת בית ספר</button>
+             </div>
+             <div className="buttLine">
+                 <Link>
+                   <button className="grey darken-3 waves-effect waves-light btn-large" >צפיה במצב פיננסי כללי</button>
                 </Link>
-                <Link to="/">
-                    <button className="waves-effect waves-light btn-large m3">פרטי בתי הספר</button>
+                <Link>
+                   <button className="grey darken-3 waves-effect waves-light btn-large" >צפיה בבתי ספר</button>
                 </Link>
-            </div>
-            <div className="section">
-                <Search/>
-            </div>
+                <Link>
+                   <button className="grey darken-3 waves-effect waves-light btn-large " >צפיה במורים</button>
+                </Link>
+                <Link>
+                   <button className="grey darken-3 waves-effect waves-light btn-large" >צפיה בתלמידים</button>
+                </Link>
 
-
+             </div>
         </div>
     )
 }

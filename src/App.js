@@ -11,7 +11,7 @@ import AddNewStud from "./components/forms/addNewStud";
 import AddNewSchool from "./components/forms/addNewSchool";
 import AddNewMiktzua from "./components/forms/addNewMiktzua";
 import personalDetails from "./components/students/personalDetails"
-import addNewSulamTeacher from "./components/forms/addNewSulamTeacher"
+import AddNewSulamTeacher from "./components/forms/addNewSulamTeacher"
 import TeachersDeatails from "./components/sulamTeachers/teachersDetails";
 
 
@@ -23,10 +23,13 @@ class App extends Component {
           <NavBar/>
         </div>
         <Switch>
+        /addNewSulamTeacher
             <Route path = '/' exact component={TeachersDeatails}/>
+            <Route path = '/dashboard' exact component={Dashboard}/>
             <Route path = '/AddNewStud' exact component={AddNewStud}/>
             <Route path = '/AddNewMiktzua' exact component={AddNewMiktzua}/>
             <Route path = '/signin' exact component={SignIn}/>
+            <Route path = '/addNewSulamTeacher' exact component={AddNewSulamTeacher}/>
         </Switch>
         </BrowserRouter>
     );

@@ -1,0 +1,103 @@
+.halfDash{
+    height: 50vh;
+    width: 100%;
+    background-color: black;
+}
+.sechalfDash{
+    height: 50vh;
+    width: 100%;
+    position: absolute;
+    display: block;
+}
+
+.textDashBox{
+    color: #fff;
+    position: relative;
+    text-align: left; 
+    width: 110%;
+    position: relative;
+    top:27%;
+    margin-left: 10%;
+
+}
+
+.headerDashText{
+    backface-visibility: hidden;
+    margin-bottom: 120px;
+    width: 50%;
+    margin: auto; 
+}
+
+.headerDashTextPrimary{
+    display: block;
+    font-size: 10vh;
+    font-weight: 400;
+    letter-spacing: 2px;
+    margin-right: 5rem;
+
+    animation-name: moveInLeft;
+    animation-duration: 1s;
+    animation-timing-function: ease-out;
+}
+
+.headerDashTextSub{
+    display: block;
+    font-size: 2vh;
+    font-weight: 400;
+    letter-spacing: 7px;
+
+    animation-name: moveInRight;
+    animation-duration: 1s;
+    animation-timing-function: ease-out;
+}
+
+.searchBox{
+    width: 50%;
+    margin-left: 50%;
+    display: inline-block;
+    position: relative;
+}
+
+.buttBox{
+    display: block;
+    width: 60%;
+    margin-left: 20%;
+    margin-right: 20%;
+}
+
+.buttLine{
+    display: flex;
+    margin-bottom: 1rem;
+    justify-content: space-around;
+}
+
+
+
+
+@keyframes moveInRight{
+    0%{
+        opacity: 0;
+        transform: translateX(-100px);
+    }
+    80%{
+        transform: translateX(10px); 
+    }
+    100%{
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes moveInLeft{
+    0%{
+        opacity: 0;
+        transform: translateX(100px);
+    }
+    80%{
+        transform: translateX(-10px); 
+    }
+    100%{
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
