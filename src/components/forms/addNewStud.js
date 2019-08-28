@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import firebase from '../../FireBase/FireStore';
 import { Redirect } from 'react-router';
 import CheckAuth from '../auth/checkAuth'
+import FileUploader from "react-firebase-file-uploader";
 
 class AddNewStud extends Component {
     constructor(props) {
@@ -33,6 +34,8 @@ class AddNewStud extends Component {
             numOfbrothers:'',
             familyStatus:'',
             generalDescription:'',
+            isUploading: false,
+            imgUrl:'',
             isSubmit: false
         };
     
@@ -40,6 +43,10 @@ class AddNewStud extends Component {
         this.handleChangebirthDate = this.handleChangebirthDate.bind(this);
         this.handleChangevetekInSulam = this.handleChangevetekInSulam.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleUploadSuccess = this.handleUploadSuccess.bind(this);
+        this.handleUploadError = this.handleUploadError.bind(this);
+        this.handleUploadStart = this.handleUploadStart.bind(this);
+        this.handleProgress = this.handleProgress.bind(this);
       }
     
       handleChange(e) {
@@ -50,6 +57,25 @@ class AddNewStud extends Component {
       }
       handleChangebirthDate(e) {
         this.setState({birthDate: e});
+      }
+      handleUploadStart() {
+        this.setState({ isUploading: true });
+      }
+      handleUploadError(error) {
+        console.error(error);
+      }
+      handleProgress = progress => this.setState({ progress: progress + "%" });
+      handleUploadError(error) {
+        alert("Upload Error: " + error);
+      }
+      handleUploadSuccess(filename) {
+        this.setState({ isUploading: false });
+        firebase
+          .storage()
+          .ref("studImages")
+          .child(filename)
+          .getDownloadURL()
+          .then(url => this.setState({ imgUrl: url, progress: [] }));
       }
     
       handleSubmit(e) {
@@ -86,6 +112,10 @@ class AddNewStud extends Component {
       
 
     render(){
+
+        let selectImg = false;
+        if (this.state.imgUrl !=="") selectImg = true;
+
         return(
         <div className="formPage">
             <CheckAuth/>
@@ -95,12 +125,10 @@ class AddNewStud extends Component {
                     <h5 className="rightHeb">פרטים אישיים:</h5><br/>
                     <form onSubmit={this.handleSubmit}>
                     <div className="inpBox">
-                        <label>
+                        <label className="active">
                         <span dir="rtl" className="headLinePD"> שם פרטי: </span>
                             <input
-                                className="inputB"
                                 required
-                                dir="rtl"
                                 type="text"
                                 name="fName"
                                 placeholder="הכנס שם פרטי"
@@ -114,7 +142,7 @@ class AddNewStud extends Component {
                         <label>
                         <span dir="rtl"  className="headLinePD"> שם משפחה: </span>
                             <input
-                                className="inputB"
+                                 
                                 required
                                 dir="rtl"
                                 type="text"
@@ -129,7 +157,7 @@ class AddNewStud extends Component {
                         <label>
                         <span  dir="rtl" className="headLinePD"> מס' ת"ז: </span>
                             <input
-                                className="inputB"
+                                 
                                 required
                                 dir="rtl"
                                 type="text"
@@ -162,7 +190,7 @@ class AddNewStud extends Component {
                         <label>
                         <span  dir="rtl" className="headLinePD"> מס' טלפון: </span>
                             <input
-                                className="inputB"
+                                 
                                 required
                                 dir="rtl"
                                 type="text"
@@ -177,10 +205,10 @@ class AddNewStud extends Component {
                         <label>
                         <span dir="rtl"  className="headLinePD"> דוא"ל: </span>
                             <input
-                                className="inputB"
+                                 
                                 required
                                 dir="rtl"
-                                type="text"
+                                type="email"
                                 name="Email"
                                 placeholder="הכנס דוא''ל"
                                 value={this.state.Email}
@@ -192,7 +220,7 @@ class AddNewStud extends Component {
                         <label>
                         <span dir="rtl"  className="headLinePD"> כתובת: </span>
                             <input
-                                className="inputB"
+                                 
                                 required
                                 dir="rtl"
                                 type="text"
@@ -282,7 +310,7 @@ class AddNewStud extends Component {
                         <label>
                         <span dir="rtl"  className="headLinePD"> שם המחנכ\ת: </span>
                         <input
-                                className="inputB"
+                                 
                                 required
                                 dir="rtl"
                                 type="text"
@@ -297,7 +325,7 @@ class AddNewStud extends Component {
                         <label>
                         <span dir="rtl"  className="headLinePD">  טלפון: </span>
                         <input
-                                className="inputB"
+                                 
                                 required
                                 dir="rtl"
                                 type="text"
@@ -313,7 +341,7 @@ class AddNewStud extends Component {
                         <label>
                         <span dir="rtl"  className="headLinePD">  איש קשר: </span>
                         <input
-                                className="inputB"
+                                 
                                 required
                                 dir="rtl"
                                 type="text"
@@ -328,7 +356,7 @@ class AddNewStud extends Component {
                         <label>
                         <span  dir="rtl" className="headLinePD">  טלפון: </span>
                         <input
-                                className="inputB"
+                                 
                                 required
                                 dir="rtl"
                                 type="text"
@@ -343,7 +371,7 @@ class AddNewStud extends Component {
                         <label>
                         <span dir="rtl"  className="headLinePD">  איש קשר נוסף: </span>
                         <input
-                                className="inputB"
+                                 
                                 required
                                 dir="rtl"
                                 type="text"
@@ -358,7 +386,7 @@ class AddNewStud extends Component {
                         <label>
                         <span dir="rtl" className="headLinePD">  טלפון: </span>
                         <input
-                                className="inputB"
+                                 
                                 required
                                 dir="rtl"
                                 type="text"
@@ -373,7 +401,6 @@ class AddNewStud extends Component {
                         <label>
                         <span dir="rtl" className="headLinePD">  מס' אחים: </span>
                         <input
-                                className="inputB"
                                 required
                                 dir="rtl"
                                 type="text"
@@ -388,6 +415,7 @@ class AddNewStud extends Component {
                         <label>
                         <span dir="rtl" className="headLinePD">  מצב כללי בבית: </span>
                         <textarea
+                        className="materialize-textarea"
                         dir="rtl"
                       rows="4"
                       cols="50"
@@ -403,6 +431,7 @@ class AddNewStud extends Component {
                         <label>
                         <span dir="rtl" className="headLinePD">  מידע נוסף: </span>
                         <textarea
+                        className="materialize-textarea"
                         dir="rtl"
                       rows="4"
                       cols="50"
@@ -414,6 +443,42 @@ class AddNewStud extends Component {
                     />
                     </label>
                 </div>
+
+                <div className="inpBox">
+                {selectImg ? (
+                    <div>
+                      <img
+                        className="profImageStud"
+                        alt="החלף תמונה"
+                        src={this.state.imgUrl}
+                      />
+                      <div>
+                        {this.state.progress}שנה תמונה
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="green waves-effect waves-light btn">
+                        {console.log("kakakakakakakakakakakakakakaka")}
+                      הוספת תמונה {this.state.progress}
+                    </div>
+                  )}
+                  <br/>
+
+
+                <FileUploader
+                    hidden
+                    accept="image/*"
+                    randomizeFilename
+                    storageRef={firebase.storage().ref("studImages")}
+                    onUploadError={this.handleUploadError}
+                    onUploadSuccess={this.handleUploadSuccess}
+                    onUploadStart={this.handleUploadStart}
+                    onProgress={this.handleProgress}
+                  />
+                 
+                </div><br/>
+
+             
                 <button className="grey darken-3 waves-effect waves-light btn-large">המשך</button><br/><br/>
                 </form>
                 </div>

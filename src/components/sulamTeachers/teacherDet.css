@@ -29,6 +29,12 @@
     float: right;
 }
 
+.profImageStud{
+    height: 3.5rem;
+    width: 3.5rem;
+    border-radius: 50%;
+}
+
 .nameBox{
     float: left;
 }
@@ -72,5 +78,24 @@
     width: 100%;
     border-radius: 0.5rem;
     background-color: #FFFDFD;
+    margin-top: 1.5rem;
+    padding: 2rem;
+    align-content: right;
+    direction: rtl;
+    text-align: right;
 }
 
+.inpBox{
+    display: inline;
+    position: relative;
+    display: block;
+  }
+
+  .headLinePD{
+    font-size: 1.5vh;
+    font-weight: 400;
+    letter-spacing: 2px;
+    direction: rtl;
+    color: #686868;
+    margin-left: 2rem;
+}

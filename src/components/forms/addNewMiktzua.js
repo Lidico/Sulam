@@ -34,7 +34,7 @@ class AddNewMiktzua extends Component {
     constructor(props) {
         super(props);
         this.state = {
-         /* StudentiD: props.location.state.StudentiD,*/
+            StudentiD: props.location.state.StudentiD,
             profName:'',
             sulamTeacher:'',
             dayOfMifgash:'',
@@ -48,7 +48,6 @@ class AddNewMiktzua extends Component {
     
         this.handleChange = this.handleChange.bind(this);
         this.handleAdd = this.handleAdd.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
       }
     
       handleChange(e) {
@@ -64,6 +63,7 @@ class AddNewMiktzua extends Component {
           let arrTemp = this.state.MiktzuaList;
           arrTemp.push(temp);
           this.setState({MiktzuaList:arrTemp});
+          console.log(MiktzuaList);
 
       }
 
@@ -129,12 +129,10 @@ class AddNewMiktzua extends Component {
                 <label>
                 <span dir="rtl" className="headLinePD"> בחר שעת המפגש: </span>
                     <DatePicker
-                        selected={this.state.vetekInSulam}
-                        onChange={this.handleChangevetekInSulam}
                         showTimeSelect
                         showTimeSelectOnly
                         timeIntervals={15}
-                        dateFormat="h:mm aa"
+                        dateFormat="hh:mm aa"
                         timeCaption="Time"
                     />
                     </label>
@@ -145,7 +143,7 @@ class AddNewMiktzua extends Component {
                 <label>
                 <span dir="rtl" className="headLinePD"> מורה מלמד בביה"ס: </span>
                             <input
-                                className="inputB"
+                                 
                                 required
                                 dir="rtl"
                                 type="text"
@@ -160,7 +158,7 @@ class AddNewMiktzua extends Component {
                 <label>
                 <span dir="rtl" className="headLinePD"> מס' טלפון: </span>
                             <input
-                                className="inputB"
+                                 
                                 required
                                 dir="rtl"
                                 type="text"
@@ -195,16 +193,7 @@ class AddNewMiktzua extends Component {
                 </div>
                 </div>
                 <div className="newClassesBox">
-                    <NewClass/>
-                    <NewClass/>
-                    <NewClass/>
-                    <NewClass/>
-                    <NewClass/>
-                    <NewClass/>
-                    <NewClass/>
-                    <NewClass/>
-                    <NewClass/>
-                    <NewClass/>
+
                 </div>
             </div>
         </div>

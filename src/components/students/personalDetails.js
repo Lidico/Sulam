@@ -59,7 +59,6 @@ class PersonalDetails extends Component {
                         <label>
                         <span  dir="rtl" className="headLinePD"> מס' טלפון: </span>
                             <input
-                                className="inputB"
                                 required
                                 dir="rtl"
                                 type="text"
@@ -80,7 +79,6 @@ class PersonalDetails extends Component {
                 <label>
                 <span dir="rtl"  className="headLinePD"> דוא"ל: </span>
                     <input
-                        className="inputB"
                         required
                         dir="rtl"
                         type="text"
@@ -106,7 +104,6 @@ class PersonalDetails extends Component {
                 <label>
                 <span dir="rtl"  className="headLinePD"> כתובת: </span>
                     <input
-                        className="inputB"
                         required
                         dir="rtl"
                         type="text"

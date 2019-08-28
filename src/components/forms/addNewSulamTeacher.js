@@ -10,6 +10,7 @@ class AddNewSulamTeacher extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            shemToar:'',
             fName:'',
             sName:'',
             SulamTeacherID:'',
@@ -18,6 +19,7 @@ class AddNewSulamTeacher extends Component {
             address:'',
             generalDescription:'',
             TeacherMiktzuaList: new Array(),
+            sulamTeacherStudentList: new Array(),
             isSubmit: false
         };
     
@@ -28,12 +30,17 @@ class AddNewSulamTeacher extends Component {
       handleChange(e) {
         this.setState({[e.target.name]: e.target.value});
         if(e.target.type == "checkbox"){
-            if(this.state.TeacherMiktzuaList.Contains(e.target.value)){
-                this.state.TeacherMiktzuaList.remove(e.target.value);
-            }
-            else{
-                this.state.TeacherMiktzuaList.push(e.target.value);
-            }
+            let temp = this.state.TeacherMiktzuaList
+            if(temp.includes(e.target.value))
+                temp = temp.filter(v => v != e.target.value);  
+            else
+                temp.push(e.target.value);
+    
+            console.log(temp);
+            this.setState({TeacherMiktzuaList:temp})  
+        }
+        else{
+            this.setState({[e.target.name]: e.target.value});
         }
       }
     
@@ -44,12 +51,14 @@ class AddNewSulamTeacher extends Component {
         db.settings({});
 
         db.collection("listOfTeachers").doc(this.state.SulamTeacherID).set({
+            shemToar:this.state.shemToar,
             fName:this.state.fName,
             sName:this.state.sName,
             SulamTeacherID:this.state.SulamTeacherID,
             phoneNumber:this.state.phoneNumber,
             Email:this.state.Email,
             address:this.state.address,
+            TeacherMiktzuaList:this.state.TeacherMiktzuaList,
             generalDescription:this.state.generalDescription,
         }).then(() => this.setState({isSubmit:true})); 
       }
@@ -76,7 +85,7 @@ class AddNewSulamTeacher extends Component {
                         <label>
                         <span dir="rtl" className="headLinePD"> שם פרטי: </span>
                             <input
-                                className="inputB"
+                                 
                                 required
                                 dir="rtl"
                                 type="text"
@@ -92,7 +101,7 @@ class AddNewSulamTeacher extends Component {
                         <label>
                         <span dir="rtl"  className="headLinePD"> שם משפחה: </span>
                             <input
-                                className="inputB"
+                                 
                                 required
                                 dir="rtl"
                                 type="text"
@@ -107,7 +116,7 @@ class AddNewSulamTeacher extends Component {
                         <label>
                         <span  dir="rtl" className="headLinePD"> מס' ת"ז: </span>
                             <input
-                                className="inputB"
+                                 
                                 required
                                 dir="rtl"
                                 type="text"
@@ -122,7 +131,7 @@ class AddNewSulamTeacher extends Component {
                         <label>
                         <span  dir="rtl" className="headLinePD"> כתובת: </span>
                             <input
-                                className="inputB"
+                                 
                                 required
                                 dir="rtl"
                                 type="text"
@@ -137,7 +146,7 @@ class AddNewSulamTeacher extends Component {
                         <label>
                         <span  dir="rtl" className="headLinePD"> מס' טלפון: </span>
                             <input
-                                className="inputB"
+                                 
                                 required
                                 dir="rtl"
                                 type="text"
@@ -152,7 +161,7 @@ class AddNewSulamTeacher extends Component {
                         <label>
                         <span dir="rtl"  className="headLinePD"> דוא"ל: </span>
                             <input
-                                className="inputB"
+                                 
                                 required
                                 dir="rtl"
                                 type="text"

@@ -51,6 +51,7 @@ const Tracing = () => {
             </div>
             <label>
                     <textarea
+                    className="materialize-textarea"
                       rows="4"
                       cols="50"
                       required
