@@ -24,7 +24,7 @@ class App extends Component {
         </div>
         <Switch>
         /addNewSulamTeacher
-            <Route path = '/' exact component={TeachersDeatails}/>
+            <Route path = '/' exact component={SignIn}/>
             <Route path = '/dashboard' exact component={Dashboard}/>
             <Route path = '/AddNewStud' exact component={AddNewStud}/>
             <Route path = '/AddNewMiktzua' exact component={AddNewMiktzua}/>
