@@ -74,10 +74,10 @@ class AddNewSulamTeacher extends Component {
                     <div className="inpBox">
                         <label>
                         <span dir="rtl" className="headLinePD"> בחר שם תואר: </span>
-                        <select className="browser-default" dir="rtl" name="kita"value={this.state.value} onChange={this.handleChange}>
-                        <option value="english">מר\גברת</option>
-                        <option value="math">ד"ר</option>
-                        <option value="history">פרופסור</option>
+                        <select className="browser-default" dir="rtl" name="shemToar"value={this.state.value} onChange={this.handleChange}>
+                        <option value="מר\גברת">מר\גברת</option>
+                        <option value="דוקטור">ד"ר</option>
+                        <option value="פרופסור">פרופסור</option>
                     </select>
                     </label>
                 </div>
@@ -223,6 +223,12 @@ class AddNewSulamTeacher extends Component {
                                 <span>לשון</span>
                             </label>
                         </p>
+                        <p>
+                            <label>
+                                <input dir="rtl" type="checkbox" value="מחשבים" onChange={this.handleChange} />
+                                <span>מחשבים</span>
+                            </label>
+                        </p>
                     </label>
                 </div>
 
@@ -230,12 +236,13 @@ class AddNewSulamTeacher extends Component {
                         <label>
                         <span dir="rtl" className="headLinePD">  מידע כללי על המורה: </span>
                         <textarea
+                          className="materialize-textarea"
                         dir="rtl"
                       rows="4"
                       cols="50"
                       required
                       name="generalDescription"
-                      placeholder="מלא את הדיווח השבועי"
+                      placeholder="מידע כללי על המורה.."
                       value={this.state.generalDescription}
                       onChange={this.handleChange}
                     />

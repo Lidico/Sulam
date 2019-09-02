@@ -10,10 +10,10 @@ import MainCard from "./components/students/mainCard";
 import AddNewStud from "./components/forms/addNewStud";
 import AddNewSchool from "./components/forms/addNewSchool";
 import AddNewMiktzua from "./components/forms/addNewMiktzua";
-import personalDetails from "./components/students/personalDetails"
 import AddNewSulamTeacher from "./components/forms/addNewSulamTeacher"
 import TeachersDeatails from "./components/sulamTeachers/teachersDetails";
-
+import AddNewProg from "./components/forms/addNewProg";
+import SulamTeachers from "./components/sulamTeachers/sulamTeachers";
 
 class App extends Component {
   render() {
@@ -24,12 +24,19 @@ class App extends Component {
         </div>
         <Switch>
         /addNewSulamTeacher
-            <Route path = '/' exact component={SignIn}/>
+            <Route path = '/' exact component={Dashboard}/>
             <Route path = '/dashboard' exact component={Dashboard}/>
             <Route path = '/AddNewStud' exact component={AddNewStud}/>
+            <Route path = '/AddNewSchool' exact component={AddNewSchool}/>
             <Route path = '/AddNewMiktzua' exact component={AddNewMiktzua}/>
+            <Route path = '/AddNewSulamTeacher' exact component={AddNewSulamTeacher}/>
             <Route path = '/signin' exact component={SignIn}/>
-            <Route path = '/addNewSulamTeacher' exact component={AddNewSulamTeacher}/>
+            <Route path = '/listPage' exact component={listPage}/>
+            <Route path = '/TeachersDeatails' exact component={TeachersDeatails}/>
+            <Route path = '/AddNewProg' exact component={AddNewProg}/>
+            <Route path = '/SulamTeachers' exact component={SulamTeachers}/>
+            
+
         </Switch>
         </BrowserRouter>
     );

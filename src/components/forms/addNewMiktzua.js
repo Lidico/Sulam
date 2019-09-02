@@ -8,6 +8,26 @@ import TimePicker from 'react-time-picker';
 import NewClass from './newClass';
 
 
+function TheacherSelector(props) {
+    // get the real category json from the DB
+  
+    let teachers = [];
+    teachers = props.teachers;
+  
+    return (
+      <select value={props.value} onChange={props.func} name="teachersList" dir="rtl">
+        {teachers.map((object, SulamTeacherID) => {
+          return (
+            <option key={SulamTeacherID} value={object.fName+" "+object.sName}>
+              {object.fName+" "+object.sName}
+            </option>
+          );
+        })}
+      </select>
+    );
+  }
+  
+
 function MiktzuaList(props){
     return (
         <div>
@@ -43,6 +63,7 @@ class AddNewMiktzua extends Component {
             schoolTeacherName:'',
             schoolTeacherPhone:'',
             studInTeacherHome:'',
+            teachersList:[],
             MiktzuaList: new Array()
         };
     
@@ -63,9 +84,9 @@ class AddNewMiktzua extends Component {
           let arrTemp = this.state.MiktzuaList;
           arrTemp.push(temp);
           this.setState({MiktzuaList:arrTemp});
-          console.log(MiktzuaList);
-
       }
+
+
 
       handleSubmit(e) {
         e.preventDefault();
@@ -103,13 +124,18 @@ class AddNewMiktzua extends Component {
                 <div className="inpBox">
                         <label>
                         <span dir="rtl" className="headLinePD"> בחר מורה סולם לעתיד: </span>
-                        <select className="browser-default" dir="rtl" name="sulamTeacher" value={this.state.sulamTeacher} onChange={this.handleChange}>
+                       <select className="browser-default" dir="rtl" name="sulamTeacher" value={this.state.sulamTeacher} onChange={this.handleChange}>
                         <option value="stop">יונתן סטופ</option>
                         <option value="chops">צ'ופס לוי</option>
                         <option value="catri">כתריאל בארי</option>
                         <option value="bella">בלה צ'ארלס</option>
                         <option value="arth">ארתור פינשטיין</option>
-                    </select>
+                         </select>
+                        {/* <TheacherSelector
+                         value={this.state.sulamTeacher}
+                         func={this.handleChange}
+                         categories={this.state.teachersList}
+                        />*/}
                     </label>
                 </div>
                 <div className="inpBox">

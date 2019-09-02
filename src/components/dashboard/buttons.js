@@ -7,13 +7,13 @@ const Buttons = () => {
     return(
         <div className="buttBox">
              <div className="buttLine">
-                <Link>
+                <Link to="/AddNewProg">
                    <button disabled className="grey darken-3 waves-effect waves-light btn-large" >הוסף תוכנית חדשה</button>
                 </Link>
-                <Link>
+                <Link to="/AddNewSchool">
                    <button disabled className="grey darken-3 waves-effect waves-light btn-large" >הוסף ביה"ס חדש</button>
                 </Link>
-                <Link to="/addNewSulamTeacher">
+                <Link to="/AddNewSulamTeacher">
                    <button className="grey darken-3 waves-effect waves-light btn-large" >הוסף מורה חדש</button>
                 </Link>
                 <Link to="/AddNewStud">
@@ -27,10 +27,10 @@ const Buttons = () => {
                 <Link>
                    <button className="grey darken-3 waves-effect waves-light btn-large" >צפיה בבתי ספר</button>
                 </Link>
-                <Link>
+                <Link  to="/TeachersDeatails">
                    <button className="grey darken-3 waves-effect waves-light btn-large " >צפיה במורים</button>
                 </Link>
-                <Link>
+                <Link to="/listPage">
                    <button className="grey darken-3 waves-effect waves-light btn-large" >צפיה בתלמידים</button>
                 </Link>
 

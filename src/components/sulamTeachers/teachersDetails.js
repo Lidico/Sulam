@@ -11,15 +11,19 @@ class TeachersDeatails extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            phoneNumber:'05214554454',
+            SulamTeacherID:'',
+            shemToar:'',
+            fName:'',
+            sName:'',
+            phoneNumber:'',
             phoneNumberEdit: false,
-            Email:'catrielB@yahoo.com',
+            Email:'',
             EmailEdit: false,
-            address:'שדרות השרת 82 יקנעם',
+            address:'',
             addressEdit: false,
-            generalDescription:'כתריאל הוא פרופסור למדעי המחשב שקיבל את הפרופסורה שלו באוניברסיטה העברית בירושלים',
+            generalDescription:'',
             generalDescriptionEdit: false,
-            TeacherMiktzuaList: ["מתמטיקה"],
+            TeacherMiktzuaList: [],
             sulamTeacherStudentList:[],
             TeacherMiktzuaListEdit: false,
 
@@ -29,6 +33,26 @@ class TeachersDeatails extends Component {
         this.handleEdit = this.handleEdit.bind(this);
         this.handleSave = this.handleSave.bind(this);
       }
+      componentDidMount()
+      { 
+      let ref = firebase.database().ref('/listOfTeachers/' + this.state.SulamTeacherID);
+      ref.on('value', snapshot => {
+        this.setState({
+                                  SulamTeacherID: snapshot.val().SulamTeacherID,
+                                  shemToar: snapshot.val().shemToar,
+                                  category:snapshot.val().category,
+                                  fName:snapshot.val().fName,
+                                  sName:snapshot.val().sName,
+                                  phoneNumber:snapshot.val().phoneNumber,
+                                  Email:snapshot.val().Email,
+                                  locaddressation: snapshot.val().address,
+                                  endTime: snapshot.val().endTime,
+                                  generalDescription: snapshot.val().generalDescription, 
+
+                              })
+                            })
+                        }
+
 
 handleChange(e) {
     this.setState({[e.target.name]: e.target.value});
@@ -71,13 +95,12 @@ render(){
         }
         return newList;
        }
-
-    console.log(firebase.auth().currentUser);    
+      
         return(
         <div className="mainBlockCard">
             <div className="nameBlock">
                 <div className="nameAndPhoto">
-                    <div className="nameBox"><span className="headerTextPrimary">פרופ' כתריאל בארי</span></div>
+                    <div className="nameBox"><span className="headerTextPrimary">פרופ' {this.state.fName} בארי</span></div>
                     <img src={TrachProfPic} alt="" className="profImage"></img>
                 </div>
             </div>

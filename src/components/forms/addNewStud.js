@@ -8,6 +8,25 @@ import { Redirect } from 'react-router';
 import CheckAuth from '../auth/checkAuth'
 import FileUploader from "react-firebase-file-uploader";
 
+function SchoolSelector(props) {
+    // get the real category json from the DB
+  
+    let schoolList = [];
+    schoolList = props.schools;
+    console.log(schoolList);
+    return (
+      <select className="browser-default"  value={props.value} onChange={props.func} name="school" dir="rtl">
+        {schoolList.map((object, schoolName) => {
+          return (
+            <option key={schoolName} value={object.schoolName}>
+              {object.schoolName}
+            </option>
+          );
+        })}
+      </select>
+    );
+  }
+
 class AddNewStud extends Component {
     constructor(props) {
         super(props);
@@ -36,6 +55,7 @@ class AddNewStud extends Component {
             generalDescription:'',
             isUploading: false,
             imgUrl:'',
+            schoolList:[],
             isSubmit: false
         };
     
@@ -77,6 +97,28 @@ class AddNewStud extends Component {
           .getDownloadURL()
           .then(url => this.setState({ imgUrl: url, progress: [] }));
       }
+
+      componentDidMount() {
+        let schools = [];
+        let self = this;
+        firebase
+          .database()
+          .ref("/listOfSchools/")
+          .once("value")
+          .then(function(snapshot) {
+            Object.keys(snapshot.val()).forEach(function(value) {
+                schools.push({ schoolName: value });
+            });
+            if (self.state.school == "" && schools.length > 0) {
+              self.setState({
+                schoolList: schools,
+                school: schools[0].schoolName
+              });
+            } else {
+              self.setState({ schoolList: schools });
+            }
+          });
+        }
     
       handleSubmit(e) {
         e.preventDefault();
@@ -115,7 +157,7 @@ class AddNewStud extends Component {
 
         let selectImg = false;
         if (this.state.imgUrl !=="") selectImg = true;
-
+        console.log();
         return(
         <div className="formPage">
             <CheckAuth/>
@@ -289,16 +331,25 @@ class AddNewStud extends Component {
                     <div className="inpBox">
                     <label>
                     <span  dir="rtl" className="headLinePD"> בחר בית ספר: </span>
-                    <select className="browser-default" name="school" value={this.state.school} onChange={this.handleChange}>
-                        <option value="זיו">זיו</option>
-                        <option value="הגמנסיה העברית">הגמנסיה העברית</option>
-                    </select>
+               {/*     <select className="browser-default" name="school" value={this.state.school} onChange={this.handleChange}>
+                            <option value="זיו">זיו</option>
+                            <option value="הגמנסיה העברית">הגמנסיה העברית</option>
+                        </select> */}
+
+                    <SchoolSelector
+                        value={this.state.school}
+                        func={this.handleChange}
+                        schools={this.state.schoolList}
+                    />
+
                     </label>
                  </div>
                  <div className="inpBox">
                     <label>
                     <span  dir="rtl" className="headLinePD"> בחר כיתה: </span>
                     <select className="browser-default" dir="rtl" name="kita" value={this.state.kita} onChange={this.handleChange}>
+                        <option value="ז">ז'</option>
+                        <option value="ח">ח'</option>
                         <option value="ט">ט'</option>
                         <option value="י">י'</option>
                         <option value="יא">י"א</option>
