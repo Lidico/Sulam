@@ -19,13 +19,14 @@ class SulamTeachers extends Component {
         this.handleSave = this.handleSave.bind(this);
       }
       componentDidMount() {
+        let currentComponent = this;
         const db = firebase.firestore();
         db.collection("listOfTeachers").get().then(function(querySnapshot) {
             let arrTemp = [];
             querySnapshot.forEach(function(doc) {
                 arrTemp.push(doc.data());
             });
-            this.setState({ sulamTeacherList: arrTemp });
+            currentComponent.setState({ sulamTeacherList: arrTemp });
         });
       }
 
@@ -39,7 +40,7 @@ handleSave(e) {
 
 render(){
  
-    let ListTeacher =  this.state.sulamTeacherList.map((ListOfTeachers,SulamTeacherID) =><StudOfTeach key={SulamTeacherID} fName = {SulamTeacherID.fName} sName = {SulamTeacherID.sName} img = {SulamTeacherID.imgUrl}/>)
+    let ListTeacher =  this.state.sulamTeacherList.map((ListOfTeachers,SulamTeacherID) =><StudOfTeach key={SulamTeacherID} shemToar = {ListOfTeachers.shemToar} fName = {ListOfTeachers.fName} sName = {ListOfTeachers.sName}/>)
     if(ListTeacher.length==0){
         ListTeacher = <span className="headLinePD">אין מורים במאגר.</span>;
     }

@@ -9,17 +9,30 @@ import CheckAuth from '../auth/checkAuth'
 import FileUploader from "react-firebase-file-uploader";
 
 function SchoolSelector(props) {
-    // get the real category json from the DB
-  
     let schoolList = [];
     schoolList = props.schools;
-    console.log(schoolList);
     return (
       <select className="browser-default"  value={props.value} onChange={props.func} name="school" dir="rtl">
         {schoolList.map((object, schoolName) => {
           return (
             <option key={schoolName} value={object.schoolName}>
               {object.schoolName}
+            </option>
+          );
+        })}
+      </select>
+    );
+  }
+
+  function ProgramSelector(props) {
+    let progList = [];
+    progList = props.programs;
+    return (
+      <select className="browser-default"  value={props.value} onChange={props.func} name="program" dir="rtl">
+        {progList.map((object, progName) => {
+          return (
+            <option key={progName} value={object.progName}>
+              {object.progName}
             </option>
           );
         })}
@@ -56,6 +69,7 @@ class AddNewStud extends Component {
             isUploading: false,
             imgUrl:'',
             schoolList:[],
+            programList:[],
             isSubmit: false
         };
     
@@ -99,25 +113,25 @@ class AddNewStud extends Component {
       }
 
       componentDidMount() {
-        let schools = [];
-        let self = this;
-        firebase
-          .database()
-          .ref("/listOfSchools/")
-          .once("value")
-          .then(function(snapshot) {
-            Object.keys(snapshot.val()).forEach(function(value) {
-                schools.push({ schoolName: value });
+        let currentComponent = this;
+        const db = firebase.firestore();
+        db.collection("listOfSchools").get().then(function(querySnapshot) {
+            let arrTemp = [];
+            querySnapshot.forEach(function(doc) {
+                arrTemp.push(doc.data());
             });
-            if (self.state.school == "" && schools.length > 0) {
-              self.setState({
-                schoolList: schools,
-                school: schools[0].schoolName
-              });
-            } else {
-              self.setState({ schoolList: schools });
-            }
-          });
+            currentComponent.setState({ schoolList: arrTemp });
+        });
+
+        db.collection("listOfProgs").get().then(function(querySnapshot) {
+            let arrTemp = [];
+            querySnapshot.forEach(function(doc) {
+                arrTemp.push(doc.data());
+            });
+            currentComponent.setState({ programList: arrTemp });
+        });
+
+
         }
     
       handleSubmit(e) {
@@ -302,11 +316,11 @@ class AddNewStud extends Component {
                 <div className="inpBox">
                     <label>
                     <span  dir="rtl" className="headLinePD"> בחר תוכנית: </span>
-                    <select className="browser-default" name="program" value={this.state.program} onChange={this.handleChange}>
-                        <option value="" disabled selected>בחר תוכנית</option>
-                        <option value="רגילה">רגילה</option>
-                        <option value="מוגברת">מוגברת</option>
-                        </select>         
+                    <ProgramSelector
+                        value={this.state.program}
+                        func={this.handleChange}
+                        programs={this.state.programList}
+                    />
                     </label>
                  </div>
                  <div className="inpBox">
@@ -331,11 +345,6 @@ class AddNewStud extends Component {
                     <div className="inpBox">
                     <label>
                     <span  dir="rtl" className="headLinePD"> בחר בית ספר: </span>
-               {/*     <select className="browser-default" name="school" value={this.state.school} onChange={this.handleChange}>
-                            <option value="זיו">זיו</option>
-                            <option value="הגמנסיה העברית">הגמנסיה העברית</option>
-                        </select> */}
-
                     <SchoolSelector
                         value={this.state.school}
                         func={this.handleChange}

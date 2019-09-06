@@ -27,7 +27,7 @@ const Buttons = () => {
                 <Link>
                    <button className="grey darken-3 waves-effect waves-light btn-large" >צפיה בבתי ספר</button>
                 </Link>
-                <Link  to="/TeachersDeatails">
+                <Link  to="/SulamTeachers">
                    <button className="grey darken-3 waves-effect waves-light btn-large " >צפיה במורים</button>
                 </Link>
                 <Link to="/listPage">
