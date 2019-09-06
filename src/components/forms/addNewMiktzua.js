@@ -47,7 +47,7 @@ class AddNewMiktzua extends Component {
         this.state = {
             StudentiD: props.location.state.StudentiD,
             profName:'',
-            sulamTeacher:'',
+            sulamTeacher: "",
             sulamTeacherIsSelected: true,
             dayOfMifgash:'',
             hourOfMifgash:'',
@@ -55,6 +55,7 @@ class AddNewMiktzua extends Component {
             schoolTeacherName:'',
             schoolTeacherPhone:'',
             studInTeacherHome:'',
+            MiktzuaList:[],
             teachersList:[],
         };
     
@@ -64,9 +65,7 @@ class AddNewMiktzua extends Component {
       }
 
       handleChangeHourOfMifgash(e) {
-        let currentComponent=this;
-       let timeHour =  e.getHours()+":"+e.getMinutes()
-       currentComponent.setState({hourOfMifgash:timeHour});
+        this.setState({hourOfMifgash:e});
      }
      
      
@@ -87,13 +86,14 @@ class AddNewMiktzua extends Component {
             hourOfMifgash:this.state.hourOfMifgash,
             studInTeacherHome:this.state.studInTeacherHome,
             schoolTeacherName:this.state.schoolTeacherName,
-            schoolTeacherPhone:this.state.schoolTeacherPhone
-           
+            schoolTeacherPhone:this.state.schoolTeacherPhone,
+            listOfGrades:[]   
         }
-         console.log(this.state.profName);
-          let arrTemp = this.state.MiktzuaList;
-          arrTemp.push(temp);
-          this.setState({MiktzuaList:arrTemp});
+        
+        let arrTemp = this.state.MiktzuaList;
+        arrTemp.push(temp);
+        this.setState({MiktzuaList:arrTemp});
+        console.log(arrTemp);
       }
 
       componentDidMount() {
@@ -104,19 +104,20 @@ class AddNewMiktzua extends Component {
             querySnapshot.forEach(function(doc) {
                 arrTemp.push(doc.data());
             });
-            currentComponent.setState({ teachersList: arrTemp });
+            currentComponent.setState({
+                 teachersList: arrTemp,
+                 sulamTeacher: arrTemp[0],
+
+            });
         });
         }
 
       handleSubmit(e) {
         e.preventDefault();
         const db = firebase.firestore();
-
         db.settings({});
-        console.log(this.state.sulamTeacher);
         db.collection("listOfStudents").doc(this.state.StudentiD).update({
-            
-            listOfmiktzout:this.state.MiktzuaList   
+            listOfmiktzout:this.state.listOfMiktzuut   
         }).then(() => alert("save")); 
       }
 
@@ -173,8 +174,8 @@ class AddNewMiktzua extends Component {
                 </div>
                 <div className="inpBox">
                 <label>
-                <span dir="rtl" className="headLinePD"> בחר שעת המפגש: </span>
-                    <DatePicker
+                <DatePicker
+                        dir = "rtl"
                         showTimeSelect
                         showTimeSelectOnly
                         timeIntervals={15}
@@ -183,6 +184,8 @@ class AddNewMiktzua extends Component {
                         selected={this.state.hourOfMifgash}
                         onChange={this.handleChangeHourOfMifgash}
                     />
+                <span dir="rtl" className="headLinePD"> בחר שעת המפגש: </span>
+                   
                     </label>
                 </div>
 

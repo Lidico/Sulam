@@ -70,6 +70,9 @@ class AddNewStud extends Component {
             imgUrl:'',
             schoolList:[],
             programList:[],
+            mifgashList:[],
+            listOfMiktzuut:[],
+            
             isSubmit: false
         };
     
@@ -504,6 +507,7 @@ class AddNewStud extends Component {
                     </label>
                 </div>
 
+                <label>
                 <div className="inpBox">
                 {selectImg ? (
                     <div>
@@ -518,7 +522,6 @@ class AddNewStud extends Component {
                     </div>
                   ) : (
                     <div className="green waves-effect waves-light btn">
-                        {console.log("kakakakakakakakakakakakakakaka")}
                       הוספת תמונה {this.state.progress}
                     </div>
                   )}
@@ -536,7 +539,9 @@ class AddNewStud extends Component {
                     onProgress={this.handleProgress}
                   />
                  
-                </div><br/>
+                </div>
+                </label>
+                <br/>
 
              
                 <button className="grey darken-3 waves-effect waves-light btn-large">המשך</button><br/><br/>

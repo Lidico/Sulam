@@ -24,10 +24,8 @@ class MiktzuaSelector extends Component {
         super(props);
         this.state = {
             teacherID: props.teachID,
-            //profName:'',
             techerProfList:[],
         };
-        //this.handleChange = this.handleChange.bind(this);
       }
     
     componentDidMount() {
@@ -40,7 +38,6 @@ class MiktzuaSelector extends Component {
                 temp = doc.data().TeacherMiktzuaList;
                 currentComponent.setState({techerProfList:temp});
             } else {
-                // doc.data() will be undefined in this case
                 console.log("No such document!");
             }
         }).catch(function(error) {

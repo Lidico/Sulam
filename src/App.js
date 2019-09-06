@@ -31,7 +31,7 @@ class App extends Component {
             <Route path = '/AddNewMiktzua' exact component={AddNewMiktzua}/>
             <Route path = '/AddNewSulamTeacher' exact component={AddNewSulamTeacher}/>
             <Route path = '/signin' exact component={SignIn}/>
-            <Route path = '/navList' exact component={navList}/>
+            <Route path = '/listPage' exact component={listPage}/>
             <Route path = '/TeachersDeatails' exact component={TeachersDeatails}/>
             <Route path = '/AddNewProg' exact component={AddNewProg}/>
             <Route path = '/SulamTeachers' exact component={SulamTeachers}/>
