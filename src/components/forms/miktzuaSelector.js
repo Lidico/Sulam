@@ -8,6 +8,7 @@ function ProfSelector(props) {
     profList = props.mikzuut;
     return (
       <select className="browser-default"  value={props.value} onChange={props.func} name="profName" dir="rtl">
+        <option value="בחר מקצוע">בחר מקצוע</option>
         {profList.map((object, kEy) => {
           return (
             <option key={kEy} value={object.value}>
@@ -25,6 +26,7 @@ class MiktzuaSelector extends Component {
         this.state = {
             teacherID: props.teachID,
             techerProfList:[],
+            currFirstMiktzua:""
         };
       }
     
@@ -36,6 +38,7 @@ class MiktzuaSelector extends Component {
         ref.get().then(function(doc) {
             if (doc.exists) {
                 temp = doc.data().TeacherMiktzuaList;
+
                 currentComponent.setState({techerProfList:temp});
             } else {
                 console.log("No such document!");
@@ -60,13 +63,12 @@ class MiktzuaSelector extends Component {
             ref.get().then(function(doc) {
                 if (doc.exists) {
                     temp = doc.data().TeacherMiktzuaList;
-                    console.log(temp);
                     currentComponent.setState({
                         techerProfList:temp,
-                        teacherID:nextProps.teachID
+                        teacherID:nextProps.teachID,
+                        currFirstMiktzua:temp[0]
                     });
                 } else {
-                    // doc.data() will be undefined in this case
                     console.log("No such document!");
                 }
             }).catch(function(error) {
@@ -76,9 +78,6 @@ class MiktzuaSelector extends Component {
         }
     }
 
-    // handleChange(e) {
-    //     this.setState({[e.target.name]: e.target.value});
-    // }
 
 
     render(){

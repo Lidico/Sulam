@@ -22,7 +22,7 @@ class SulamTeachers extends Component {
         let currentComponent = this;
         const db = firebase.firestore();
         db.collection("listOfTeachers").get().then(function(querySnapshot) {
-            let arrTemp = [];
+            let arrTemp = [" "];
             querySnapshot.forEach(function(doc) {
                 arrTemp.push(doc.data());
             });

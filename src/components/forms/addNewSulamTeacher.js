@@ -5,6 +5,8 @@ import "react-datepicker/dist/react-datepicker.css";
 import firebase from '../../FireBase/FireStore';
 import { Link } from 'react-router-dom';
 import { Redirect } from 'react-router';
+import FileUploader from "react-firebase-file-uploader";
+import defImg from './defImg.jpg';
 
 class AddNewSulamTeacher extends Component {
     constructor(props) {
@@ -17,14 +19,20 @@ class AddNewSulamTeacher extends Component {
             phoneNumber:'',
             Email:'',
             address:'',
+            imgUrl: defImg,
+            isUploading: false,
             generalDescription:'',
             TeacherMiktzuaList: new Array(),
-            sulamTeacherStudentList: new Array(),
+            sulamTeacherStudentList: [],
             isSubmit: false
         };
     
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleUploadSuccess = this.handleUploadSuccess.bind(this);
+        this.handleUploadError = this.handleUploadError.bind(this);
+        this.handleUploadStart = this.handleUploadStart.bind(this);
+        this.handleProgress = this.handleProgress.bind(this);
       }
     
       handleChange(e) {
@@ -42,6 +50,26 @@ class AddNewSulamTeacher extends Component {
         else{
             this.setState({[e.target.name]: e.target.value});
         }
+      }
+
+      handleUploadStart() {
+        this.setState({ isUploading: true });
+      }
+      handleUploadError(error) {
+        console.error(error);
+      }
+      handleProgress = progress => this.setState({ progress: progress + "%" });
+      handleUploadError(error) {
+        alert("Upload Error: " + error);
+      }
+      handleUploadSuccess(filename) {
+        this.setState({ isUploading: false });
+        firebase
+          .storage()
+          .ref("teacherImg")
+          .child(filename)
+          .getDownloadURL()
+          .then(url => this.setState({ imgUrl: url, progress: [] }));
       }
     
       handleSubmit(e) {
@@ -64,6 +92,9 @@ class AddNewSulamTeacher extends Component {
       }
 
     render(){
+        
+        let selectImg = false;
+        if (this.state.imgUrl !==defImg) selectImg = true;
     
         return(
         <div className="formPage">
@@ -74,7 +105,7 @@ class AddNewSulamTeacher extends Component {
                     <div className="inpBox">
                         <label>
                         <span dir="rtl" className="headLinePD"> בחר שם תואר: </span>
-                        <select className="browser-default" dir="rtl" name="shemToar"value={this.state.value} onChange={this.handleChange}>
+                        <select className="browser-default" dir="rtl" name="shemToar" value={this.state.value} onChange={this.handleChange}>
                         <option value="מר\גברת">מר\גברת</option>
                         <option value="דוקטור">ד"ר</option>
                         <option value="פרופסור">פרופסור</option>
@@ -248,6 +279,42 @@ class AddNewSulamTeacher extends Component {
                     />
                     </label>
                 </div>
+
+                <label>
+                <div className="inpBox">
+                {selectImg ? (
+                    <div>
+                      <img
+                        className="profImageStud"
+                        alt="החלף תמונה"
+                        src={this.state.imgUrl}
+                      />
+                      <div>
+                        {this.state.progress}החלף תמונה
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="green waves-effect waves-light btn">
+                      הוספת תמונה {this.state.progress}
+                    </div>
+                  )}
+                  <br/>
+
+
+                <FileUploader
+                    hidden
+                    accept="image/*"
+                    randomizeFilename
+                    storageRef={firebase.storage().ref("teacherImg")}
+                    onUploadError={this.handleUploadError}
+                    onUploadSuccess={this.handleUploadSuccess}
+                    onUploadStart={this.handleUploadStart}
+                    onProgress={this.handleProgress}
+                  />
+                 
+                </div>
+                </label>
+                <br/>
                 
                 <div className="courseButtons">
                     <button className="grey darken-3 waves-effect waves-light btn-large">שלח</button><br/><br/>

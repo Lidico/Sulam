@@ -2,19 +2,22 @@ import React from 'react';
 import { Link } from 'react-router-dom'
 import './listPage.css';
 
-const grade = () => {
-    return(
-    <div lassName="project-list section listBlock">
-        <h4 className="headline">בחר כיתה</h4>
-        <Link to="/NewClass">
-             <button className="buttonListChecked">ט'</button>
-             <button className="buttonList">י"א</button>
-             <button className="buttonList">י"ב</button>
+const grade = (props) => {
 
-        </Link>
-    </div>
-
-    )
+    let gradeList = [];
+    gradeList = props.gradeList;
+    return (
+        <div lassName="project-list section listBlock">
+        <h5 className="headline">בחר כיתה</h5>
+        {gradeList.map((object, index) => {
+            if(object === props.grade)
+                return(<button name="grade"  value={object} onClick={props.onChange} className="buttonListChecked">{object}</button>);
+            else
+                return (<button name="grade" value={object} onClick={props.onChange} className="buttonList">{object}</button>);
+        })}
+      </div>
+    );
 }
+
 
 export default grade;

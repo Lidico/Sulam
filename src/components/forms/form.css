@@ -29,10 +29,20 @@
   }
 
   .formCont{
+    width:59%;
     float: right;
     position: relative;
     display: block;
     align-content: right;
+  }
+
+  .miktzuutCont{
+    width:35%;
+    float: left;
+    position: relative;
+    display: block;
+    align-content: left;
+    margin-left: 2rem;
   }
 
   .headLinePD{
@@ -64,7 +74,7 @@
   }
 
   .courseButtons{
-    width: 60%;
+    width: 30%;
     display: flex;
     justify-content: space-between;
     position: relative;
@@ -127,4 +137,31 @@
   justify-content: space-between;
   position: relative;
   margin-bottom: 2rem;
+}
+
+.profImageStud{
+    height: 3.5rem;
+    width: 3.5rem;
+    border-radius: 50%;
+}
+
+.profBox{
+  padding-top: 1rem;
+  padding-left: 1rem;
+  padding-bottom: 1rem;
+  direction: rtl;
+  display: block;
+  border: 1px solid lightgray;
+  float: right;
+  padding-right: 1rem;
+  width: 90%;
+  border-radius: 0.5rem;
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.profLine{
+  float: right;
+  direction: rtl;
+  display: inline-block;
 }

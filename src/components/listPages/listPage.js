@@ -4,23 +4,106 @@ import Program from './program';
 import Grade from './grade';
 import Student from './students';
 import './listPage.css';
+import firebase from '../../FireBase/FireStore';
 
 class ListPage extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            student:"",
+            program:"",
+            grade:"ז",
+            school:"",
+            studentList:[],
+            programList:[],
+            gradeList:["ז","ח","ט","י","יא","יב"],
+            schoolList:[],
+            gradeView: false,
+            programView: false,
+            studentView:false
+        };
+    
+        this.handleChange = this.handleChange.bind(this);
+        this.handleChangeStu = this.handleChangeStu.bind(this);
+      }
+
+      componentDidMount() {
+        let currentComponent = this;
+        const db = firebase.firestore();
+        db.collection("listOfSchools").get().then(function(querySnapshot) {
+            let arrTemp = [];
+            querySnapshot.forEach(function(doc) {
+                arrTemp.push(doc.data());
+            });
+            currentComponent.setState({ schoolList: arrTemp , school: arrTemp[0].schoolName });
+        });
+
+        db.collection("listOfProgs").get().then(function(querySnapshot) {
+            let arrTemp = [];
+            querySnapshot.forEach(function(doc) {
+                arrTemp.push(doc.data().progName);
+            });
+            currentComponent.setState({ programList: arrTemp , program: arrTemp[0]});
+        });
+
+        db.collection("listOfStudents").get().then(function(querySnapshot) {
+            let arrTemp = [];
+            querySnapshot.forEach(function(doc) {
+                arrTemp.push(doc.data());
+            });
+            currentComponent.setState({ studentList: arrTemp ,student: arrTemp[0]});
+        });
+        
+    }
+        
+
+      handleChange(e) {
+        this.setState({[e.target.name]: e.target.value});
+
+        if(e.target.name == "school")
+            this.setState({gradeView:true,programView:false,studentView:false})
+        if(e.target.name == "grade")
+            this.setState({gradeView:true,programView:true,studentView:false})
+        if(e.target.name == "program")
+            this.setState({gradeView:true,programView:true,studentView:true})
+      }
+      handleChangeStu(e) {
+        this.setState({student: this.state.studentList[e.target.value]});
+     }
+
         render(){
+        console.log(this.state);
         return(
         <div className="dashboard container mainBlock">
             <div className="row">
+
+            
                 <div className="colSt col s12 m2 offset-m2">
-                     <Student/>
+                {this.state.studentView ? 
+                     <Student school={this.state.school} grade={this.state.grade} program={this.state.program} student={this.state.student} studentList={this.state.studentList} onChangeStu={this.handleChangeStu}/>
+                :null}
                 </div>
+            
+
+            
                 <div className="col s12 m2 colSt">
-                   <Program/>  
-                </div>
+                {this.state.programView ? 
+                   <Program program={this.state.program} programList={this.state.programList} onChange={this.handleChange}/>  
+                   :null}
+                   </div>
+            
+
+            
                 <div className="col s12 m2 colSt">
-                     <Grade/>
-                </div>
+                {this.state.gradeView ? 
+                     <Grade grade={this.state.grade} gradeList={this.state.gradeList} onChange={this.handleChange}/>
+                     :null}
+                     </div>
+            
+
                 <div className="col s12 m2 colSt">
-                    <Schools/>
+                    <Schools school={this.state.school} schoolList={this.state.schoolList} onChange={this.handleChange}/>
                  </div>
             </div>
         </div>

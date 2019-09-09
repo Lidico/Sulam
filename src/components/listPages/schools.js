@@ -4,35 +4,25 @@ import firebase from '../../FireBase/FireStore';
 import { Redirect } from 'react-router';
 import './listPage.css';
 
-class Schools extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            schoolName:"",
-            schoolAdress:"",
-            isSubmit: false,
-        };
+const Schools = (props) => {
 
-    }
-    
-
-    render(){
-    
-        return(
-            <div lassName="project-list section listBlock">
-                <h4 className="headline">בחר בית ספר</h4>
-                <button className="buttonList">דנמרק</button>
-                <button className="buttonListChecked">זיו</button>
-                <button className="buttonList">מכללת אורט</button>
-                <button className="buttonList">הגמנסיה העברית</button>
-                <button className="buttonList">גבעת גונן</button>
-            </div>
-
-        )
-    }
+    let schoolList = [];
+    schoolList = props.schoolList;
+    return (
+        <div lassName="project-list section listBlock">
+        <h5 className="headline">בחר בית ספר</h5>
+        {schoolList.map((object, index) => {
+            if(object.schoolName === props.school)
+                return(<button name="school" key={index} value={object.schoolName} onClick={props.onChange} className="buttonListChecked">{object.schoolName}</button>);
+            else
+                return (<button name="school" key={index} value={object.schoolName} onClick={props.onChange} className="buttonList">{object.schoolName}</button>);
+        })}
+      </div>
+    );
 }
     
 
 export default Schools;
+
 
 

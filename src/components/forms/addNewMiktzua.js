@@ -3,7 +3,9 @@ import './form.css';
 import DatePicker, { registerLocale } from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 import firebase from '../../FireBase/FireStore';
-import MiktzuaSelector from './miktzuaSelector';
+import MiktzuaSelector from './miktzuaSelector'; 
+import MiktzuaList from './miktzuaList';
+import { Redirect } from 'react-router';
 
 
 function TheacherSelector(props) {
@@ -14,7 +16,7 @@ function TheacherSelector(props) {
         {teachersList.map((object, SulamTeacherID) => {
           return (
             <option key={SulamTeacherID} value={object.SulamTeacherID}>
-              {object.fName+" "+object.sName}
+              {object.shemToar+" "+object.fName+" "+object.sName}
             </option>
           );
         })}
@@ -22,22 +24,6 @@ function TheacherSelector(props) {
     );
   }
   
-
-function MiktzuaList(props){
-    return (
-        <div>
-            <h6>רשימת מקצועות</h6>
-
-            {props.list.map(element => {
-                return(
-                    <div>
-                <h6>{element.profName}</h6>
-                </div>
-                );
-            })}
-        </div>
-    )
-}
 
 class AddNewMiktzua extends Component {
 
@@ -48,17 +34,23 @@ class AddNewMiktzua extends Component {
             StudentiD: props.location.state.StudentiD,
             profName:'',
             sulamTeacher: "",
-            sulamTeacherIsSelected: true,
-            dayOfMifgash:'',
+            sulamTeacherIsExist: false,
+            dayOfMifgash:'א',
             hourOfMifgash:'',
-            techerProfList:[],
             schoolTeacherName:'',
             schoolTeacherPhone:'',
-            studInTeacherHome:'',
-            MiktzuaList:[],
+            studInTeacherHome:'כן',
+            MiktzuutList:[],
             teachersList:[],
+            shemToar:"",
+            fName:"",
+            sName:"",
+            isSubmit: false,
+            isChangeTeacher: false
         };
     
+        
+        this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleAdd = this.handleAdd.bind(this);
         this.handleChangeHourOfMifgash = this.handleChangeHourOfMifgash.bind(this);
@@ -70,18 +62,43 @@ class AddNewMiktzua extends Component {
      
      
       handleChange(e) {
-        let currentComponent = this;
+        const currentComponent = this;
         currentComponent.setState({[e.target.name]: e.target.value});
-        if(e.target.id != "yabadabado"){
-            this.setState({sulamTeacherIsSelected: false})  
+        console.log("target:", e.target.name);
+        if(e.target.name == "sulamTeacher"){
+            const db = firebase.firestore();
+                const ref = db.collection("listOfTeachers").doc(e.target.value);
+                ref.get().then(doc => {
+                    if (doc.exists) {
+                         const teachShemToar = doc.data().shemToar;
+                         const teachFName = doc.data().fName;
+                         const teachSName  = doc.data().sName;
+                         console.log(teachFName);
+                         this.setState({isChangeTeacher: true,
+                            shemToar: teachShemToar,
+                            fName: teachFName,
+                            sName: teachSName
+                        })  
+                    } else {
+                        console.log("No such document!");
+                    }
+                }).catch(error => {
+                    console.log("Error getting document:", error);
+                });
         }
       }
 
-
       handleAdd(e) {
-          let temp={
+        if(!this.state.profName) {
+            return;
+        }
+        const db = firebase.firestore();
+
+        let temp={
             profName:this.state.profName,
-            sulamTeacher:this.state.sulamTeacher,
+            shemToar:this.state.shemToar,
+            fName:this.state.fName,
+            sName:this.state.sName,
             dayOfMifgash:this.state.dayOfMifgash,
             hourOfMifgash:this.state.hourOfMifgash,
             studInTeacherHome:this.state.studInTeacherHome,
@@ -89,36 +106,97 @@ class AddNewMiktzua extends Component {
             schoolTeacherPhone:this.state.schoolTeacherPhone,
             listOfGrades:[]   
         }
-        
-        let arrTemp = this.state.MiktzuaList;
+        console.log("temp", temp);
+        let arrTemp = this.state.MiktzuutList;
         arrTemp.push(temp);
-        this.setState({MiktzuaList:arrTemp});
-        console.log(arrTemp);
+        this.setState({MiktzuutList:arrTemp});
+        console.log(this.state.sulamTeacher);
+        e.preventDefault();
+        db.settings({});
+        db.collection("listOfTeachers").doc(this.state.sulamTeacher).update({
+            sulamTeacherStudentList: firebase.firestore.FieldValue.arrayUnion(this.state.StudentiD) 
+        }); 
+ 
       }
 
       componentDidMount() {
         let currentComponent = this;
+        let firstTeach;
         const db = firebase.firestore();
+        let arrTemp = [];
         db.collection("listOfTeachers").get().then(function(querySnapshot) {
-            let arrTemp = [];
             querySnapshot.forEach(function(doc) {
                 arrTemp.push(doc.data());
             });
             currentComponent.setState({
-                 teachersList: arrTemp,
-                 sulamTeacher: arrTemp[0],
-
+                 teachersList: arrTemp
             });
         });
+        
+        db.collection("listOfTeachers")
+        .limit(1)
+        .get()
+        .then(querySnapshot => {
+            if (!querySnapshot.empty) {
+                const queryDocumentSnapshot = querySnapshot.docs[0];
+                let teachID = queryDocumentSnapshot.data().SulamTeacherID;
+                let teachShemToar = queryDocumentSnapshot.data().shemToar;
+                let teachFName = queryDocumentSnapshot.data().fName;
+                let teachSName  = queryDocumentSnapshot.data().sName;
+                this.setState({
+                    sulamTeacher: teachID,
+                    shemToar: teachShemToar,
+                    fName: teachFName,
+                    sName: teachSName,
+                    sulamTeacherIsExist: true
+               });
+            } else {
+                console.log("No document corresponding to the query!");
+                return null;
+            }
+        });
+    }
+
+   /* componentWillUpdate(nextProps, nextState) {
+        const db = firebase.firestore();
+        let teachShemToar;
+        let teachFName;
+        let teachSName;
+        let currentComponent = this;
+        if(this.state.sulamTeacher!=nextState.sulamTeacher) {
+            let ref = db.collection("listOfTeachers").doc(nextState.sulamTeacher);
+            ref.get().then(function(doc) {
+                if (doc.exists) {
+                     teachShemToar = doc.data().shemToar;
+                     teachFName = doc.data().fName;
+                     teachSName  = doc.data().sName;
+                   
+                } else {
+                    console.log("No such document!");
+                }
+            }).catch(function(error) {
+                console.log("Error getting document:", error);
+            });
+        } else {
+            console.log("pice of Crap!%$#%@$");
         }
+        currentComponent.setState({
+            shemToar: teachShemToar,
+            fName: teachFName,
+            sName: teachSName,
+            isChangeTeacher: true
+       });
+      } 
+    */
 
       handleSubmit(e) {
         e.preventDefault();
         const db = firebase.firestore();
         db.settings({});
         db.collection("listOfStudents").doc(this.state.StudentiD).update({
-            listOfmiktzout:this.state.listOfMiktzuut   
-        }).then(() => alert("save")); 
+            listOfmiktzout:this.state.MiktzuutList   
+        }); 
+        this.setState({isSubmit:true})
       }
 
 
@@ -127,6 +205,9 @@ class AddNewMiktzua extends Component {
         return(
         <div className="formPage">
             <div align="right" className="formBox">
+                <div align="left" className="miktzuutCont">
+                <MiktzuaList profs={this.state.MiktzuutList}/>
+                </div>
                 <div align="right" className="formCont">
                     <h4 className="rightHeb">הוספת מקצוע חדש</h4><br/><br/><br/>
                     <form onSubmit={this.handleSubmit} id="mikzua">
@@ -144,31 +225,24 @@ class AddNewMiktzua extends Component {
                 <div className="inpBox">
                         <label>
                         <span dir="rtl" className="headLinePD"> בחר מקצוע: </span>
-                        {this.state.sulamTeacherIsSelected?
-                        (
-                            <select className="browser-default" dir="rtl" name="profName" value={this.state.profName} onChange={this.handleChange}>
-                                <option value="english"> </option>
-                            </select>
-                        ):
-                        (
-                           <MiktzuaSelector profName={this.state.profName} teachID={this.state.sulamTeacher}  onChange={this.handleChange}
-                           />
-                           
-                        )
-                        }
-                        
+                         {this.state.sulamTeacherIsExist?( 
+                        <MiktzuaSelector profName={this.state.profName} teachID={this.state.sulamTeacher}  onChange={this.handleChange}/>
+                         ):
+                         (
+                             console.log(this.state.sulamTeacher)
+                         )}
                     </label>
                 </div>
                 <div className="inpBox">
                         <label>
                         <span dir="rtl" className="headLinePD"> בחר יום מפגש: </span>
-                        <select className="browser-default" dir="rtl" name="kita"value={this.state.value} onChange={this.handleChange}>
-                        <option value="sun">א'</option>
-                        <option value="mon">ב'</option>
-                        <option value="tus">ג'</option>
-                        <option value="wed">ד' </option>
-                        <option value="thr">ה' </option>
-                        <option value="fri">ו' </option>
+                        <select className="browser-default" dir="rtl" name="dayOfMifgash" value={this.state.value} onChange={this.handleChange}>
+                        <option value="א">א'</option>
+                        <option value="ב">ב'</option>
+                        <option value="ג">ג'</option>
+                        <option value="ד">ד' </option>
+                        <option value="ה">ה' </option>
+                        <option value="ו">ו' </option>
                     </select>
                     </label>
                 </div>
@@ -225,13 +299,13 @@ class AddNewMiktzua extends Component {
                     <span dir="rtl"  className="headLinePD"> לומד בבית המורה: </span><br/>
                     <p>
                         <label>
-                            <input name="gishaLeMahshev" type="radio" value="לא"/>
+                            <input name="studInTeacherHome" checked={this.state.studInTeacherHome === 'לא'} onChange={this.handleChange} type="radio" value="לא"/>
                             <span>לא</span>
                         </label>
                         </p>
                         <p>
                         <label>
-                            <input name="gishaLeMahshev" type="radio" value="כן"/>
+                            <input name="studInTeacherHome" checked={this.state.studInTeacherHome === 'לא'} onChange={this.handleChange} type="radio" value="כן"/>
                             <span>כן</span>
                         </label>
                         </p>
@@ -241,6 +315,7 @@ class AddNewMiktzua extends Component {
                 <div className="courseButtons">
                     <button type="submit" form="mikzua" className="grey darken-3 waves-effect waves-light btn-large">שלח</button><br/><br/>
                     <button className="grey darken-3 waves-effect waves-light btn-large" onClick={this.handleAdd}>הוסף</button><br/><br/>
+                    {this.state.isSubmit ? (<Redirect to={{pathname: "/Dashboard"}} ></Redirect>):null}
                 </div>
                 </div>
                 <div className="newClassesBox">

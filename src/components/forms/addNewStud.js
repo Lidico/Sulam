@@ -7,6 +7,7 @@ import firebase from '../../FireBase/FireStore';
 import { Redirect } from 'react-router';
 import CheckAuth from '../auth/checkAuth'
 import FileUploader from "react-firebase-file-uploader";
+import defImg from './defImg.jpg';
 
 function SchoolSelector(props) {
     let schoolList = [];
@@ -67,7 +68,7 @@ class AddNewStud extends Component {
             familyStatus:'',
             generalDescription:'',
             isUploading: false,
-            imgUrl:'',
+            imgUrl: defImg,
             schoolList:[],
             programList:[],
             mifgashList:[],
@@ -95,6 +96,7 @@ class AddNewStud extends Component {
       handleChangebirthDate(e) {
         this.setState({birthDate: e});
       }
+
       handleUploadStart() {
         this.setState({ isUploading: true });
       }
@@ -114,6 +116,7 @@ class AddNewStud extends Component {
           .getDownloadURL()
           .then(url => this.setState({ imgUrl: url, progress: [] }));
       }
+ 
 
       componentDidMount() {
         let currentComponent = this;
@@ -173,7 +176,7 @@ class AddNewStud extends Component {
     render(){
 
         let selectImg = false;
-        if (this.state.imgUrl !=="") selectImg = true;
+        if (this.state.imgUrl !==defImg) selectImg = true;
         console.log();
         return(
         <div className="formPage">
@@ -517,7 +520,7 @@ class AddNewStud extends Component {
                         src={this.state.imgUrl}
                       />
                       <div>
-                        {this.state.progress}שנה תמונה
+                        {this.state.progress}החלף תמונה
                       </div>
                     </div>
                   ) : (
