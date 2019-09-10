@@ -37,6 +37,7 @@ class AddNewMiktzua extends Component {
             sulamTeacherIsExist: false,
             dayOfMifgash:'א',
             hourOfMifgash:'',
+            numOfShaot: 1,
             schoolTeacherName:'',
             schoolTeacherPhone:'',
             studInTeacherHome:'כן',
@@ -54,6 +55,7 @@ class AddNewMiktzua extends Component {
         this.handleChange = this.handleChange.bind(this);
         this.handleAdd = this.handleAdd.bind(this);
         this.handleChangeHourOfMifgash = this.handleChangeHourOfMifgash.bind(this);
+        this.handleRemove = this.handleRemove.bind(this);
       }
 
       handleChangeHourOfMifgash(e) {
@@ -101,6 +103,7 @@ class AddNewMiktzua extends Component {
             sName:this.state.sName,
             dayOfMifgash:this.state.dayOfMifgash,
             hourOfMifgash:this.state.hourOfMifgash,
+            numOfShaot:this.state.numOfShaot,
             studInTeacherHome:this.state.studInTeacherHome,
             schoolTeacherName:this.state.schoolTeacherName,
             schoolTeacherPhone:this.state.schoolTeacherPhone,
@@ -157,37 +160,6 @@ class AddNewMiktzua extends Component {
         });
     }
 
-   /* componentWillUpdate(nextProps, nextState) {
-        const db = firebase.firestore();
-        let teachShemToar;
-        let teachFName;
-        let teachSName;
-        let currentComponent = this;
-        if(this.state.sulamTeacher!=nextState.sulamTeacher) {
-            let ref = db.collection("listOfTeachers").doc(nextState.sulamTeacher);
-            ref.get().then(function(doc) {
-                if (doc.exists) {
-                     teachShemToar = doc.data().shemToar;
-                     teachFName = doc.data().fName;
-                     teachSName  = doc.data().sName;
-                   
-                } else {
-                    console.log("No such document!");
-                }
-            }).catch(function(error) {
-                console.log("Error getting document:", error);
-            });
-        } else {
-            console.log("pice of Crap!%$#%@$");
-        }
-        currentComponent.setState({
-            shemToar: teachShemToar,
-            fName: teachFName,
-            sName: teachSName,
-            isChangeTeacher: true
-       });
-      } 
-    */
 
       handleSubmit(e) {
         e.preventDefault();
@@ -199,6 +171,10 @@ class AddNewMiktzua extends Component {
         this.setState({isSubmit:true})
       }
 
+      handleRemove(e) {
+        console.log("sdad");
+    }
+
 
     render(){
     
@@ -206,10 +182,12 @@ class AddNewMiktzua extends Component {
         <div className="formPage">
             <div align="right" className="formBox">
                 <div align="left" className="miktzuutCont">
-                <MiktzuaList profs={this.state.MiktzuutList}/>
+                <MiktzuaList profs={this.state.MiktzuutList} onRemove={this.handleRemove}/>
                 </div>
                 <div align="right" className="formCont">
-                    <h4 className="rightHeb">הוספת מקצוע חדש</h4><br/><br/><br/>
+                <div className="inpBox">
+                <h4 className="rightHeb">הוספת מקצוע חדש</h4><br/><br/><br/>
+                </div>
                     <form onSubmit={this.handleSubmit} id="mikzua">
                 <div className="inpBox">
                         <label>
@@ -263,6 +241,17 @@ class AddNewMiktzua extends Component {
                     </label>
                 </div>
 
+                <div className="inpBox">
+                        <label>
+                        <span dir="rtl" className="headLinePD"> מס' השעות בשבוע: </span>
+                        <select className="browser-default" dir="rtl" name="numOfShaot" value={this.state.value} onChange={this.handleChange}>
+                        <option value="1">שעה</option>
+                        <option value="2">שעתיים</option>
+                        <option value="3">שלוש שעות</option>
+
+                    </select>
+                    </label>
+                </div>
 
                 <div className="inpBox">
                 <label>
