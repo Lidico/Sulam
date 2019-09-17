@@ -8,7 +8,7 @@ const program = (props) => {
     programList = props.programList;
     return (
         <div lassName="project-list section listBlock">
-        <h4 className="headline">בחר תוכנית</h4>
+        <h5 className="headline">בחר תוכנית</h5>
         {programList.map((object, index) => {
             if(object === props.program)
                 return(<button name="program"  value={object} onClick={props.onChange} className="buttonListChecked">{object}</button>);

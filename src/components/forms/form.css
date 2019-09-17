@@ -24,7 +24,6 @@
   .rightHeb{
       text-align: right;
       direction: rtl;
-      float:right;
       margin-bottom: 2rem;
   }
 
@@ -165,3 +164,9 @@
   direction: rtl;
   display: inline-block;
 }
+
+.btnDel{
+  float: left;
+}
+
+

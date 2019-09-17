@@ -5,6 +5,8 @@ import Grade from './grade';
 import Student from './students';
 import './listPage.css';
 import firebase from '../../FireBase/FireStore';
+import { tr } from 'date-fns/esm/locale';
+import MainCard from '../students/mainCard.js'
 
 class ListPage extends Component {
 
@@ -21,7 +23,8 @@ class ListPage extends Component {
             schoolList:[],
             gradeView: false,
             programView: false,
-            studentView:false
+            studentView:false,
+            studentSelected:false
         };
     
         this.handleChange = this.handleChange.bind(this);
@@ -62,30 +65,37 @@ class ListPage extends Component {
         this.setState({[e.target.name]: e.target.value});
 
         if(e.target.name == "school")
-            this.setState({gradeView:true,programView:false,studentView:false})
+            this.setState({gradeView:true,programView:false,studentView:false,studentSelected:false})
         if(e.target.name == "grade")
-            this.setState({gradeView:true,programView:true,studentView:false})
+            this.setState({gradeView:true,programView:true,studentView:false,studentSelected:false})
         if(e.target.name == "program")
-            this.setState({gradeView:true,programView:true,studentView:true})
+            this.setState({gradeView:true,programView:true,studentView:true,studentSelected:false})
       }
       handleChangeStu(e) {
-        this.setState({student: this.state.studentList[e.target.value]});
+        this.setState({student: this.state.studentList[e.target.value], studentSelected:true});
      }
 
         render(){
         console.log(this.state);
         return(
         <div className="dashboard container mainBlock">
+            
+
+            {this.state.studentSelected ? 
+            <div>
+            <button onClick={()=>this.setState({studentSelected:false})}>חיפוש חדש</button>
+            <MainCard student={this.state.student}/>
+            </div>
+            :
+
             <div className="row">
 
-            
                 <div className="colSt col s12 m2 offset-m2">
                 {this.state.studentView ? 
                      <Student school={this.state.school} grade={this.state.grade} program={this.state.program} student={this.state.student} studentList={this.state.studentList} onChangeStu={this.handleChangeStu}/>
                 :null}
                 </div>
             
-
             
                 <div className="col s12 m2 colSt">
                 {this.state.programView ? 
@@ -93,7 +103,6 @@ class ListPage extends Component {
                    :null}
                    </div>
             
-
             
                 <div className="col s12 m2 colSt">
                 {this.state.gradeView ? 
@@ -106,6 +115,8 @@ class ListPage extends Component {
                     <Schools school={this.state.school} schoolList={this.state.schoolList} onChange={this.handleChange}/>
                  </div>
             </div>
+            }
+
         </div>
 
         )

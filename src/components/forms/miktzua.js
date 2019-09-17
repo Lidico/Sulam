@@ -25,7 +25,8 @@ class Miktzua extends Component {
             sName: props.sName,
             hourOfMifgash: props.hourOfMifgash,
             numOfShaot: props.numOfShaot,
-            dayOfMifgash: props.dayOfMifgash
+            dayOfMifgash: props.dayOfMifgash,
+            isDelete: props.onRemove
         };
     
         this.handleChange = this.handleChange.bind(this);
@@ -50,7 +51,7 @@ render(){
             <div className="profBox">
                 <div className="profLine">שיעור {this.state.profName} עם {this.state.shemToar} {this.state.fName} {this.state.sName }</div><br/>
                 <div className="profLine">בין השעות {hourOfBeg}-{hourOfEnd} כל יום {this.state.dayOfMifgash}'</div><br/>
-                <div className="btnDel"><button className="deep-orange waves-effect waves-light btn">מחיקה</button></div>
+                <div className="btnDel"><button className="deep-orange waves-effect waves-light btn" onClick={this.state.isDelete}>מחיקה</button></div>
             </div>
         )
     }

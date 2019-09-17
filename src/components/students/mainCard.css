@@ -16,6 +16,7 @@
 
 .nameAndPhoto{
     position: relative;
+    display: inline-block;
     float: right;
     top: 20%;
     margin-right: 3rem;
@@ -26,11 +27,11 @@
     height: 7rem;
     width: 7rem;
     border-radius: 50%;
-    float: right;
 }
 
 .nameBox{
-    float: left;
+    direction: rtl;
+    display: block;
 }
 
 .headerTextPrimary{
@@ -39,6 +40,7 @@
     font-weight: 400;
     letter-spacing: 2px;
     margin-right: 2rem;
+    text-align: right;
 }
 
 .headerTextSub{
@@ -47,6 +49,8 @@
     font-weight: 400;
     letter-spacing: 2px;
     direction: rtl;
+    margin-top: 0.5rem;
+    text-align: right;
 }
 
 .buttonNav{    
@@ -205,4 +209,14 @@ hr.borderLine{
     position: relative;
     margin-top: 2rem;
     margin-bottom: 0.5rem;
+  }
+
+  .graphButtons{
+    position: relative;
+    width: 30%;
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    margin-bottom: 2rem;
+    margin-left: 40%;
   }

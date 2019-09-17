@@ -26,7 +26,7 @@ handleRemove(e) {
 
 render(){
  
-    let ListMiktzua =  this.state.profsList.map((Mikzuut,MikzuaName) =><Miktzua key={MikzuaName} shemToar = {Mikzuut.shemToar} fName = {Mikzuut.fName} sName = {Mikzuut.sName} profName = {Mikzuut.profName} dayOfMifgash = {Mikzuut.dayOfMifgash} hourOfMifgash = {Mikzuut.hourOfMifgash} numOfShaot={Mikzuut.numOfShaot}/>)
+    let ListMiktzua =  this.state.profsList.map((Mikzuut,MikzuaName) =><Miktzua key={MikzuaName} shemToar = {Mikzuut.shemToar} fName = {Mikzuut.fName} sName = {Mikzuut.sName} profName = {Mikzuut.profName} dayOfMifgash = {Mikzuut.dayOfMifgash} hourOfMifgash = {Mikzuut.hourOfMifgash} numOfShaot={Mikzuut.numOfShaot} onRemove={Mikzuut.onRemove}/>)
     if(ListMiktzua.length==0){
         ListMiktzua = <span className="headLinePD"></span>;
     }

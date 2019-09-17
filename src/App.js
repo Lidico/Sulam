@@ -35,6 +35,7 @@ class App extends Component {
             <Route path = '/TeachersDeatails' exact component={TeachersDeatails}/>
             <Route path = '/AddNewProg' exact component={AddNewProg}/>
             <Route path = '/SulamTeachers' exact component={SulamTeachers}/>
+            <Route path = '/MainCard' exact component={MainCard}/>
             
 
         </Switch>

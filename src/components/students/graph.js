@@ -1,13 +1,14 @@
 
 import React, { Component } from 'react';
 import Chart from 'react-apexcharts';
+import firebase from '../../FireBase/FireStore';
 
 class Graph extends Component {
 
   constructor(props) {
     super(props);
-
     this.state = {
+      studGrades:props.mikztuut,
       options: {
         chart: {
           shadow: {
@@ -45,7 +46,7 @@ class Graph extends Component {
           size: 6
         },
         xaxis: {
-          categories: ['1926 א', '1926 ב', '1927 א'],
+          categories: [],
           title: {
             text: 'מחצית'
           }
@@ -65,18 +66,41 @@ class Graph extends Component {
           offsetX: -5
         }
       },
-      series: [
-        {
-          name: "מתמטיקה",
-          data: [87, 65, 77]
-        },
-        {
-          name: "אנגלית",
-          data: [42, 81, 99]
-        }
-      ],
+      series: props.mikztuut.map(m => ({name: m.profName, data: m.listOfGrades}))
+
     }
   }
+
+
+ componentDidMount() {
+    const db = firebase.firestore();
+    const ref = db.collection("mahatzit").doc("mahatzit");
+    ref.get().then(doc => {
+        if (doc.exists) {
+             const tempArr = doc.data().mahatzit;
+             console.log(tempArr );
+             this.setState({
+              options: {
+                    ...this.state.options, xaxis: {
+                      ...this.state.options.xaxis, categories: tempArr
+                    }
+              }
+          }) 
+        } else {
+            console.log("No such document!");
+        }
+    }).catch(error => {
+        console.log("Error getting document:", error);
+    });
+  let tempArrForSerias = this.state.studGrades.map((prof)=>
+        prof.profName
+    );
+    
+    console.log(this.state.series);
+
+
+  }
+
 
 
   render() {

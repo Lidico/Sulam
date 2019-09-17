@@ -73,6 +73,7 @@ class AddNewStud extends Component {
             programList:[],
             mifgashList:[],
             listOfMiktzuut:[],
+            listOfTrace:[],
             
             isSubmit: false
         };
@@ -159,6 +160,7 @@ class AddNewStud extends Component {
             program:this.state.program,
             gishaLeMahshev:this.state.gishaLeMahshev,
             school:this.state.school,
+            imgUrl:this.state.imgUrl,
             kita:this.state.kita,
             teacherName:this.state.teacherName,
             teacherPhone:this.state.teacherPhone,
@@ -169,6 +171,7 @@ class AddNewStud extends Component {
             numOfbrothers:this.state.numOfbrothers,
             familyStatus:this.state.familyStatus,
             generalDescription:this.state.generalDescription,
+            listOfTrace:[]
         }).then(() => this.setState({isSubmit:true})); 
       }
       
@@ -183,7 +186,7 @@ class AddNewStud extends Component {
             <CheckAuth/>
             <div align="right" className="formBox">
                 <div align="right" className="formCont">
-                    <h4 className="rightHeb">הוסף תלמיד חדש</h4><br/><br/><br/>
+                    <h4 className="rightHeb">הוסף תלמיד חדש</h4><br/>
                     <h5 className="rightHeb">פרטים אישיים:</h5><br/>
                     <form onSubmit={this.handleSubmit}>
                     <div className="inpBox">

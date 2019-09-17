@@ -9,22 +9,25 @@ class PersonalDetails extends Component {
         constructor(props) {
             super(props);
             this.state = {
-                phoneNumber: '54235',
+                phoneNumber: props.student.phoneNumber,
                 phoneNumberEdit: false,
-                Email: 'shamirIsTheMan@gmail.com',
+                Email: props.student.Email,
                 EmailEdit: false,
-                address: 'בית ראש הממשלה 22 ירושלים',
+                address: props.student.address,
                 addressEdit: false,
-                birthDate: new Date(),
+                birthDate: props.student.birthDate,
                 birthDateEdit: false,
-                vetekInSulam: 'שנה',
+                vetekInSulam: '',
                 vetekInSulamEdit: false,
-                program: 'מוגברת',
+                program: props.student.program,
                 programEdit: false,
-                schoolContact: 'ברוריה',
+                schoolContact: props.student.schoolContact,
                 schoolContactEdit: false,
-
-                gishaLeMahshev: 'לא',
+                firstContactName: props.student.firstContactName,
+                firstContactNameEdit: false,
+                firstContPhoneNum: props.student.firstContPhoneNum,
+                firstContPhoneNumEdit: false,
+                gishaLeMahshev: props.student.gishaLeMahshev,
                 gishaLeMahshevEdit: false
 
             };
@@ -46,10 +49,13 @@ class PersonalDetails extends Component {
         console.log(this.state.birthDateEdit)
     }
     handleSave(e) {
-        this.setState({[e.target.name]: false});  
+        this.setState({[e.target.name]: false}); 
+        //const db = firebase.firestore();
+        //db.collection("listOfStudents").doc(this.prop.student.StudentiD).update({
+
+       // }); 
     }
-    render(){
-        console.log(firebase.auth().currentUser);     
+    render(){    
         return(
             <div className="personalDataBox">
                 <h5>יצירת קשר</h5>
@@ -123,22 +129,20 @@ class PersonalDetails extends Component {
                 (<div dir="rtl" className="inpBox">
                 <label>
                 <span dir="rtl"  className="headLinePD"> תאריך לידה: </span>
-                    <DatePicker
-                        dateFormat="dd/MM/yyyy"
-                        showYearDropdown
-                        isClearable={true}
-                        dir="rtl"
-                        placeholderText="מלא תאריך לידה"
-                        name="birthDate"
-                        selected={this.state.birthDate}
-                        onChange={this.handleChangebirthDate}
-                    />
+                <DatePicker
+                                dateFormat="dd/MM/yyyy"
+                                showYearDropdown
+                                placeholderText="מלא תאריך כניסה"
+                                name="vetekInSulam"
+                                selected={this.state.vetekInSulam}
+                                onChange={this.handleChangevetekInSulam}
+                            />
                 </label>
                 <button className="buttonEdit" name="birthDateEdit" value={this.state.birthDateEdit} onClick={this.handleSave}>שמור</button><br/>
                 </div>)
                 :
                 (
-                    <div><span className="headLinePD">תאריך לידה:</span><span className="contentPD">fdg</span>
+                    <div><span className="headLinePD">תאריך לידה:</span><span className="contentPD">xsadad {console.log(this.state.birthDate)}</span>
                     <button className="buttonEdit" name="birthDateEdit" value={this.state.birthDateEdit} onClick={this.handleEdit}>עריכה</button><br/></div>
                 )}
                 
@@ -149,15 +153,14 @@ class PersonalDetails extends Component {
                 (<div dir="rtl"  className="inpBox">
                 <label>
                 <span  dir="rtl" className="headLinePD">  תאריך כניסה לסולם לעתיד: </span>
-                    <DatePicker
-                        dateFormat="dd/mm/yyyy"
-                        showYearDropdown
+                <input
+                        required
                         dir="rtl"
-                        isClearable={true}
-                        placeholderText="מלא תאריך כניסה"
-                        name="vetekInSulam"
-                        value = {this.state.vetekInSulam}
-                        onChange = {this.onChange}
+                        type="text"
+                        name="address"
+                        placeholder="הכנס כתובת"
+                        value = {this.state.address}
+                        onChange = {this.handleChange}
                     />
                     </label>
                     <button className="buttonEdit" name="vetekInSulamEdit" value={this.state.vetekInSulamEdit} onClick={this.handleSave}>שמור</button><br/>
@@ -185,10 +188,49 @@ class PersonalDetails extends Component {
 
                 )}
                 
-                  
-                <span className="headLinePD">איש קשר בביה"ס:</span><span className="contentPD">ברוריה</span><Link to="/"><button className="buttonEdit" name="schoolContact">עריכה</button></Link><br/>
-                <span className="headLinePD">טלפון:</span><span className="contentPD">0536066600</span><Link to="/"><button className="buttonEdit">עריכה</button></Link><br/>
+
+                {this.state.firstContactNameEdit ? 
+                (<div className="inpBox">
+                <label>
+                <span dir="rtl"  className="headLinePD"> איש קשר בביה"ס:</span>
+                    <input
+                        required
+                        dir="rtl"
+                        type="text"
+                        name="firstContactName"
+                        placeholder="הכנס איש קשר"
+                        value = {this.state.firstContactName}
+                        onChange = {this.handleChange}
+                    />
+                    </label>
+                    <button className="buttonEdit" name="firstContactNameEdit" value={this.state.firstContactName} onClick={this.handleSave}>שמור</button><br/>
+                </div>)
+                :
+                ( <div> <span className="headLinePD">איש קשר בביה"ס:</span><span className="contentPD">{this.state.firstContactName}</span>
+                    <button className="buttonEdit" name="firstContactNameEdit" value={this.state.firstContactNameEdit} onClick={this.handleEdit}>עריכה</button><br/></div>)}
                 
+
+                {this.state.firstContPhoneNumEdit ? 
+                (<div className="inpBox">
+                        <label>
+                        <span  dir="rtl" className="headLinePD"> מס' טלפון: </span>
+                            <input
+                                required
+                                dir="rtl"
+                                type="text"
+                                name="firstContPhoneNum"
+                                placeholder= {this.state.firstContPhoneNum}
+                                value = {this.state.firstContPhoneNum}
+                                onChange={this.handleChange}
+                            />
+                    </label>
+                    <button className="buttonEdit" name="firstContPhoneNumEdit"  value={this.state.firstContPhoneNumEdit} onClick={this.handleSave}>שמור</button><br/>
+                    </div>)
+                :
+                    (<div><span className="headLinePD">טלפון:</span><span className="contentPD">{this.state.firstContPhoneNum}</span>
+                    <button className="buttonEdit" name="firstContPhoneNumEdit"  value={this.state.firstContPhoneNumEdit} onClick={this.handleEdit}>עריכה</button><br/></div>)}
+
+                 
                 {this.state.gishaLeMahshevEdit ?
                 (<div className="inpBox">
                 <label>
