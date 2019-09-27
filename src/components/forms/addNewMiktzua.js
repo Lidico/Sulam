@@ -6,6 +6,8 @@ import firebase from '../../FireBase/FireStore';
 import MiktzuaSelector from './miktzuaSelector'; 
 import MiktzuaList from './miktzuaList';
 import { Redirect } from 'react-router';
+import { stat } from 'fs';
+import CheckAuth from '../auth/checkAuth';
 
 
 function TheacherSelector(props) {
@@ -37,10 +39,11 @@ class AddNewMiktzua extends Component {
             sulamTeacherIsExist: false,
             dayOfMifgash:'א',
             hourOfMifgash:'',
+            teachIMG:'',
             numOfShaot: 1,
             schoolTeacherName:'',
             schoolTeacherPhone:'',
-            studInTeacherHome:'כן',
+            studInTeacherHome:'לא',
             MiktzuutList:[],
             teachersList:[],
             shemToar:"",
@@ -75,11 +78,13 @@ class AddNewMiktzua extends Component {
                          const teachShemToar = doc.data().shemToar;
                          const teachFName = doc.data().fName;
                          const teachSName  = doc.data().sName;
+                         const teachImg  = doc.data().imgUrl;
                          console.log(teachFName);
                          this.setState({isChangeTeacher: true,
                             shemToar: teachShemToar,
                             fName: teachFName,
-                            sName: teachSName
+                            sName: teachSName,
+                            teachIMG: teachImg
                         })  
                     } else {
                         console.log("No such document!");
@@ -91,6 +96,7 @@ class AddNewMiktzua extends Component {
       }
 
       handleAdd(e) {
+          console.log(this.state.hourOfMifgash);
         if(!this.state.profName) {
             return;
         }
@@ -101,6 +107,7 @@ class AddNewMiktzua extends Component {
             shemToar:this.state.shemToar,
             fName:this.state.fName,
             sName:this.state.sName,
+            techIMG:this.state.teachIMG,
             dayOfMifgash:this.state.dayOfMifgash,
             hourOfMifgash:this.state.hourOfMifgash,
             numOfShaot:this.state.numOfShaot,
@@ -146,11 +153,13 @@ class AddNewMiktzua extends Component {
                 let teachShemToar = queryDocumentSnapshot.data().shemToar;
                 let teachFName = queryDocumentSnapshot.data().fName;
                 let teachSName  = queryDocumentSnapshot.data().sName;
+                let teachIMAGE = queryDocumentSnapshot.data().imgUrl;
                 this.setState({
                     sulamTeacher: teachID,
                     shemToar: teachShemToar,
                     fName: teachFName,
                     sName: teachSName,
+                    teachIMG: teachIMAGE,
                     sulamTeacherIsExist: true
                });
             } else {
@@ -180,6 +189,7 @@ class AddNewMiktzua extends Component {
     
         return(
         <div className="formPage">
+            <CheckAuth/>
             <div align="right" className="formBox">
                 <div align="left" className="miktzuutCont">
                 <MiktzuaList profs={this.state.MiktzuutList} onRemove={this.handleRemove}/>
@@ -248,11 +258,9 @@ class AddNewMiktzua extends Component {
                         <option value="1">שעה</option>
                         <option value="2">שעתיים</option>
                         <option value="3">שלוש שעות</option>
-
                     </select>
                     </label>
                 </div>
-
                 <div className="inpBox">
                 <label>
                 <span dir="rtl" className="headLinePD"> מורה מלמד בביה"ס: </span>

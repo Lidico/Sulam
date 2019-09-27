@@ -7,6 +7,7 @@ import './listPage.css';
 import firebase from '../../FireBase/FireStore';
 import { tr } from 'date-fns/esm/locale';
 import MainCard from '../students/mainCard.js'
+import CheckAuth from '../auth/checkAuth';
 
 class ListPage extends Component {
 
@@ -79,7 +80,7 @@ class ListPage extends Component {
         console.log(this.state);
         return(
         <div className="dashboard container mainBlock">
-            
+            <CheckAuth/>
 
             {this.state.studentSelected ? 
             <div>

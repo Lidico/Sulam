@@ -146,6 +146,7 @@ hr.borderLine{
 
 .traceBox{
     border: 1px solid lightgray;
+    margin-right: 1rem;
     margin-left: 1rem;
     width: 80%;
     border-radius: 0.5rem;
@@ -154,6 +155,7 @@ hr.borderLine{
     text-align: right;
     padding: 1rem;
     margin-bottom: 0.5rem;
+    display: block;
 }
 
 .tracingBox{
@@ -186,7 +188,8 @@ hr.borderLine{
     border-radius: 0.5rem;
     background-color: #FFFDFD;
     text-align: right;
-    padding-top: 10rem;
+    padding-top: 7rem;
+    margin-left: 0.3rem;
     margin-bottom: 0.5rem;
 }
 
@@ -202,7 +205,7 @@ hr.borderLine{
   }
 
   .checkBOxes{
-    width: 60%;
+    width: 80%;
     display: flex;
     justify-content: space-between;
     float: right;
@@ -213,10 +216,74 @@ hr.borderLine{
 
   .graphButtons{
     position: relative;
-    width: 30%;
+    width: 50%;
     display: flex;
     justify-content: space-between;
     position: relative;
     margin-bottom: 2rem;
     margin-left: 40%;
+    margin-top: 1rem;
   }
+
+  .profImageStud{
+    height: 3.5rem;
+    width: 3.5rem;
+    border-radius: 50%;
+}
+
+.nameAndPhoto{
+    position: relative;
+    float: right;
+}
+
+.headLineProf{
+    position: relative;
+    font-size: 1.5rem;
+    margin-right: 1rem;
+    margin-top: 0.5rem;
+}
+
+.detailsProf{
+    margin-top: 1rem;
+    margin-right: 3rem;
+    position: relative;
+    font-size: 1rem;
+    color: #909090;
+    display: block;
+    direction: rtl;
+    float: right;
+    width: 40%;
+}
+
+.proffBox{
+    border: 1px solid lightgray;
+    margin-right: 1rem;
+    margin-left: 1rem;
+    width: 70%;
+    border-radius: 0.5rem;
+    background-color: #FFFDFD;
+    float: right;
+    text-align: right;
+    padding: 1rem;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+.precentage{
+    float: left;
+    width: 40%;
+    padding-left: 1rem;
+    direction: rtl;
+}
+
+.prec{
+    font-size: 2rem;
+}
+
+.buttTrace{
+    z-index: -1;
+}
+
+.desc{
+    padding-top: 2rem;
+}

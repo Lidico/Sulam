@@ -3,11 +3,14 @@ import Notifications from './notifications';
 import Buttons from './buttons';
 import Search from './search';
 import './dashboard.css';
+import CheckAuth from '../auth/checkAuth';
 
 class Dashboard extends Component{
     render(){
         return(
+           
             <div>
+                 <CheckAuth/>
                 <div className="halfDash">
                     <div className="textDashBox">
                             <div className="headerDashText">
@@ -17,7 +20,7 @@ class Dashboard extends Component{
                         </div>
                 </div>
                 <div className="secHalfDash">
-                <Search/>
+                <br/>
                 <Buttons/>
             </div>
          </div>

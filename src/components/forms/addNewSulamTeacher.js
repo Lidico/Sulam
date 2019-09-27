@@ -7,6 +7,8 @@ import { Link } from 'react-router-dom';
 import { Redirect } from 'react-router';
 import FileUploader from "react-firebase-file-uploader";
 import defImg from './defImg.jpg';
+import CheckAuth from '../auth/checkAuth';
+
 
 class AddNewSulamTeacher extends Component {
     constructor(props) {
@@ -85,6 +87,8 @@ class AddNewSulamTeacher extends Component {
             SulamTeacherID:this.state.SulamTeacherID,
             phoneNumber:this.state.phoneNumber,
             Email:this.state.Email,
+            imgUrl:this.state.imgUrl,
+
             address:this.state.address,
             TeacherMiktzuaList:this.state.TeacherMiktzuaList,
             generalDescription:this.state.generalDescription,
@@ -98,9 +102,10 @@ class AddNewSulamTeacher extends Component {
     
         return(
         <div className="formPage">
+            <CheckAuth/>
             <div align="right" className="formBox">
                 <div align="right" className="formCont">
-                    <h4 className="rightHeb">הוספת מורה חדש</h4><br/><br/><br/>
+                    <h4 className="rightHeb">הוספת מורה חדש</h4><br/>
                     <form onSubmit={this.handleSubmit}>
                     <div className="inpBox">
                         <label>

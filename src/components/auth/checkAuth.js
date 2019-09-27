@@ -12,7 +12,6 @@ class CheckAuth extends Component {
 
     componentDidMount = () => {
         firebase.auth().onAuthStateChanged(user => {
-            console.log("check", user);
             if(!user)
                 this.setState({signedIn: false})
             else

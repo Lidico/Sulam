@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import "react-datepicker/dist/react-datepicker.css";
 import firebase from '../../FireBase/FireStore';
 import { Redirect } from 'react-router';
 import './listPage.css';

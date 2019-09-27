@@ -8,7 +8,8 @@ class AcademyDetails extends Component {
         super(props);
         console.log(props.student.listOfmiktzout);
         this.state = {
-            miktzuutList:props.student.listOfmiktzout
+            miktzuutList:props.student.listOfmiktzout,
+            studentID: props.student.StudentiD
         };
     
         this.handleChange = this.handleChange.bind(this);
@@ -44,11 +45,7 @@ render(){
     return(
      <div>
          <Graph mikztuut={this.state.miktzuutList} />
-         <div className="graphButtons">
-                <button  className="grey darken-3 waves-effect waves-light btn-large">הוסף מחצית</button><br/><br/>
-                <button className="grey darken-3 waves-effect waves-light btn-large" onClick={this.handleAdd}>הוסף ציון</button><br/><br/>
-        </div>
-        <ProffList mikztuut={this.state.miktzuutList}/>
+        <ProffList mikztuut={this.state.miktzuutList} studentID={this.state.studentID}/>
     </div>
        
        )

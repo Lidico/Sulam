@@ -170,6 +170,7 @@ class AddNewStud extends Component {
             secondContPhoneNum:this.state.secondContPhoneNum,
             numOfbrothers:this.state.numOfbrothers,
             familyStatus:this.state.familyStatus,
+            listOfmiktzout:[],
             generalDescription:this.state.generalDescription,
             listOfTrace:[]
         }).then(() => this.setState({isSubmit:true})); 

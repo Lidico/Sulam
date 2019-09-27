@@ -16,6 +16,7 @@ import AddNewProg from "./components/forms/addNewProg";
 import SulamTeachers from "./components/sulamTeachers/sulamTeachers";
 
 class App extends Component {
+  
   render() {
       return (
         <BrowserRouter>

@@ -9,7 +9,8 @@ class ProffList extends Component {
         console.log(props);
         super(props);
         this.state = {
-            proffList: props.mikztuut
+            proffList: props.mikztuut,
+            studentID: props.studentID
         };
     
         this.handleChange = this.handleChange.bind(this);
@@ -26,7 +27,7 @@ handleRemove(e) {
 
 render(){
  
-    let ListProff =  this.state.proffList.map((Prof,ProffKey) => <Proff key={ProffKey}/>)
+    let ListProff =  this.state.proffList.map((Prof,ProffKey) => <Proff key={ProffKey} shemToar={Prof.shemToar} fName={Prof.fName} sName={Prof.sName} profName={Prof.profName} teachIMG={Prof.techIMG} dayOfMifgash={Prof.dayOfMifgash} hourOfMifgash={Prof.hourOfMifgash} timeOfMifgash={Prof.numOfShaot} schoolTeacherName={Prof.schoolTeacherName} schoolTeacherPhone={Prof.schoolTeacherPhone} studInTeacherHome={Prof.studInTeacherHome} studentID={this.state.studentID}/>)
     if(ListProff.length==0){
         ListProff = <span className="headLinePD"></span>;
     }

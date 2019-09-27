@@ -8,10 +8,9 @@ import TrachProfPic from './teachPic.jpg';
 function StudOfTeach(props) {
       
         return(
-            <div className="">
+            <div>
                 <img className="profImageStud" src={TrachProfPic}/>
                 <span>{props.shemToar} {props.fName} {props.sName}</span>
-
             </div>
         )
     }

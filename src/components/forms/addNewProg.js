@@ -3,6 +3,7 @@ import './form.css';
 import "react-datepicker/dist/react-datepicker.css";
 import firebase from '../../FireBase/FireStore';
 import { Redirect } from 'react-router';
+import CheckAuth from '../auth/checkAuth';
 
 class AddNewProg extends Component {
     constructor(props) {
@@ -37,6 +38,7 @@ class AddNewProg extends Component {
     
         return(
         <div className="formPage">
+            <CheckAuth/>
             <div align="right" className="formBox">
                 <div align="right" className="formCont">
                     <h4 className="rightHeb">הוסף תוכנית חדשה</h4><br/><br/><br/>
