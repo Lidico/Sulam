@@ -5,6 +5,7 @@ import { Redirect } from 'react-router';
 import signedIn from '../layOut/signedIn';
 import AddUser from './addUser'
 import SigninForm from './signinForm'
+import managers from './managers'
 
 class SignIn extends Component {
     state={
@@ -21,7 +22,7 @@ class SignIn extends Component {
                 this.setState({signedIn: false,manager: false})
                 return;
             }
-            if(user.email === "piskarov@gmail.com")
+            if(managers.includes(user.email))
                 this.setState({manager:true})
             else
                 this.setState({signedIn:true})
@@ -50,6 +51,14 @@ class SignIn extends Component {
  
     createUser = ()=> {
         firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
+        .then((user)=>{
+            user.user.updateProfile({
+                displayName: this.state.displayName
+              }).then(()=>{
+                    window.location.reload();
+              })
+            
+           })
         .catch(function(error) {
             var errorCode = error.code;
             var errorMessage = error.message;

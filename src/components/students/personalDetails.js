@@ -46,7 +46,6 @@ class PersonalDetails extends Component {
       }
     handleEdit(e) {
         this.setState({[e.target.name]: true});
-        console.log(this.state.birthDateEdit)
     }
     handleSave(e) {
         this.setState({[e.target.name]: false}); 
@@ -142,7 +141,7 @@ class PersonalDetails extends Component {
                 </div>)
                 :
                 (
-                    <div><span className="headLinePD">תאריך לידה:</span><span className="contentPD">xsadad {console.log(this.state.birthDate)}</span>
+                    <div><span className="headLinePD">תאריך לידה:</span><span className="contentPD">xsadad </span>
                     <button className="buttonEdit" name="birthDateEdit" value={this.state.birthDateEdit} onClick={this.handleEdit}>עריכה</button><br/></div>
                 )}
                 

@@ -8,7 +8,6 @@ import './mainCard.css';
 class Precentes extends Component {
     constructor(props) {
         super(props);
-        console.log(props);
         this.state = {
             mevukash: props.numOfMevukash,
             mifgash:props.numOfMifgash,

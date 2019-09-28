@@ -4,8 +4,30 @@ import Buttons from './buttons';
 import Search from './search';
 import './dashboard.css';
 import CheckAuth from '../auth/checkAuth';
+import managers from '../auth/managers'
+import firebase from '../../FireBase/FireStore';    
 
 class Dashboard extends Component{
+
+    state={
+        manager: false,
+        signedIn: false
+    }
+
+    componentDidMount = () => {
+        firebase.auth().onAuthStateChanged(user => {
+            console.log(user);
+            if(!user){
+                this.setState({signedIn: false,manager: false})
+                return;
+            }
+            if(managers.includes(user.email))
+                this.setState({manager:true})
+            else
+                this.setState({signedIn:true})
+        })
+    }
+
     render(){
         return(
            
@@ -21,7 +43,7 @@ class Dashboard extends Component{
                 </div>
                 <div className="secHalfDash">
                 <br/>
-                <Buttons/>
+                <Buttons manager={this.state.manager}/>
             </div>
          </div>
         )

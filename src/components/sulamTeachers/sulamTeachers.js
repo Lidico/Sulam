@@ -44,7 +44,6 @@ render(){
     if(ListTeacher.length==0){
         ListTeacher = <span className="headLinePD">אין מורים במאגר.</span>;
     }
-    console.log(this.state.sulamTeacherList);
         return(
         <div className="mainBlockCard">
             <div className="detailsBlock">

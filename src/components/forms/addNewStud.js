@@ -181,7 +181,6 @@ class AddNewStud extends Component {
 
         let selectImg = false;
         if (this.state.imgUrl !==defImg) selectImg = true;
-        console.log();
         return(
         <div className="formPage">
             <CheckAuth/>

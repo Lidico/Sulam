@@ -12,6 +12,7 @@ class navBar extends Component {
         super(props);
         this.state={
             signedIn: true,
+            name: ' '
         };
     }
 
@@ -20,7 +21,7 @@ componentDidMount = () => {
         if(!user)
             this.setState({signedIn: false})
         else
-            this.setState({signedIn:true})
+            this.setState({signedIn:true,name:user.displayName})
     })
 }
     render(){
@@ -29,7 +30,7 @@ componentDidMount = () => {
             <nav className="nav-wrapper grey darken-3">
             <div className="container">
                 <Link to='/' className="brand-logo right"><img src={logo} className="logo"></img></Link>
-               {this.state.signedIn? (<SignedIn/>) : (<SignedOut/>)}
+               {this.state.signedIn? <div><SignedIn name={this.state.name}/></div> : (<SignedOut/>)}
             </div>
         </nav>    
 

@@ -78,7 +78,6 @@ class Graph extends Component {
     ref.get().then(doc => {
         if (doc.exists) {
              const tempArr = doc.data().mahatzit;
-             console.log(tempArr );
              this.setState({
               options: {
                     ...this.state.options, xaxis: {
@@ -96,7 +95,6 @@ class Graph extends Component {
         prof.profName
     );
     
-    console.log(this.state.series);
 
 
   }

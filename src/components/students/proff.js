@@ -40,7 +40,8 @@ class Proff extends Component {
             newGrad:"",
             mahatzitGrade:"",
             yearGrade:"",
-            isAddButtPresed:false
+            isAddButtPresed:false,
+            currMiktzua:""
         };
 
         this.handleAdd = this.handleAdd.bind(this);
@@ -57,15 +58,16 @@ componentDidMount() {
     ref.get().then(doc => {
         if (doc.exists) {
              const numOfTrace = doc.data().listOfTrace.filter(num =>num.details.sName==currentComponent.state.sName).length;
-             const numOfArivedToClass = doc.data().listOfTrace.filter(num =>num.details.sName==currentComponent.state.sName).filter(numOf =>!numOf.isArived).length;
+             const numOfArivedToClass = doc.data().listOfTrace.filter(num =>num.details.sName==currentComponent.state.sName).filter(numOf =>!numOf.isntArived).length;
              const numOfLateToClass = doc.data().listOfTrace.filter(num =>num.details.sName==currentComponent.state.sName).filter(numOf =>!numOf.isLate).length;
              const numOfGetPaid = doc.data().listOfTrace.filter(num =>num.details.sName==currentComponent.state.sName).filter(numOf =>numOf.isGetPaid).length;
-             console.log(numOfArivedToClass);
+             const thisMiktzua = doc.data().listOfmiktzout.where(name => name.profName==currentComponent.state.profName);
              this.setState({
                 numOfMifgash: numOfTrace,
                 numOfArived:numOfArivedToClass,
                 lates: numOfLateToClass,
                 isGetPaid: numOfGetPaid,
+                currMiktzua: thisMiktzua,
                 isLoad: true,
             })  
         } else {
@@ -77,16 +79,17 @@ componentDidMount() {
 }
 
 handleEdit(e) {
-    console.log([e.target])
     this.setState({[e.target.name]: true});
+
 }
 
 handleSave(e) {
     this.setState({[e.target.name]: false}); 
-    //const db = firebase.firestore();
-    //db.collection("listOfStudents").doc(this.prop.student.StudentiD).update({
+    console.log(this.state.currMiktzua);
 
-   // }); 
+
+
+
 }
 
 
@@ -103,9 +106,7 @@ handleRemove(e) {
 }
 
 render(){
-    //console.log("hourOfMifgash", JSON.stringify(this.state.hourOfMifgash));
-    //console.log("hourOfMifgash", this.state.hourOfMifgash.toDate().getHours());
-    //let hourOfBeg = this.state.hourOfMifgash.toDate().getHours()+":"+(this.state.hourOfMifgash.toDate().getMinutes()==0?"00":this.state.hourOfMifgash.toDate().getMinutes());
+  
     let hourOfBeg = this.state.hourOfMifgash.getHours()+":"+(this.state.hourOfMifgash.getMinutes()==0?"00":this.state.hourOfMifgash.getMinutes());
 
     return(

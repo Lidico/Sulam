@@ -45,8 +45,7 @@ render(){
   
     let hourOfBeg = this.state.hourOfMifgash.getHours()+":"+(this.state.hourOfMifgash.getMinutes()==0?"00":this.state.hourOfMifgash.getMinutes());
     let hourOfEnd = (this.state.hourOfMifgash.getHours())+addHours(this.state.numOfShaot)+":"+(this.state.hourOfMifgash.getMinutes()==0?"00":this.state.hourOfMifgash.getMinutes());
-    console.log(hourOfBeg)
-    console.log(hourOfEnd)
+
         return(
             <div className="profBox">
                 <div className="profLine">שיעור {this.state.profName} עם {this.state.shemToar} {this.state.fName} {this.state.sName }</div><br/>

@@ -38,7 +38,7 @@ const navList = (props) => {
                 }
 
                 {props.tracing ?
-                    <Tracing student={props.student}/>
+                    <Tracing student={props.student} display={props.tracing}/>
                     :
                      null
                 }

@@ -50,7 +50,6 @@ class Tracing extends Component {
       }
       
       componentDidMount() {
-        console.log(this.state.studentID);
         let currentComponent = this;
         let firstTeach;
         const db = firebase.firestore();
@@ -92,7 +91,6 @@ class Tracing extends Component {
     handleChange(e) {
       const currentComponent = this;
       currentComponent.setState({[e.target.name]: e.target.value});
-      console.log(this.state.traceList);
       if(e.target.name == "sulamTeacher"){
           const db = firebase.firestore();
               const ref = db.collection("listOfTeachers").doc(e.target.value);
@@ -101,7 +99,6 @@ class Tracing extends Component {
                        const teachShemToar = doc.data().shemToar;
                        const teachFName = doc.data().fName;
                        const teachSName  = doc.data().sName;
-                       console.log(teachFName);
                        this.setState({isChangeTeacher: true,
                           shemToar: teachShemToar,
                           fName: teachFName,
@@ -174,10 +171,9 @@ handleSave(e) {
 }
 
 render(){
-    console.log(this.state.traceList);
     return(
-        <div>
-        
+      <div>
+         {this.props.display ? <div> 
         <div className="tracingBox">
             <AllTraces handleChangeCheckBox={this.handleChangeCheckBox} removeFunc={this.handleRemove} tracingList={this.state.traceList} studentID={this.state.studentID}/>
         </div>
@@ -219,6 +215,10 @@ render(){
           <button className="grey darken-3 waves-effect waves-light btn-large" onClick={this.handleAdd}>הוספת דיווח</button>
         </div>
         </div>
+        :
+        null 
+      }
+      </div>
     )
     
     }

@@ -5,6 +5,10 @@ const AddUser = (props) => {
             <div>
                 <h5 className="grey-text text-darken-3">הוספת משתמש חדש</h5>
                 <div dir="rtl" className="input-field">
+                            <input dir="rtl" type="text" id="displayName" onChange={props.handleChange}/>
+                            <label dir="rtl" htmlFor="displayName">שם מלא</label>
+                        </div>
+                <div dir="rtl" className="input-field">
                             <input dir="rtl"  type="email" id="email" onChange={props.handleChange}/>
                             <label dir="rtl" htmlFor="email">דואר אלקטרוני</label>
                         </div>

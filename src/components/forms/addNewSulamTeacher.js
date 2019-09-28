@@ -46,7 +46,6 @@ class AddNewSulamTeacher extends Component {
             else
                 temp.push(e.target.value);
     
-            console.log(temp);
             this.setState({TeacherMiktzuaList:temp})  
         }
         else{

@@ -69,7 +69,6 @@ class AddNewMiktzua extends Component {
       handleChange(e) {
         const currentComponent = this;
         currentComponent.setState({[e.target.name]: e.target.value});
-        console.log("target:", e.target.name);
         if(e.target.name == "sulamTeacher"){
             const db = firebase.firestore();
                 const ref = db.collection("listOfTeachers").doc(e.target.value);
@@ -79,7 +78,7 @@ class AddNewMiktzua extends Component {
                          const teachFName = doc.data().fName;
                          const teachSName  = doc.data().sName;
                          const teachImg  = doc.data().imgUrl;
-                         console.log(teachFName);
+
                          this.setState({isChangeTeacher: true,
                             shemToar: teachShemToar,
                             fName: teachFName,
@@ -96,7 +95,6 @@ class AddNewMiktzua extends Component {
       }
 
       handleAdd(e) {
-          console.log(this.state.hourOfMifgash);
         if(!this.state.profName) {
             return;
         }
@@ -116,11 +114,9 @@ class AddNewMiktzua extends Component {
             schoolTeacherPhone:this.state.schoolTeacherPhone,
             listOfGrades:[]   
         }
-        console.log("temp", temp);
         let arrTemp = this.state.MiktzuutList;
         arrTemp.push(temp);
         this.setState({MiktzuutList:arrTemp});
-        console.log(this.state.sulamTeacher);
         e.preventDefault();
         db.settings({});
         db.collection("listOfTeachers").doc(this.state.sulamTeacher).update({
@@ -181,7 +177,6 @@ class AddNewMiktzua extends Component {
       }
 
       handleRemove(e) {
-        console.log("sdad");
     }
 
 
@@ -217,7 +212,7 @@ class AddNewMiktzua extends Component {
                         <MiktzuaSelector profName={this.state.profName} teachID={this.state.sulamTeacher}  onChange={this.handleChange}/>
                          ):
                          (
-                             console.log(this.state.sulamTeacher)
+                             <div></div>
                          )}
                     </label>
                 </div>

@@ -20,7 +20,6 @@ class CheckAuth extends Component {
     }
 
 render(){
-    console.log("signin",this.state.signedIn);
     return(
         <div>
         {this.state.signedIn ? null:(<Redirect to="/signin"></Redirect>)}

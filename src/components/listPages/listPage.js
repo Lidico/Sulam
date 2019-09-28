@@ -30,9 +30,15 @@ class ListPage extends Component {
     
         this.handleChange = this.handleChange.bind(this);
         this.handleChangeStu = this.handleChangeStu.bind(this);
+        this.readFromDB = this.readFromDB.bind(this);
       }
 
       componentDidMount() {
+        this.readFromDB();
+        
+    }
+        
+    readFromDB(){
         let currentComponent = this;
         const db = firebase.firestore();
         db.collection("listOfSchools").get().then(function(querySnapshot) {
@@ -58,11 +64,11 @@ class ListPage extends Component {
             });
             currentComponent.setState({ studentList: arrTemp ,student: arrTemp[0]});
         });
-        
-    }
-        
 
-      handleChange(e) {
+        this.setState({gradeView:false,programView:false,studentView:false,studentSelected:false})
+    }   
+
+       handleChange(e) {
         this.setState({[e.target.name]: e.target.value});
 
         if(e.target.name == "school")
@@ -84,7 +90,7 @@ class ListPage extends Component {
 
             {this.state.studentSelected ? 
             <div>
-            <button onClick={()=>this.setState({studentSelected:false})}>חיפוש חדש</button>
+            <button onClick={this.readFromDB}>חיפוש חדש</button>
             <MainCard student={this.state.student}/>
             </div>
             :

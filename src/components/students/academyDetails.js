@@ -6,7 +6,6 @@ import ProffList from './proffList';
 class AcademyDetails extends Component {
     constructor(props) {
         super(props);
-        console.log(props.student.listOfmiktzout);
         this.state = {
             miktzuutList:props.student.listOfmiktzout,
             studentID: props.student.StudentiD
@@ -18,10 +17,6 @@ class AcademyDetails extends Component {
         this.handleChangebirthDate = this.handleChangebirthDate.bind(this);
       }
 
-// componentDidMount() {
-// console.log(this.props.student.listOfMiktzut)
-
-// }
 
 handleChange(e) {
     this.setState({[e.target.name]: e.target.value});
@@ -31,7 +26,6 @@ handleChangebirthDate(e) {
   }
 handleEdit(e) {
     this.setState({[e.target.name]: true});
-    console.log(this.state.birthDateEdit)
 }
 handleSave(e) {
     this.setState({[e.target.name]: false}); 

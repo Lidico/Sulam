@@ -14,7 +14,6 @@ const AllTraces = (props) => {
         return(
         <div >
               {props.tracingList.map((Trace,index) =>{
-                  console.log(Trace);
                 return (
                 <OneTrace index={index} traceList={props.tracingList} dateOfTrace={Trace.details.dateOfTrace} fName={Trace.details.fName} sName={Trace.details.sName} shemToar={Trace.details.shemToar} description={Trace.details.description} isntArived={Trace.isntArived} isLate={Trace.isLate} isGetPaid={Trace.isGetPaid} studentID={props.studentID} onRemove={props.removeFunc} handleChangeCheckBox={props.handleChangeCheckBox}/>
                 );
