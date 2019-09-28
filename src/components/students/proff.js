@@ -60,6 +60,7 @@ componentDidMount() {
              const numOfArivedToClass = doc.data().listOfTrace.filter(num =>num.details.sName==currentComponent.state.sName).filter(numOf =>!numOf.isArived).length;
              const numOfLateToClass = doc.data().listOfTrace.filter(num =>num.details.sName==currentComponent.state.sName).filter(numOf =>!numOf.isLate).length;
              const numOfGetPaid = doc.data().listOfTrace.filter(num =>num.details.sName==currentComponent.state.sName).filter(numOf =>numOf.isGetPaid).length;
+             console.log(numOfArivedToClass);
              this.setState({
                 numOfMifgash: numOfTrace,
                 numOfArived:numOfArivedToClass,
@@ -138,7 +139,7 @@ render(){
                                 onChange={this.handleChange}
                             />
                     </label>
-                    <label>
+                    {/*<label>
                         <span  dir="rtl" className="headLinePD">הכנס שנה: </span>
                             <input
                                 required
@@ -161,7 +162,7 @@ render(){
                                 value = {this.state.mahatzitGrade}
                                 onChange={this.handleChange}
                             />
-                    </label>
+                    </label>*/}
                     <button className="buttonEdit" name="isAddButtPresed" value={this.state.isAddButtPresed} onClick={this.handleSave}>שמור ציון</button><br/>
                     </div>)
                 :

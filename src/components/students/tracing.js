@@ -44,6 +44,8 @@ class Tracing extends Component {
         this.handleSave = this.handleSave.bind(this);
         this.handleChangeDate = this.handleChangeDate.bind(this);
         this.handleAdd = this.handleAdd.bind(this);
+        this.handleRemove = this.handleRemove.bind(this);
+        this.handleChangeCheckBox = this.handleChangeCheckBox.bind(this);
         
       }
       
@@ -135,28 +137,49 @@ handleChangeDate(e) {
       }
     }
    
-    const arrTemp = [temp, ...this.state.traceList]
-    // console.log("tracelist: ", arrTemp);
-    this.setState(prevState => ({
-      traceList: [temp, ...prevState.traceList]
-    }));
+    let arrTemp = [temp, ...this.state.traceList]
+
+    this.setState({traceList: arrTemp})
     db.collection("listOfStudents").doc(currentComponent.state.studentID).update({
       listOfTrace: arrTemp
     }) 
   }
 
+
+  handleRemove (e){
+    let temp = this.state.traceList;
+    temp.splice(e.target.value,1);
+    const db = firebase.firestore();
+    const ref = db.collection("listOfStudents").doc(this.state.studentID);
+    ref.update({
+        listOfTrace: temp
+    })
+    this.setState({traceList:temp});
+}
+
+handleChangeCheckBox (e) {
+  let temp = this.state.traceList;
+  temp[e.target.value][[e.target.name]] = e.target.checked;
+  const db = firebase.firestore();
+  const ref = db.collection("listOfStudents").doc(this.state.studentID);
+  ref.update({
+      listOfTrace: temp
+  })
+  this.setState({[e.target.name]: e.target.checked, traceList:temp});
+   
+}
 handleEdit(e) {
 }
 handleSave(e) {
 }
 
 render(){
- 
+    console.log(this.state.traceList);
     return(
         <div>
         
         <div className="tracingBox">
-            <AllTraces tracingList={this.state.traceList}/>
+            <AllTraces handleChangeCheckBox={this.handleChangeCheckBox} removeFunc={this.handleRemove} tracingList={this.state.traceList} studentID={this.state.studentID}/>
         </div>
          <div className="addNewTrace">
                          <div className="inpBox">
