@@ -17,14 +17,15 @@ class mainCard extends Component {
             tracing: false,
             academyDetailsView: false,
             familyDetailsView: false,
-            personalDetailsView:true
+            personalDetailsView:true,
+            financeTrace: false
         };
     
         this.handleChange = this.handleChange.bind(this);
       }
 
       handleChange(e) {
-        this.setState({academyDetailsView : false,familyDetailsView :false,personalDetailsView:false, tracing:false})
+        this.setState({academyDetailsView : false,familyDetailsView :false,personalDetailsView:false, tracing:false, financeTrace:false})
         this.setState({[e.target.name]: true});
       }
 
@@ -40,7 +41,7 @@ class mainCard extends Component {
                     <img src={this.props.student.imgUrl} alt="" className="profImage"/>
                 </div>
             </div>
-            <NavList student={this.props.student} tracing={this.state.tracing} academyDetailsView={this.state.academyDetailsView} familyDetailsView={this.state.familyDetailsView} personalDetailsView={this.state.personalDetailsView} onClick={this.handleChange}/>
+            <NavList student={this.props.student} financeTrace={this.state.financeTrace} tracing={this.state.tracing} academyDetailsView={this.state.academyDetailsView} familyDetailsView={this.state.familyDetailsView} personalDetailsView={this.state.personalDetailsView} onClick={this.handleChange}/>
         </div>
 
         );

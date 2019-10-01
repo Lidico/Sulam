@@ -4,6 +4,7 @@ import PersonalDetails from './personalDetails';
 import AcademyDetails from './academyDetails';
 import FamilyDetails from './familyDetails';
 import Tracing from './tracing';
+import FinanceTrace from './financeTrace';
 
 
 
@@ -16,7 +17,7 @@ const navList = (props) => {
                     <button className="buttonNav" name="familyDetailsView" onClick={props.onClick}>מצב משפחתי</button>
                     <button className="buttonNav" name="academyDetailsView" onClick={props.onClick}>מצב לימודי</button>
                     <button className="buttonNav" name="tracing" onClick={props.onClick}>מעקב שבועי</button>
-                    <button className="buttonNav">מעקב פיננסי</button>
+                    <button className="buttonNav" name="financeTrace" onClick={props.onClick}>מעקב פיננסי</button>
             </div>
             <div className="dataBox">
                 {props.personalDetailsView ?
@@ -39,6 +40,12 @@ const navList = (props) => {
 
                 {props.tracing ?
                     <Tracing student={props.student} display={props.tracing}/>
+                    :
+                     null
+                }
+
+                {props.financeTrace ?
+                    <FinanceTrace student={props.student} display={props.tracing}/>
                     :
                      null
                 }

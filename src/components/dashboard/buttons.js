@@ -8,19 +8,30 @@ const Buttons = (props) => {
     return(
         <div className="buttBox">
              <div className="buttLine">
-                {props.manager ? <div className="buttLine"><Link to="/AddNewProg">
-                   <button disabled className="grey darken-3 waves-effect waves-light btn-large" >הוסף תוכנית חדשה</button>
+                {props.manager ? (
+               <Link to="/AddNewProg">
+                   <button className="grey darken-3 waves-effect waves-light btn-large" >הוסף תוכנית חדשה</button>
                 </Link>
-                <Link to="/AddNewSchool">
-                   <button disabled className="grey darken-3 waves-effect waves-light btn-large" >הוסף ביה"ס חדש</button>
-                </Link>
-                </div>
+               
+     
+                )
                 :
-                <div className="buttLine">
+                (
+      
                    <button disabled className="grey darken-3 waves-effect waves-light btn-large" >הוסף תוכנית חדשה</button>
-                   <button disabled className="grey darken-3 waves-effect waves-light btn-large" >הוסף ביה"ס חדש</button>
-                </div>
+           )
                 }
+
+               {props.manager ? ( 
+                <Link to="/AddNewSchool">
+                   <button  className="grey darken-3 waves-effect waves-light btn-large" >הוסף ביה"ס חדש</button>
+                </Link>
+                )
+                :
+                (
+                   <button disabled className="grey darken-3 waves-effect waves-light btn-large" >הוסף ביה"ס חדש</button>
+                   )
+                }    
                 
                 <Link to="/AddNewSulamTeacher">
                    <button className="grey darken-3 waves-effect waves-light btn-large" >הוסף מורה חדש</button>

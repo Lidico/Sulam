@@ -98,6 +98,7 @@
     direction: rtl;
     text-align: right;
     margin-top: 3rem;
+    margin-bottom: 2rem;
 }
 
 .headLinePD{
@@ -286,4 +287,46 @@ hr.borderLine{
 
 .desc{
     padding-top: 2rem;
+}
+
+.financeSect{
+    width: 60%;
+    float: left;
+    margin-left: 30%;
+    display: block;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+.FinanceTraceBox{
+    background-color: #909090;
+    display: inline-block;
+    height: 2rem;
+    width: 100%;
+    float: right;
+    direction: rtl;
+}
+
+.FinanceTraceBoxHD{
+    background-color: #65E09F;
+    display: inline-block;
+    height: 2rem;
+    width: 100%;
+    float: right;
+    direction: rtl;
+}
+
+.tab{
+    margin-left: 2rem;
+    float: right;
+    margin-right: 0.5rem;
+}
+
+.sahac{
+    direction: rtl;
+    margin-left: 0.5rem;
+}
+
+.toRight{
+    direction: rtl;
 }

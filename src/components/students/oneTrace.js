@@ -4,9 +4,7 @@ import './mainCard.css';
 
 
 const OneTrace = (props) => {
-        let dateOfMifgash="";
-
-           // dateOfMifgash = props.dateOfTrace.toDate().getDate()+"/"+(props.dateOfTrace.toDate().getMonth()+1)+"/"+props.dateOfTrace.toDate().getFullYear();
+           let dateOfMifgash = props.dateOfTrace.toDate().getDate()+"/"+(props.dateOfTrace.toDate().getMonth()+1)+"/"+props.dateOfTrace.toDate().getFullYear();
        
         return(
             <div className="traceBox">

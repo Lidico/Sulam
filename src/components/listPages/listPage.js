@@ -83,7 +83,6 @@ class ListPage extends Component {
      }
 
         render(){
-        console.log(this.state);
         return(
         <div className="dashboard container mainBlock">
             <CheckAuth/>

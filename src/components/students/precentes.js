@@ -17,7 +17,7 @@ class Precentes extends Component {
       }
 
 render(){
-    const precent = ((this.state.mevukash/this.state.mifgash)*100).toFixed(2);
+    const precent = ((this.state.mevukash/(this.state.mifgash==0?1:this.state.mifgash))*100).toFixed(2);
     let precColor = {
         color: ''
     };

@@ -6,6 +6,7 @@ import Proff from './proff';
 
 class ProffList extends Component {
     constructor(props) {
+        console.log(props);
         super(props);
         this.state = {
             proffList: props.mikztuut,
@@ -26,7 +27,7 @@ handleRemove(e) {
 
 render(){
  
-    let ListProff =  this.state.proffList.map((Prof,ProffKey) => <Proff key={ProffKey} shemToar={Prof.shemToar} fName={Prof.fName} sName={Prof.sName} profName={Prof.profName} teachIMG={Prof.techIMG} dayOfMifgash={Prof.dayOfMifgash} hourOfMifgash={Prof.hourOfMifgash} timeOfMifgash={Prof.numOfShaot} schoolTeacherName={Prof.schoolTeacherName} schoolTeacherPhone={Prof.schoolTeacherPhone} studInTeacherHome={Prof.studInTeacherHome} studentID={this.state.studentID}/>)
+    let ListProff =  this.state.proffList.map((Prof,ProffKey) => <Proff listOfmiktzout={this.state.proffList} key={ProffKey} index={ProffKey} shemToar={Prof.shemToar} fName={Prof.fName} sName={Prof.sName} profName={Prof.profName} teachIMG={Prof.techIMG} dayOfMifgash={Prof.dayOfMifgash} hourOfMifgash={Prof.hourOfMifgash} timeOfMifgash={Prof.numOfShaot} schoolTeacherName={Prof.schoolTeacherName} schoolTeacherPhone={Prof.schoolTeacherPhone} studInTeacherHome={Prof.studInTeacherHome} studentID={this.state.studentID}/>)
     if(ListProff.length==0){
         ListProff = <span className="headLinePD"></span>;
     }

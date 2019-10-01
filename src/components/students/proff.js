@@ -41,7 +41,7 @@ class Proff extends Component {
             mahatzitGrade:"",
             yearGrade:"",
             isAddButtPresed:false,
-            currMiktzua:""
+            listOfmiktzout: props.listOfmiktzout
         };
 
         this.handleAdd = this.handleAdd.bind(this);
@@ -58,16 +58,14 @@ componentDidMount() {
     ref.get().then(doc => {
         if (doc.exists) {
              const numOfTrace = doc.data().listOfTrace.filter(num =>num.details.sName==currentComponent.state.sName).length;
-             const numOfArivedToClass = doc.data().listOfTrace.filter(num =>num.details.sName==currentComponent.state.sName).filter(numOf =>!numOf.isntArived).length;
+             const numOfArivedToClass = doc.data().listOfTrace.filter(num =>num.details.sName==currentComponent.state.sName).filter(numOf =>!numOf.isArived).length;
              const numOfLateToClass = doc.data().listOfTrace.filter(num =>num.details.sName==currentComponent.state.sName).filter(numOf =>!numOf.isLate).length;
              const numOfGetPaid = doc.data().listOfTrace.filter(num =>num.details.sName==currentComponent.state.sName).filter(numOf =>numOf.isGetPaid).length;
-             const thisMiktzua = doc.data().listOfmiktzout.where(name => name.profName==currentComponent.state.profName);
              this.setState({
                 numOfMifgash: numOfTrace,
                 numOfArived:numOfArivedToClass,
                 lates: numOfLateToClass,
                 isGetPaid: numOfGetPaid,
-                currMiktzua: thisMiktzua,
                 isLoad: true,
             })  
         } else {
@@ -79,17 +77,19 @@ componentDidMount() {
 }
 
 handleEdit(e) {
+    console.log([e.target])
     this.setState({[e.target.name]: true});
-
 }
 
 handleSave(e) {
-    this.setState({[e.target.name]: false}); 
-    console.log(this.state.currMiktzua);
-
-
-
-
+    const currentComponent = this;
+    let temp = this.state.listOfmiktzout;
+    temp[this.props.index].listOfGrades.push(this.state.newGrad);
+    const db = firebase.firestore();
+    db.collection("listOfStudents").doc(currentComponent.state.studentID).update({
+        listOfmiktzout:temp
+    }); 
+    this.setState({[e.target.name]: false,newGrad:""}); 
 }
 
 
@@ -98,6 +98,7 @@ handleAdd(e) {
 }
 
 handleChange(e) {
+    this.setState({[e.target.name]: e.target.value}); 
 }
 
 
@@ -106,9 +107,10 @@ handleRemove(e) {
 }
 
 render(){
-  
+    //console.log("hourOfMifgash", JSON.stringify(this.state.hourOfMifgash));
+    //console.log("hourOfMifgash", this.state.hourOfMifgash.toDate().getHours());
+    //let hourOfBeg = this.state.hourOfMifgash.toDate().getHours()+":"+(this.state.hourOfMifgash.toDate().getMinutes()==0?"00":this.state.hourOfMifgash.toDate().getMinutes());
     let hourOfBeg = this.state.hourOfMifgash.getHours()+":"+(this.state.hourOfMifgash.getMinutes()==0?"00":this.state.hourOfMifgash.getMinutes());
-
     return(
 
         <div className="proffBox">
@@ -140,30 +142,7 @@ render(){
                                 onChange={this.handleChange}
                             />
                     </label>
-                    {/*<label>
-                        <span  dir="rtl" className="headLinePD">הכנס שנה: </span>
-                            <input
-                                required
-                                dir="rtl"
-                                type="text"
-                                name="yearGrade"
-                                placeholder= "הכנס שנה"
-                                value = {this.state.yearGrade}
-                                onChange={this.handleChange}
-                            />
-                    </label>
-                    <label>
-                        <span  dir="rtl" className="headLinePD"> הכנס מחצית : </span>
-                            <input
-                                required
-                                dir="rtl"
-                                type="text"
-                                name="mahatzitGrade"
-                                placeholder= "הכנס מחצית"
-                                value = {this.state.mahatzitGrade}
-                                onChange={this.handleChange}
-                            />
-                    </label>*/}
+                    
                     <button className="buttonEdit" name="isAddButtPresed" value={this.state.isAddButtPresed} onClick={this.handleSave}>שמור ציון</button><br/>
                     </div>)
                 :

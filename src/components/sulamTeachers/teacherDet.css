@@ -27,12 +27,14 @@
     width: 7rem;
     border-radius: 50%;
     float: right;
+    top: -1rem;
 }
 
 .profImageStud{
     height: 3.5rem;
     width: 3.5rem;
     border-radius: 50%;
+    float: right;
 }
 
 .nameBox{
@@ -73,6 +75,7 @@
 }
 
 .detailsBlock{
+    position: relative;
     border: 1px solid lightgray;
     margin-left: 1rem;
     width: 100%;
@@ -83,6 +86,7 @@
     align-content: right;
     direction: rtl;
     text-align: right;
+    height: 100%;
 }
 
 .inpBox{
@@ -98,4 +102,19 @@
     direction: rtl;
     color: #686868;
     margin-left: 2rem;
+}
+
+.tab{
+    margin-right: 1rem;
+    float: right;
+    align-content: right;
+    direction: rtl;
+    margin-top: 1rem;
+}
+
+.nameAndPhototo{
+    width: 35%;
+    position: relative;
+    float: right;
+    display: inline-block;
 }
