@@ -264,6 +264,12 @@ class AddNewSulamTeacher extends Component {
                                 <span>מחשבים</span>
                             </label>
                         </p>
+                        <p>
+                            <label>
+                                <input dir="rtl" type="checkbox" value="כימיה" onChange={this.handleChange} />
+                                <span>כימיה</span>
+                            </label>
+                        </p>
                     </label>
                 </div>
 

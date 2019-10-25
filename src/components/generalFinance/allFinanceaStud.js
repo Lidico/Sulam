@@ -4,15 +4,17 @@ import './mainCard.css';
 
 const AllFinanceaStud = (props) => {
 
-    let justArivedTrace = props.traceList.filter(num => num.listOfTrace!=0);
+    let justArivedTrace = props.traceList.filter(num => (num.listOfTrace).length!=0);
     if(justArivedTrace.length==0){
-        return <span className="headLinePD">לא קיימים דוחות עדיין</span>;
+        return;
     }
         return(
         <div>
-              {justArivedTrace.map((Trace,index) =>{
+              {justArivedTrace.traceList.map((Trace,index) =>{
                 return (
-                <OneFinanceTrace index={index}  fName={Trace.fName} sName={Trace.sName}  progCost={props.programData.cost} isGetPaid={Trace.isGetPaid}  dateOfTrace={Trace.details.dateOfTrace} fName={Trace.details.fName} sName={Trace.details.sName} shemToar={Trace.details.shemToar} />
+                    Trace.traceList.filter(num => !num.isntArived).map((OneTrace,index)=>{
+                        <OneFinanceGeneral key={index} fullName={Trace.fName+" "+Trace.sName} programList={props.programData} isGetPaid={OneTrace.isGetPaid}  dateOfTrace={OneTrace.details.dateOfTrace} fName={OneTrace.details.fName} sName={OneTrace.details.sName} shemToar={OneTrace.details.shemToar} />
+                    })
                 );
                 })} 
         </div>
