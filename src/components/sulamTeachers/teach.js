@@ -8,10 +8,10 @@ import './teacherDet.css';
 function Teach(props) {
       
         return(
-            <button className="blockPic" name="sulamTeacher" onClick={props.onChangeTeach}>
+            <div className="blockPic" name="sulamTeacher">
                 <img className="profImageStud" src={props.imgUrl}/>
                 <span className="tab">{props.shemToar} {props.fName} {props.sName}</span>
-            </button>
+            </div>
         )
     }
 

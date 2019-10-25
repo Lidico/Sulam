@@ -1,16 +1,15 @@
 
 import React, { Component } from 'react';
 import './teacherDet.css';
-import TrachProfPic from './teachPic.jpg';
 
 
 
 function StudOfTeach(props) {
       
         return(
-            <div>
-                <img className="profImageStud" src={TrachProfPic}/>
-                <span>{props.shemToar} {props.fName} {props.sName}</span>
+            <div className="blockPic" name="studOfTeach">
+                <img className="profImageStud" src={props.imgUrl}/>
+                <span className="tab">{props.fName} {props.sName}</span>
             </div>
         )
     }

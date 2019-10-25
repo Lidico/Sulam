@@ -6,7 +6,6 @@ import Proff from './proff';
 
 class ProffList extends Component {
     constructor(props) {
-        console.log(props);
         super(props);
         this.state = {
             proffList: props.mikztuut,

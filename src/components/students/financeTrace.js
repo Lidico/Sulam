@@ -21,7 +21,6 @@ var docRef = db.collection("listOfProgs").doc(currentComponent.state.program);
 docRef.get().then(function(doc) {
     if (doc.exists) {
         let progDat= doc.data();
-        console.log(progDat)
         currentComponent.setState({
             programData: progDat
         })
@@ -36,7 +35,7 @@ docRef.get().then(function(doc) {
 
 render(){
     let isPaid = this.state.traceList.filter(num=> num.isGetPaid).length;
-    let isNotPaid = this.state.traceList.filter(num=> !num.isGetPaid).length;
+    let isNotPaid = this.state.traceList.filter(num=> !num.isntArived).filter(num=> !num.isGetPaid).length;
     return(
      <div className="financeSect">
              <div className="FinanceTraceBoxHD">

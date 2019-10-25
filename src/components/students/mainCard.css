@@ -301,7 +301,7 @@ hr.borderLine{
 .FinanceTraceBox{
     background-color: #909090;
     display: inline-block;
-    height: 2rem;
+    height: 3rem;
     width: 100%;
     float: right;
     direction: rtl;
@@ -310,7 +310,7 @@ hr.borderLine{
 .FinanceTraceBoxHD{
     background-color: #65E09F;
     display: inline-block;
-    height: 2rem;
+    height: 3rem;
     width: 100%;
     float: right;
     direction: rtl;

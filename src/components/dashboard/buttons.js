@@ -44,7 +44,7 @@ const Buttons = (props) => {
                  <Link>
                    <button className="grey darken-3 waves-effect waves-light btn-large" >צפיה במצב פיננסי כללי</button>
                 </Link>
-                <Link>
+                <Link to='/Schools'>
                    <button className="grey darken-3 waves-effect waves-light btn-large" >צפיה בבתי ספר</button>
                 </Link>
                 <Link  to="/SulamTeachers">

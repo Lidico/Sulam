@@ -34,7 +34,6 @@ handleChangebirthDate(e) {
 }
 handleSave(e) {
     this.setState({[e.target.name]: false}); 
-    console.log([e.target]);
     const db = firebase.firestore();
     db.collection("listOfStudents").doc(this.state.studentID).update({
         [e.target.title]: e.target.slot

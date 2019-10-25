@@ -1,17 +1,21 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom'
 import './teacherDet.css';
-import TrachProfPic from './teachPic.jpg';
 import firebase from '../../FireBase/FireStore';    
-import DatePicker, { registerLocale } from 'react-datepicker';
 import StudOfTeach from './studOfTeach';
+import {
+    BrowserRouter as Router,
+    Route,
+    Link
+  } from 'react-router-dom'
+
 
 
 class TeachersDeatails extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            SulamTeacherID:'',
+            SulamTeacherID: props.match.params.id,
+            imgUrl:'',
             shemToar:'',
             fName:'',
             sName:'',
@@ -33,25 +37,39 @@ class TeachersDeatails extends Component {
         this.handleEdit = this.handleEdit.bind(this);
         this.handleSave = this.handleSave.bind(this);
       }
-      componentDidMount()
-      { 
-      let ref = firebase.database().ref('/listOfTeachers/' + this.state.SulamTeacherID);
-      ref.on('value', snapshot => {
-        this.setState({
-                                  SulamTeacherID: snapshot.val().SulamTeacherID,
-                                  shemToar: snapshot.val().shemToar,
-                                  category:snapshot.val().category,
-                                  fName:snapshot.val().fName,
-                                  sName:snapshot.val().sName,
-                                  phoneNumber:snapshot.val().phoneNumber,
-                                  Email:snapshot.val().Email,
-                                  locaddressation: snapshot.val().address,
-                                  endTime: snapshot.val().endTime,
-                                  generalDescription: snapshot.val().generalDescription, 
+    
+componentDidMount() {
 
-                              })
-                            })
-                        }
+    const currentComponent = this;
+    const db = firebase.firestore();
+
+    var docRef = db.collection("listOfTeachers").doc(this.state.SulamTeacherID);
+
+    docRef.get().then(function(doc) {
+        if (doc.exists) {
+            console.log("Document data:", doc.data());
+             currentComponent.setState({
+                shemToar:doc.data().shemToar,
+                fName:doc.data().fName,
+                imgUrl:doc.data().imgUrl,
+                sName:doc.data().sName,
+                phoneNumber:doc.data().phoneNumber,
+                Email:doc.data().Email,
+                address:doc.data().address,
+                generalDescription:doc.data().generalDescription,
+                TeacherMiktzuaList: doc.data().TeacherMiktzuaList,
+                sulamTeacherStudentList: doc.data().sulamTeacherStudentList,
+            }) 
+
+        } else {
+            // doc.data() will be undefined in this case
+            console.log("No such document!");
+        }
+    }).catch(function(error) {
+        console.log("Error getting document:", error);
+    });
+
+}
 
 
 handleChange(e) {
@@ -73,12 +91,16 @@ handleEdit(e) {
     this.setState({[e.target.name]: true});
 }
 handleSave(e) {
-    this.setState({[e.target.name]: false});  
+    this.setState({[e.target.name]: false}); 
+    const db = firebase.firestore();
+    db.collection("listOfTeachers").doc(this.state.SulamTeacherID).update({
+        [e.target.title]: e.target.slot
+    });
 }
 
 render(){
- 
-    let studentsListTeacher =  this.state.sulamTeacherStudentList.map((listOfStudents,StudentiD) =><StudOfTeach key={StudentiD} fName = {listOfStudents.fName} sName = {listOfStudents.sName} img = {listOfStudents.imgUrl}/>)
+
+    let studentsListTeacher =  this.state.sulamTeacherStudentList.map((listOfStudents,StudentiD) =><Link to = {"/MainCard/" + listOfStudents.StudentiD} ><button name="sulamTeacher" key={StudentiD} onClick={this.handleChange} title={StudentiD} ><StudOfTeach id={listOfStudents.StudentiD} imgUrl={listOfStudents.imgUrl}  fName = {listOfStudents.fName} sName = {listOfStudents.sName}/></button></Link>)
     if(studentsListTeacher.length==0){
         studentsListTeacher = <span className="headLinePD">למורה זה אין אף תלמיד רשום</span>;
     }
@@ -99,8 +121,8 @@ render(){
         <div className="mainBlockCard">
             <div className="nameBlock">
                 <div className="nameAndPhoto">
-                    <div className="nameBox"><span className="headerTextPrimary">פרופ' {this.state.fName} בארי</span></div>
-                    <img src={TrachProfPic} alt="" className="profImage"></img>
+                    <div className="nameBox"><span className="headerTextPrimary">{this.state.shemToar} {this.state.fName} {this.state.sName}</span></div>
+                    <img src={this.state.imgUrl} alt="" className="profImage"></img>
                 </div>
             </div>
            <div className="detailsBlock">
@@ -121,7 +143,7 @@ render(){
                                 onChange={this.handleChange}
                             />
                     </label>
-                    <button className="buttonEdit" name="phoneNumberEdit"  value={this.state.phoneNumberEdit} onClick={this.handleSave}>שמור</button><br/>
+                    <button className="buttonEdit" name="phoneNumberEdit"  value={this.state.phoneNumberEdit} title="phoneNumber" slot={this.state.phoneNumber} onClick={this.handleSave}>שמור</button><br/>
                     </div>)
                 :
                     (<div><span className="headLinePD">טלפון:</span><span className="contentPD">{this.state.phoneNumber}</span>
@@ -142,7 +164,7 @@ render(){
                         onChange={this.handleChange}
                     />
                 </label>
-                <button className="buttonEdit" name="EmailEdit" value={this.state.EmailEdit} onClick={this.handleSave}>שמור</button><br/>
+                <button className="buttonEdit" name="EmailEdit" value={this.state.EmailEdit} title="Email" slot={this.state.Email} onClick={this.handleSave}>שמור</button><br/>
                 </div>)
                 :
                 (<div>
@@ -164,7 +186,7 @@ render(){
                         onChange = {this.handleChange}
                     />
                     </label>
-                    <button className="buttonEdit" name="addressEdit" value={this.state.addressEdit} onClick={this.handleSave}>שמור</button><br/>
+                    <button className="buttonEdit" name="addressEdit" value={this.state.addressEdit} title="address" slot={this.state.address} onClick={this.handleSave}>שמור</button><br/>
                 </div>)
                 :
                 ( <div> <span className="headLinePD">כתובת:</span><span className="contentPD">{this.state.address}</span>
@@ -186,7 +208,7 @@ render(){
                       onChange={this.handleChange}
                     />
                     </label>
-                    <button className="buttonEdit" name="generalDescriptionEdit" value={this.state.generalDescriptionEdit} onClick={this.handleSave}>שמור</button><br/>
+                    <button className="buttonEdit" name="generalDescriptionEdit" value={this.state.generalDescriptionEdit} title="Description" slot={this.state.generalDescription} onClick={this.handleSave}>שמור</button><br/>
                 </div>)
                 :
                 ( <div> <span className="headLinePD">מידע כללי על המורה:</span><span className="contentPD">{this.state.generalDescription}</span>
@@ -245,7 +267,7 @@ render(){
                             </label>
                         </p>
                     </label>
-                    <button className="buttonEdit" name="TeacherMiktzuaListEdit" value={this.state.TeacherMiktzuaListEdit} onClick={this.handleSave}>שמור</button><br/>
+                    <button className="buttonEdit" name="TeacherMiktzuaListEdit" value={this.state.TeacherMiktzuaListEdit} title="TeacherMiktzuaList" slot={this.state.TeacherMiktzuaList} onClick={this.handleSave}>שמור</button><br/>
                 </div>)
                 :
                 ( <div> <span className="headLinePD">מקצועות הנלמדים ע"י המורה:</span><span className="contentPD">{profList(this.state.TeacherMiktzuaList)}</span>

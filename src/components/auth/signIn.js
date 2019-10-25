@@ -17,7 +17,6 @@ class SignIn extends Component {
 
     componentDidMount = () => {
         firebase.auth().onAuthStateChanged(user => {
-            console.log(user);
             if(!user){
                 this.setState({signedIn: false,manager: false})
                 return;
@@ -35,11 +34,10 @@ class SignIn extends Component {
     }
     handleSubmit = (e) => {
         e.preventDefault();
-        console.log(this.state)
     }
 
     SignIn = () => {
-        console.log(this.state)
+
         firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
         .catch(function(error) {
             var errorCode = error.code;

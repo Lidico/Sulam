@@ -4,11 +4,12 @@ import './mainCard.css';
 
 
 const OneTrace = (props) => {
-           let dateOfMifgash = props.dateOfTrace.toDate().getDate()+"/"+(props.dateOfTrace.toDate().getMonth()+1)+"/"+props.dateOfTrace.toDate().getFullYear();
+       // const date = props.dateOfTrace.toDate()
+        //const dateOfMifgash = date.getDate()+"/"+(date.getMonth()+1)+"/"+date.getFullYear();
        
         return(
             <div className="traceBox">
-            <span className="dateAndTeacher">{dateOfMifgash} {props.shemToar} {props.fName} {props.sName }</span><br/><span className="contentPD desc">{props.description}</span>
+            <span className="dateAndTeacher">{} {props.shemToar} {props.fName} {props.sName }</span><br/><span className="contentPD desc">{props.description}</span>
             <div className="btnDel"><button className="deep-orange waves-effect waves-light btn" onClick={props.onRemove} value={props.index}>מחיקה</button></div>
              <div className="checkBOxes">
                  <p>

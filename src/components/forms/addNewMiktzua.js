@@ -33,7 +33,7 @@ class AddNewMiktzua extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            StudentiD: props.location.state.StudentiD,
+            Student: props.location.state.Student,
             profName:'',
             sulamTeacher: "",
             sulamTeacherIsExist: false,
@@ -120,7 +120,7 @@ class AddNewMiktzua extends Component {
         e.preventDefault();
         db.settings({});
         db.collection("listOfTeachers").doc(this.state.sulamTeacher).update({
-            sulamTeacherStudentList: firebase.firestore.FieldValue.arrayUnion(this.state.StudentiD) 
+            sulamTeacherStudentList: firebase.firestore.FieldValue.arrayUnion(this.state.Student) 
         }); 
  
       }
@@ -170,7 +170,7 @@ class AddNewMiktzua extends Component {
         e.preventDefault();
         const db = firebase.firestore();
         db.settings({});
-        db.collection("listOfStudents").doc(this.state.StudentiD).update({
+        db.collection("listOfStudents").doc(this.state.Student.StudentiD).update({
             listOfmiktzout:this.state.MiktzuutList   
         }); 
         this.setState({isSubmit:true})

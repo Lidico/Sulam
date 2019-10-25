@@ -47,7 +47,6 @@ class PersonalDetails extends Component {
     }
     handleSave(e) {
         this.setState({[e.target.name]: false}); 
-        console.log([e.target]);
         const db = firebase.firestore();
         db.collection("listOfStudents").doc(this.state.StudentiD).update({
             [e.target.title]: e.target.slot
@@ -61,8 +60,6 @@ class PersonalDetails extends Component {
              if (doc.exists) {
                   const contSchool = doc.data().contactName;
                   const phoneSchool = doc.data().contactPhone;
-                  console.log(contSchool);
-                  console.log(phoneSchool);
                   this.setState({
                     schoolContactName: contSchool,
                     schoolContactPhone: phoneSchool,

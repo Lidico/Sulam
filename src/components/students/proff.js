@@ -58,7 +58,7 @@ componentDidMount() {
     ref.get().then(doc => {
         if (doc.exists) {
              const numOfTrace = doc.data().listOfTrace.filter(num =>num.details.sName==currentComponent.state.sName).length;
-             const numOfArivedToClass = doc.data().listOfTrace.filter(num =>num.details.sName==currentComponent.state.sName).filter(numOf =>!numOf.isArived).length;
+             const numOfArivedToClass = doc.data().listOfTrace.filter(num =>num.details.sName==currentComponent.state.sName).filter(numOf =>!numOf.isntArived).length;
              const numOfLateToClass = doc.data().listOfTrace.filter(num =>num.details.sName==currentComponent.state.sName).filter(numOf =>!numOf.isLate).length;
              const numOfGetPaid = doc.data().listOfTrace.filter(num =>num.details.sName==currentComponent.state.sName).filter(numOf =>numOf.isGetPaid).length;
              this.setState({
@@ -77,7 +77,6 @@ componentDidMount() {
 }
 
 handleEdit(e) {
-    console.log([e.target])
     this.setState({[e.target.name]: true});
 }
 

@@ -14,6 +14,9 @@ import AddNewSulamTeacher from "./components/forms/addNewSulamTeacher"
 import TeachersDeatails from "./components/sulamTeachers/teachersDetails";
 import AddNewProg from "./components/forms/addNewProg";
 import SulamTeachers from "./components/sulamTeachers/sulamTeachers";
+import Schools from "./components/school/schools";
+import SchoolDetails from "./components/school/schoolDetails";
+import Footer from "./components/layOut/footer";
 
 class App extends Component {
   
@@ -24,7 +27,6 @@ class App extends Component {
           <NavBar/>
         </div>
         <Switch>
-        /addNewSulamTeacher
             <Route path = '/' exact component={Dashboard}/>
             <Route path = '/dashboard' exact component={Dashboard}/>
             <Route path = '/AddNewStud' exact component={AddNewStud}/>
@@ -33,13 +35,14 @@ class App extends Component {
             <Route path = '/AddNewSulamTeacher' exact component={AddNewSulamTeacher}/>
             <Route path = '/signin' exact component={SignIn}/>
             <Route path = '/listPage' exact component={listPage}/>
-            <Route path = '/TeachersDeatails' exact component={TeachersDeatails}/>
+            <Route path = '/TeachersDeatails/:id' exact component={TeachersDeatails}/>
+            <Route path = '/SchoolDetails/:id' exact component={SchoolDetails}/>
             <Route path = '/AddNewProg' exact component={AddNewProg}/>
+            <Route path = '/Schools' exact component={Schools}/>
             <Route path = '/SulamTeachers' exact component={SulamTeachers}/>
-            <Route path = '/MainCard' exact component={MainCard}/>
-            
-
+            <Route path = '/MainCard/:id' exact component={MainCard}/>
         </Switch>
+        {/*<Footer/>*/}
         </BrowserRouter>
     );
   }

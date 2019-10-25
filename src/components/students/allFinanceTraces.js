@@ -7,7 +7,6 @@ import OneFinanceTrace from './oneFinanceTrace';
 const AllFinanceTraces = (props) => {
 
     let justArivedTrace = props.traceList.filter(num => !num.isntArived);
-    console.log(props.programData.progName)
     if(justArivedTrace.length==0){
         return <span className="headLinePD">לא קיימים דוחות עדיין</span>;
     }

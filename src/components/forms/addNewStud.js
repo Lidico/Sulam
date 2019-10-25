@@ -127,7 +127,10 @@ class AddNewStud extends Component {
             querySnapshot.forEach(function(doc) {
                 arrTemp.push(doc.data());
             });
-            currentComponent.setState({ schoolList: arrTemp });
+            currentComponent.setState({ 
+              schoolList: arrTemp,
+              school: arrTemp[0].schoolName
+             });
         });
 
         db.collection("listOfProgs").get().then(function(querySnapshot) {
@@ -135,7 +138,11 @@ class AddNewStud extends Component {
             querySnapshot.forEach(function(doc) {
                 arrTemp.push(doc.data());
             });
-            currentComponent.setState({ programList: arrTemp });
+            currentComponent.setState({ 
+              programList: arrTemp,
+              program: arrTemp[0]
+            
+            });
         });
 
 
@@ -174,7 +181,12 @@ class AddNewStud extends Component {
             generalDescription:this.state.generalDescription,
             listOfTrace:[]
         }).then(() => this.setState({isSubmit:true})); 
+      
       }
+
+      
+
+      
       
 
     render(){
@@ -555,7 +567,7 @@ class AddNewStud extends Component {
                 </div>
             </div>
 
-            {this.state.isSubmit ? (<Redirect to={{pathname: "/AddNewMiktzua", state:{StudentiD:this.state.StudentiD}}} ></Redirect>):null}
+            {this.state.isSubmit ? (<Redirect to={{pathname: "/AddNewMiktzua", state:{Student:this.state}}} ></Redirect>):null}
         </div>
 
         )

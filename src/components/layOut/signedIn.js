@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import NavLink from 'react-bootstrap/NavLink';
+import { NavLink } from 'react-router-dom'
 import firebase from '../../FireBase/FireStore';
+import managers from '../auth/managers'
 
 const signedIn =(props) => {
 
@@ -12,12 +13,11 @@ const signedIn =(props) => {
     let s = props.name.indexOf(' ');
     if(s > 1 && s < props.name.length - 1)
         name += props.name.charAt(s+1);
-    console.log(name,props.name.length,s);
     return(
         <ul>
             <li><NavLink to='/' className="btn btn-floating pink lightin-1">{name}</NavLink></li>
             <li><div onClick={() => firebase.auth().signOut()} ><NavLink to='/'>התנתק</NavLink></div></li>
-            <li><NavLink to='/'>דף ראשי</NavLink></li>
+            <li><NavLink to='/dashboard'>דף ראשי</NavLink></li>
         </ul>    
     )
 }
